@@ -1,0 +1,11 @@
+coverage/
+
+tmp
+
+.vscode/
+
+#Hiden files
+.*
+
+#Exept !.gitignore
+!.gitignore
