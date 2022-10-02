@@ -1,0 +1,117 @@
+* {
+  text-align: center;
+}
+
+/* header */
+header {
+  background-image: url("https://static.pexels.com/photos/248515/pexels-photo-248515.png");
+  color: white;
+  padding-bottom: 60px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.headerContent {
+  width: 60%;
+  display: inline-block;
+}
+
+.headerContent h1 {
+  padding-top: 100px;
+  padding-bottom: 0;
+  margin: 0;
+}
+
+.headerContent button {
+  background: #333;
+  color: #fff;
+  text-decoration: none;
+  padding: 1em 2em;
+  border: 1px solid #666;
+  margin: 0.5em 0;
+}
+
+/* body */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.1em;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* content */
+.content {
+  width: 60%;
+  display: inline-block;
+  padding: 18px;
+}
+
+.contentTitle {
+  padding: 18px;
+}
+
+.contentText {
+  columns: 2;
+  column-gap: 2em;
+}
+
+/* card */
+.cardImg {
+  width: 100%;
+}
+
+.cardItem {
+  list-style: none;
+  display: inline-block;
+  background-color: rgb(255, 255, 255);
+  margin: 10px;
+  width: 20%;
+}
+
+.cardItems {
+  background-color: #333;
+  margin: 0;
+  padding: 17px;
+  padding-bottom: 8.5px;
+}
+
+.cardContent {
+  padding: 10px;
+  margin: 17px;
+}
+
+/* content items */
+.contactItems {
+  font-size: 0;
+}
+
+.contactItem {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 50%;
+  vertical-align: top;
+  font-size: initial;
+  margin: 0;
+  color: white;
+  padding: 20px;
+}
+
+#ContactUs {
+  background-color: #2690d4;
+}
+
+#AboutOurCompany {
+  background-color: #333;
+}
+
+/* footer */
+footer {
+  background-color: #000000;
+}
+
+footer a {
+  color: #2690d4;
+  text-decoration: none;
+}
