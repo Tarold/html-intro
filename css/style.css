@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,200&display=swap");
+* {
+  margin: 0px;
+}
+html {
+  font-family: Monsterrat, sans-serif;
+  font-size: 20px;
+}
+article + article {
+  background-color: blue;
+}
+footer > ul {
+  border: 2px dotted green;
+}
+ul ~ p {
+  text-decoration-style: wavy;
+  text-decoration-color: red;
+  text-decoration-line: underline;
+}
+h2 + p {
+  background-color: yellow;
+}
+article > p {
+  text-shadow: orange 0 -10px 1em;
+}
