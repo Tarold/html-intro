@@ -1,18 +1,40 @@
 * {
   box-sizing: border-box;
 }
-header {
-  background-image: url(http://traversymedia.com/downloads/assets/beachshowcase.jpg);
-  background-repeat: no-repeat;
-  background-color: cover;
-  background-position: center;
-  height: 100vh;
-
-  display: flex;
+.flexItems {
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 body {
-  text-align: center;
+  text-align: left;
+}
+.flexItem {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  border: 2px solid lightgrey;
+}
+
+.flexItem > * {
+  margin: 10px;
+}
+
+.img {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  border: 3px solid violet;
+}
+.basket {
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+h1 {
+  font-weight: bold;
+}
+main {
+  padding: 20px;
 }
