@@ -1,0 +1,154 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.1em;
+  line-height: 1.5;
+  text-align: center;
+  background-color: #333;
+}
+/* header */
+header {
+  background-image: url("https://static.pexels.com/photos/248515/pexels-photo-248515.png");
+  color: white;
+  padding-bottom: 60px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.headerContent {
+  max-width: 800px;
+  width: 100%;
+  min-width: 300px;
+  padding: 0 20px 0 20px;
+  display: inline-block;
+}
+
+.headerContent h1 {
+  padding-top: 100px;
+  padding-bottom: 0;
+  margin: 0;
+}
+
+.linkHeader {
+  display: inline-block;
+  background-color: #333;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid #666;
+}
+/* main */
+
+.textSection {
+  background-color: #eaeaea;
+  display: flex;
+  justify-content: center;
+}
+/* content */
+.content {
+  max-width: 750px;
+  width: 100%;
+  min-width: 300px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.contentText {
+  columns: 2;
+  column-gap: 2em;
+}
+
+/* card */
+.cardImg {
+  width: 100%;
+}
+
+.cardItem {
+  display: inline-block;
+  background-color: rgb(255, 255, 255);
+  margin: 10px;
+  max-width: 250px;
+  width: 100%;
+  min-width: 200px;
+}
+
+.cardItems {
+  display: flex;
+  margin: 0;
+  padding: 17px;
+  padding-bottom: 8.5px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cardContent {
+  padding: 10px;
+  margin: 17px;
+}
+
+/* content items */
+.contactItems {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.contactItem {
+  display: flex;
+  min-width: 50%;
+  justify-content: center;
+  align-content: center;
+}
+
+@media screen and (max-width: 1016px) {
+  .contactItem {
+    width: 100%;
+  }
+}
+.contentContact {
+  max-width: 500px;
+  width: 100%;
+  min-width: 300px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.footerItems {
+  display: flex;
+  flex-wrap: wrap;
+  justify-self: center;
+  justify-content: center;
+  color: #fff;
+  padding: 17px;
+  justify-content: space-around;
+}
+
+.footerItem {
+  margin: 0;
+  max-width: 483px;
+  width: 100%;
+  min-width: 300px;
+}
+
+#ContactUs {
+  background-color: #2690d4;
+}
+
+/* footer */
+footer {
+  background-color: #000000;
+}
+
+footer a {
+  color: #2690d4;
+  text-decoration: none;
+}
