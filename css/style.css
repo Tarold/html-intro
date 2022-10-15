@@ -1,0 +1,26 @@
+.parent {
+  border: 5px solid red;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.child {
+  border: 5px solid blue;
+}
+.child1 {
+  flex: 0 1 300px;
+}
+.child2 {
+  flex: 0 1 300px;
+  order: -1;
+}
+.child3 {
+  flex: 0 1 300px;
+}
+.child4 {
+  flex: 0 1 300px;
+}
+.child5 {
+  flex: 0 1 300px;
+  order: -2;
+}
