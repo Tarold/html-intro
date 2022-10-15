@@ -1,93 +1,61 @@
-:root {
-  --card-width: 300px;
-}
 * {
   box-sizing: border-box;
 }
-.userCards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-}
-.userCard {
-  display: flex;
-  width: var(--card-width);
-  border: 1px solid grey;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 20px;
-  overflow: hidden;
-  background-color: lightcyan;
-}
-.userCardHeader {
-  height: calc(var(--card-width) / 2);
-  width: 100%;
-  background: url(https://wallpaperaccess.com/full/3641889.jpg);
-  background-color: #050d21;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
-.userPhoto {
-  width: calc(var(--card-width) / 2);
-  height: calc(var(--card-width) / 2);
-  margin-top: calc((var(--card-width) / 4) * -1);
-  border: 5px solid lightcyan;
-  border-radius: 100%;
-}
-.userName {
-  font-size: 24px;
-  margin: 2px;
-}
-.userTagLink {
-  margin-top: 5px;
-  margin-bottom: 20px;
-  color: grey;
-}
-.userInfo {
-  text-align: center;
-  padding: 0 15px 0 15px;
-}
-.socials {
-  margin-top: auto;
-  display: flex;
-  font-size: 25px;
-}
-.itemSocials {
-  margin: 15px 5px 20px;
-}
-.Facebook a {
-  color: #4b77b9;
-}
-.Linkedin a {
-  color: #1288ca;
-}
-.Twitter a {
-  color: #67cdf0;
-}
-/* .parent {
-  border: 5px solid red;
-  display: flex;
-  flex-wrap: wrap;
+
+:root {
+  font-family: sans-serif;
 }
 
-.child {
-  border: 5px solid blue;
+a {
+  text-decoration: none;
+  color: inherit;
 }
-.child1 {
-  flex: 0 1 300px;
+
+.logoContainer {
+  margin-left: auto;
 }
-.child2 {
-  flex: 0 1 300px;
-  order: -1;
+
+.logo {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
 }
-.child3 {
-  flex: 0 1 300px;
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+
+  padding: 20px;
+
+  background-color: black;
+
+  color: white;
 }
-.child4 {
-  flex: 0 1 300px;
+
+header > * {
+  flex-grow: 0.5;
 }
-.child5 {
-  flex: 0 1 300px;
-  order: -2;
-} */
+
+.navMenu {
+  text-align: right;
+}
+
+.menu {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.menuItems {
+  display: inline-block;
+
+  margin-left: 10px;
+}
+
+.menuItems > a {
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border: 2px solid white;
+  border-radius: 10px;
+}
