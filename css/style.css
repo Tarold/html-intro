@@ -1,11 +1,41 @@
 table {
-  border: 1px solid black;
-  border-collapse: collapse;
   border-spacing: 0;
+}
+
+thead {
+  color: white;
+}
+
+th:nth-child(1) {
+  background-color: #7787a9;
+}
+
+th:nth-child(2) {
+  background-color: #4d628f;
+}
+
+th:nth-child(3) {
+  background-color: #2a4173;
+}
+
+th:nth-child(4) {
+  background-color: #142956;
+}
+
+tr:nth-child(odd) > td:nth-child(odd) {
+  background-color: #dbdbdb;
+}
+
+tr:nth-child(even) > td:nth-child(even) {
+  background-color: #f3f3f3;
+}
+
+tr:nth-child(even) > td:nth-child(odd),
+tr:nth-child(odd) > td:nth-child(even) {
+  background-color: #ececec;
 }
 
 td,
 th {
-  border: 1px solid black;
   padding: 10px;
 }
