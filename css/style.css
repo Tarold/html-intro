@@ -1,23 +1,11 @@
-div {
-  margin: 10px;
-}
-/* 
-div:nth-child(3) {
-  color: red;
+table {
+  border: 1px solid black;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
-div:nth-last-child(5) {
-  color: blue;
-}
-
-div:nth-child(odd) {
-  background-color: aqua;
-}
-
-div:nth-child(even) {
-  background-color: yellow;
-} */
-
-div:nth-child(3n) {
-  color: blue;
+td,
+th {
+  border: 1px solid black;
+  padding: 10px;
 }
