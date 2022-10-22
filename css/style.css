@@ -2,26 +2,28 @@
   box-sizing: border-box;
 }
 
-ul {
-  font-size: 0;
-  margin: 20px;
-  white-space: nowrap;
+section {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 800px;
+
+  width: 100%;
+  min-width: 320px;
+  margin: 0 auto;
+  border: 5px solid red;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-  padding: 10px 20px;
-  background-color: burlywood;
-  font-size: 16px;
-  transition: border-top 0.1s, border-bottom 0.1s;
+article {
+  max-width: 250px;
+  min-width: 200px;
+  width: 100%;
+  border: 5px solid blue;
+  padding: 30px 10px;
 }
 
-li {
-  display: inline-block;
-}
-
-a:hover {
-  border-top: 2px solid red;
-  border-bottom: 2px solid red;
+@media screen and (max-width: 760px) {
+  section {
+    flex-direction: column;
+  }
 }
