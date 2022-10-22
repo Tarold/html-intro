@@ -1,41 +1,31 @@
 * {
   box-sizing: border-box;
 }
-body {
-  background-color: orange;
+
+p::first-letter {
+  font-size: 36px;
+  color: red;
 }
-header {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  position: relative;
+p::first-line {
+  color: green;
 }
 
-.blure-bg {
-  position: absolute;
-  background: url(https://images.pexels.com/photos/13366951/pexels-photo-13366951.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  filter: blur(3px);
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: -1;
-  transition: filter 1s;
+p::selection {
+  color: white;
+  background-color: pink;
 }
 
-h1 {
-  filter: blur(0);
-  transition: filter 1s;
+p::before {
+  content: "Paragraph: ";
+}
+p::after {
+  content: "@kadzuna";
+  color: grey;
 }
 
-h1:hover {
-  filter: blur(3px);
+span::before {
+  content: "<<: ";
 }
-h1:hover + .blure-bg {
-  filter: blur(0);
+span::after {
+  content: ">>";
 }
