@@ -2,30 +2,26 @@
   box-sizing: border-box;
 }
 
-p::first-letter {
-  font-size: 36px;
-  color: red;
-}
-p::first-line {
-  color: green;
+ul {
+  font-size: 0;
+  margin: 20px;
+  white-space: nowrap;
 }
 
-p::selection {
-  color: white;
-  background-color: pink;
+a {
+  text-decoration: none;
+  color: inherit;
+  padding: 10px 20px;
+  background-color: burlywood;
+  font-size: 16px;
+  transition: border-top 0.1s, border-bottom 0.1s;
 }
 
-p::before {
-  content: "Paragraph: ";
-}
-p::after {
-  content: "@kadzuna";
-  color: grey;
+li {
+  display: inline-block;
 }
 
-span::before {
-  content: "<<: ";
-}
-span::after {
-  content: ">>";
+a:hover {
+  border-top: 2px solid red;
+  border-bottom: 2px solid red;
 }
