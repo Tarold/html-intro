@@ -5,10 +5,9 @@
 body {
   display: grid;
   grid-template-columns: 250px 1fr 200px;
-}
+  grid-template-rows: 200px 1fr 150px;
 
-body > * {
-  border: 2px solid red;
+  min-height: 100vh;
 }
 
 header,
@@ -16,17 +15,20 @@ footer {
   grid-column-start: 1;
   grid-column-end: 4;
 }
-header {
-  height: 200px;
-}
 
-footer {
-  height: 150px;
+body > * {
+  padding: 10px;
+  border: 5px solid red;
 }
 
 @media screen and (max-width: 768px) {
-  body > * {
+  body {
+    grid-template-columns: 1fr;
+    grid-template-rows: 200px auto auto auto 150px;
+  }
+  header,
+  footer {
     grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column-end: 2;
   }
 }
