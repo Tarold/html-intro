@@ -1,95 +1,78 @@
-// JS - мова з динамічною типізацією
+// variables tasks
+// 1
+const a = 5;
+const b = 5;
 
-// Виведення в консоль
-// console.log('Hello, world!');
+console.log("a * b", a * b);
 
-// Вивести в модальне вікно
-// alert('Hello, world!');
+// 2
+const c = 5;
+const d = 5;
 
-/*
-  Багатостроковий коментар
-*/
+console.log("c / d", c / d);
 
-// Змінні
+// 3
+const e = 5;
+const f = 5;
 
-// let a = 1;
-// console.log('a =', a);
-// a = a + 1;
-// console.log('a =', a);
+console.log("e + f", e + f);
 
-// для уникнення випадкового переприсвоювання важливої інф-ї
-// рекомендується максимально вживати const
-// const pi = 3.14; // не можна переприсвоювати значення!
+// 4
+const intVar = 11;
+const booleanVar = true;
+const stringVar = "java script";
+const intInStringVar = "100";
 
-// console.log(pi);
+console.log(intVar, booleanVar, stringVar, intInStringVar);
 
-// var b = 10; // старий стиль
-// console.log('b =', b);
+// 5
+let num = 1;
+num += 11;
+num -= 11;
+num *= 11;
+num /= 11;
+++num;
+--num;
 
-// Стиль іменування: camelCase
-// lowerCamelCase
-// UpperCamelCase
+// prompt tasks
+//1
+const numUser = parseInt(prompt("enter number"));
+let unswerNumUser;
 
-// PI, MATH_PI - для констант
+if (numUser) {
+  unswerNumUser = numUser ** 2;
+} else {
+  unswerNumUser = "entered not number";
+}
 
-// 1    a-z, A-Z, _, $
-// 2... a-z, A-Z, _, $, 0-9
+alert("Result: " + unswerNumUser);
 
-// Типи даних - примітивні (7)
-//            - object
+//2
+const firstNumUser = parseInt(prompt("enter first number"));
+const secondNumUser = parseInt(prompt("enter second number"));
+let unswerFewNumUser;
 
-// string
+if (!firstNumUser || !secondNumUser) {
+  unswerFewNumUser = "entered not number";
+} else {
+  unswerFewNumUser = (firstNumUser + secondNumUser) / 2;
+}
 
-// const stringVariable1 = 'string1';
-// const stringVariable2 = 'string2'; // подвійні дужки
-// const stringVariable3 = `string3`;
-// "string2" - літерально задане значення
+alert("Result: " + unswerFewNumUser);
 
-// console.log('He says :"Hello"');
+//3
+const minUser = parseInt(prompt("enter minuts"));
+let unswerSeconds;
+if (minUser) {
+  unswerSeconds = minUser * 60;
+} else {
+  unswerSeconds = "entered not number";
+}
 
-// number
-// 1, 22, -50, 10.5, 10e5, Infinity, -Infinity, 0 (+0, -0), NaN
+alert("Result: " + unswerSeconds);
 
-// const numberVariable1 = Infinity;
-// console.log('numberVariable1 :>> ', numberVariable1);
+//4
+const greeting = "Hello, ";
+let userName = prompt("enter user name");
 
-// const numberVariable2 = NaN;
-// console.log('numberVariable2 :>> ', numberVariable2);
-
-// console.log('10 / 0 :>> ', 10 / 0);
-// console.log('10 / -0 :>> ', 10 / -0);
-// console.log('"abc" / 5 :>> ', 'abc' / 5);
-// Number.MAX_VALUE
-// Number.MAX_SAFE_INTEGER
-
-// bigint
-
-// const bigintValue = 9999999999999999n;
-// console.log('bigintValue :>> ', bigintValue);
-
-// boolean
-
-// true, false
-
-// const boolValue = false;
-// console.log('boolValue :>> ', boolValue);
-
-// symbol
-// const symbolValue = Symbol();
-// console.log('symbolValue :>> ', symbolValue);
-
-// undefined / value undefined
-
-// const undValue = undefined
-// let undValue;
-// console.log('undValue :>> ', undValue);
-
-// null / value null
-
-// const nullValue = null;
-// console.log('nullValue :>> ', nullValue);
-
-// не примітив / object
-const obj = {};
-
-// typeof значення
+alert(greeting + unswerSeconds + "!");
