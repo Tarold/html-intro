@@ -1,157 +1,85 @@
-console.log("Пройти прямо");
-console.log("Повернути наліво");
+// if tasks
+//1
+const varUser = parseInt(prompt("enter variable"));
+let unswerSeconds;
 
-console.log("Пройти прямо");
-console.log("Повернути наліво");
+if (varUser === 10) {
+  isVarTen = "Вірно";
+} else {
+  isVarTen = "Невірно";
+}
+alert(isVarTen);
 
-console.log("Пройти прямо");
-console.log("Повернути наліво");
+//2
+const test = Boolean(prompt("enter variable"));
+let isTestUnswer;
 
-console.log("Пройти прямо");
-console.log("Повернути наліво");
+if (test === true) {
+  isTestUnswer = "Вірно";
+} else {
+  isTestUnswer = "Невірно";
+}
+alert(isTestUnswer);
 
-// while (умова) {
-//   тіло циклу
-// }
+if (test !== true) {
+  isTestUnswer = "Вірно";
+} else {
+  isTestUnswer = "Невірно";
+}
+alert(isTestUnswer);
 
-// 1 виконання тіла циклу -- ітерація
+//3
+const amount = parseInt(prompt("enter the purchase amount"));
+let amountUnswer;
+if (!Number(amount)) {
+  amountUnswer = "purchase amount is not a number";
+} else {
+  if (amount > 800) {
+    amountUnswer -= (amountUnswer / 100) * 5;
+  } else if (amount > 500) {
+    amountUnswer -= (amountUnswer / 100) * 3;
+  }
+  amountUnswer += "грн";
+}
+alert(amountUnswer);
 
-let i = 1;
-const limit = 4;
-
-while (i++ <= limit) {
-  console.log("Пройти прямо");
-  console.log("Повернути наліво");
-  // i = i + 1;
+// loops tasks
+//1
+let i = 25;
+while (i >= 0) {
+  console.log(i--);
 }
 
-// i - змінна ціклу
-// змінна цикла має змінюватися, щоб досягти умови закінчення
-
-// Task: У користувача є книга з pageCount сторінок    5
-// 1) Вивести номери сторінок з 1ї по останню          1 2 3 4 5
-
-let currentPage = 1;
-const pagesCount = 5;
-
-while (currentPage <= pagesCount) {
-  console.log(currentPage++);
-  // currentPage = currentPage + 1;
+for (let index = 25; index >= 0; index--) {
+  console.log(index);
 }
 
-// Алгоритм:
-// почати з 1 стор
-// перевірити, чи не досягли кінця
-// якщо ні, то вивести номер
-//             збільшити номер сторінки
-// перевірити, чи не досягли кінця
-// якщо ні, то вивести номер
-//             збільшити номер сторінки
-// перевірити, чи не досягли кінця
-// якщо ні, то вивести номер
-//             збільшити номер сторінки
-// ...
-// перевірити, чи не досягли кінця
-// якщо так, то вихід з циклу
+//2
+let indexNum = 10;
 
-// Task: У користувача є книга з pageCount сторінок     5
-// 2) * Вивести парні номери сторінок                   2 4
-
-let i = 1;
-const limit = 5;
-if (i % 2 !== 0) {
-  i++;
-}
-while (i <= limit) {
-  console.log(i);
-  i += 2;
+while (indexNum <= 50) {
+  console.log(indexNum);
+  indexNum += 5;
 }
 
-// Task: Користувач вводе значення, поки не введе коректне число
-// Вивести квадрат цього числа
-
-let userValue = Number(prompt("Input number"));
-
-while (!Number.isFinite(userValue)) {
-  userValue = Number(
-    prompt("You are input wrong number. Input correct number")
-  );
+for (let index = 10; index <= 50; index += 5) {
+  console.log(index);
 }
 
-console.log("userValue ** 2 :>> ", userValue ** 2);
+//3
+let sumNum = 1;
+let sumWhileUnswer = 0;
 
-// або (+ перевірка на незаповлення поля введення)
-
-let userValue = prompt("Input number");
-
-while (!Number.isFinite(Number(userValue)) || userValue === "") {
-  userValue = prompt("You are input wrong number. Input correct number");
+while (sumNum < 101) {
+  sumWhileUnswer += sumNum++;
 }
 
-console.log("userValue ** 2 :>> ", userValue ** 2);
+console.log(sumWhileUnswer);
 
-// Цикл з лічильником (змінна циклу)
+let sumForUnswer = 0;
 
-// for (ініціалізація лічильника; умова; зміна лічильника){
-//   тіло циклу
-// }
-
-let currentPage = 1;
-const pagesCount = 5;
-
-while (currentPage <= pagesCount) {
-  console.log(currentPage);
-  currentPage++;
-}
-// або
-//             0                       1                   3
-for (let currentPage = 1; currentPage <= pagesCount; currentPage++) {
-  console.log(currentPage); // 2
+for (let index = 1; index < 101; index++) {
+  sumForUnswer += index;
 }
 
-// 0 (ініціалізація лічильника) виконується 1 раз до циклу
-// 1 (умова продовження циклу)  якщо умова істинна, то виконуємо тіло циклу 2, інакше вихід
-// 2 (тіло циклу)               виконується, якщо умова 1 істинна
-// 3 (зміна лічильника)         виконується після кожної ітерації. Потім перехід на 1
-
-// Task: вивести номери сторінок з останньої по 1
-
-// const pagesCount = 5;
-
-for (let currentPage = pagesCount; currentPage >= 1; currentPage--) {
-  console.log("currentPage :>> ", currentPage);
-}
-
-// Task: розрахувати суму чисел від 1 до 5 ( 1+2+3+4+5 )
-
-let sum = 0;
-for (let i = 1; i <= 5; i++) {
-  sum = sum + i;
-}
-console.log("sum :>> ", sum);
-
-// s = 0
-// i = 1;
-// s = s + i = 0 + 1 = 1;
-// i = 2
-// s = s + i = 1 + 2 = 3
-// i = 3
-// s = s + i = 3 + 3 = 6
-
-// Task: Вивести числа від 2 до 16 парні
-
-const limit = 16;
-for (let i = 2; i <= 16; i += 2) {
-  console.log(i);
-}
-
-// Task: Розрахувати добуток чисел від 1 до 15 непарні
-const limit = 15;
-
-let mult = 1;
-for (let i = 1; i <= 15; i += 2) {
-  mult *= i; // 1 * 1 * 3 * 5 * 7 * ... * 15
-}
-console.log("mult :>> ", mult);
-
-// i = i + 2 ==  i += 2
+console.log(sumForUnswer);
