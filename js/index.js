@@ -1,238 +1,157 @@
-// if - розгалуження
+console.log("Пройти прямо");
+console.log("Повернути наліво");
 
-// if (умова) {
-//   гілка true;
-// } else {
-//   гілка false;
+console.log("Пройти прямо");
+console.log("Повернути наліво");
+
+console.log("Пройти прямо");
+console.log("Повернути наліво");
+
+console.log("Пройти прямо");
+console.log("Повернути наліво");
+
+// while (умова) {
+//   тіло циклу
 // }
 
-// Булевські змінні імунуємо з is...
+// 1 виконання тіла циклу -- ітерація
 
-const isLogged = false;
+let i = 1;
+const limit = 4;
 
-if (isLogged) {
-  console.log("You are logged in))))");
-} else {
-  console.log("Try again(((");
+while (i++ <= limit) {
+  console.log("Пройти прямо");
+  console.log("Повернути наліво");
+  // i = i + 1;
 }
 
-// Task: Задана змінна
-// const isEnoughMoney = true;
-// Якщо грошей достатньо, вивести “Операцію схвалено)”
-// Якщо недостатньо, то вивести “Операцію відхилено(”
+// i - змінна ціклу
+// змінна цикла має змінюватися, щоб досягти умови закінчення
 
-const isEnoughMoney = true;
+// Task: У користувача є книга з pageCount сторінок    5
+// 1) Вивести номери сторінок з 1ї по останню          1 2 3 4 5
 
-if (isEnoughMoney) {
-  console.log("Операцію схвалено)))");
-} else {
-  console.log("Операцію не схвалено(((");
+let currentPage = 1;
+const pagesCount = 5;
+
+while (currentPage <= pagesCount) {
+  console.log(currentPage++);
+  // currentPage = currentPage + 1;
 }
 
-// Перевірити, чи скінченне число ввів користувач, і видати відповідне повідомлення.
+// Алгоритм:
+// почати з 1 стор
+// перевірити, чи не досягли кінця
+// якщо ні, то вивести номер
+//             збільшити номер сторінки
+// перевірити, чи не досягли кінця
+// якщо ні, то вивести номер
+//             збільшити номер сторінки
+// перевірити, чи не досягли кінця
+// якщо ні, то вивести номер
+//             збільшити номер сторінки
+// ...
+// перевірити, чи не досягли кінця
+// якщо так, то вихід з циклу
 
-const inputValue = Number(prompt("Input number")); // => 55, Infinity, NaN
+// Task: У користувача є книга з pageCount сторінок     5
+// 2) * Вивести парні номери сторінок                   2 4
 
-if (Number.isFinite(inputValue)) {
-  console.log("number");
-} else {
-  console.log("not a finite number");
+let i = 1;
+const limit = 5;
+if (i % 2 !== 0) {
+  i++;
+}
+while (i <= limit) {
+  console.log(i);
+  i += 2;
 }
 
-// Оператори порівняння
+// Task: Користувач вводе значення, поки не введе коректне число
+// Вивести квадрат цього числа
 
-const age = 18;
+let userValue = Number(prompt("Input number"));
 
-console.log("age > 18 :>> ", age > 18);
-console.log("age < 18 :>> ", age < 18);
-console.log("age >= 18 :>> ", age >= 18);
-console.log("age <= 18 :>> ", age <= 18);
-
-// Нестрога рівність / нерівність - ПОГАНО!
-console.log("age == 18 :>> ", age == 18);
-console.log('age == "18" :>> ', age == "18");
-console.log("age != 18 :>> ", age != 18);
-console.log('age != "18" :>> ', age != "18");
-
-// Строга / нерівність рівність
-console.log("age === 18 :>> ", age === 18);
-console.log('age === "18" :>> ', age === "18");
-console.log("age !== 18 :>> ", age !== 18);
-console.log('age !== "18" :>> ', age !== "18"); // 18!=='18'
-
-// Task: Якщо користовач повнолітній, то привітати, якщо ні - то доступ заборонений
-
-const age = 20;
-
-if (age >= 18) {
-  console.log("Wellcome!");
-} else {
-  console.log("Access is denied");
+while (!Number.isFinite(userValue)) {
+  userValue = Number(
+    prompt("You are input wrong number. Input correct number")
+  );
 }
 
-// Скорочена форма if
+console.log("userValue ** 2 :>> ", userValue ** 2);
 
-// if (умова) {
-//   гілка true;
+// або (+ перевірка на незаповлення поля введення)
+
+let userValue = prompt("Input number");
+
+while (!Number.isFinite(Number(userValue)) || userValue === "") {
+  userValue = prompt("You are input wrong number. Input correct number");
+}
+
+console.log("userValue ** 2 :>> ", userValue ** 2);
+
+// Цикл з лічильником (змінна циклу)
+
+// for (ініціалізація лічильника; умова; зміна лічильника){
+//   тіло циклу
 // }
 
-// При вході перевірити, чи користувач повнолітній
-// Якщо ні - то видати попередження про обмежений доступ
-// Вивести привітання
+let currentPage = 1;
+const pagesCount = 5;
 
-const age = 18;
-
-if (age < 18) {
-  console.log("Деякі функції будуть обмежені");
-}
-
-console.log("Вітаємо на сайті!)");
-
-// Task: если пользователь несовершеннолетний, то "Wellcome"
-// иначе если сертификат есть, то "Wellcome"
-//       иначе вакцинироваться
-
-const age = 18;
-const isVactinated = true;
-
-if (age < 18) {
-  console.log("Wellcome)");
-} else {
-  if (isVactinated) {
-    console.log("Wellcome)");
-  } else {
-    console.log("Please go to vactination");
-  }
+while (currentPage <= pagesCount) {
+  console.log(currentPage);
+  currentPage++;
 }
 // або
-
-// Розширена форма if
-
-// if (умова) {
-//   гілка true;
-// } else if (умова) {
-//   гілка ;
-// } else if (умова) {
-//   гілка ;
-// } else {
-//   гілка false;
-// }
-
-if (age < 18) {
-  console.log("Wellcome");
-} else if (isVactinated) {
-  console.log("Wellcome");
-} else {
-  console.log("Please go to vactination");
+//             0                       1                   3
+for (let currentPage = 1; currentPage <= pagesCount; currentPage++) {
+  console.log(currentPage); // 2
 }
 
-// Task: Ввести 2 числа. Вивести з них більше
-// Ввести 2 числа. Вивести що вони рівні, а якщо ні, то більше з них
+// 0 (ініціалізація лічильника) виконується 1 раз до циклу
+// 1 (умова продовження циклу)  якщо умова істинна, то виконуємо тіло циклу 2, інакше вихід
+// 2 (тіло циклу)               виконується, якщо умова 1 істинна
+// 3 (зміна лічильника)         виконується після кожної ітерації. Потім перехід на 1
 
-const userInput1 = Number(prompt("Введіть перше число"));
-const userInput2 = Number(prompt("Введіть друге число"));
+// Task: вивести номери сторінок з останньої по 1
 
-if (userInput1 > userInput2) {
-  console.log("більше число = ", userInput1);
-} else if (userInput1 < userInput2) {
-  console.log("більше число = ", userInput2);
-} else {
-  console.log("Вони еквівалентні", userInput1 + " = " + userInput2);
+// const pagesCount = 5;
+
+for (let currentPage = pagesCount; currentPage >= 1; currentPage--) {
+  console.log("currentPage :>> ", currentPage);
 }
 
-// Умовні (булевські) операції
+// Task: розрахувати суму чисел від 1 до 5 ( 1+2+3+4+5 )
 
-// умова І умова   - умова && умова - age >= 18 && isVactinated
-// умова АБО умова - умова || умова - age < 18  || isVactinated
-// НЕ умова        - !умова         - !isVactinated
+let sum = 0;
+for (let i = 1; i <= 5; i++) {
+  sum = sum + i;
+}
+console.log("sum :>> ", sum);
 
-const age = 18;
-const isVactinated = true;
+// s = 0
+// i = 1;
+// s = s + i = 0 + 1 = 1;
+// i = 2
+// s = s + i = 1 + 2 = 3
+// i = 3
+// s = s + i = 3 + 3 = 6
 
-if (age < 18 || isVactinated) {
-  console.log("Wellcome");
-} else {
-  console.log("Go to vactination");
+// Task: Вивести числа від 2 до 16 парні
+
+const limit = 16;
+for (let i = 2; i <= 16; i += 2) {
+  console.log(i);
 }
 
-console.group("Таблиця істинності &&:");
+// Task: Розрахувати добуток чисел від 1 до 15 непарні
+const limit = 15;
 
-console.log("true && true :>> ", true && true); // => true, якщо всі true
-console.log("false && false :>> ", false && false);
-console.log("true && false :>> ", true && false);
-console.log("false && true :>> ", false && true);
-
-console.groupEnd();
-
-console.group("Таблиця істинності ||:");
-
-console.log("true || true :>> ", true || true);
-console.log("false || false :>> ", false || false); // => false, якщо всі false
-console.log("true || false :>> ", true || false);
-console.log("false || true :>> ", false || true);
-
-console.groupEnd();
-
-console.group("Таблиця істинності !:");
-
-console.log("!true :>> ", !true);
-console.log("!false  :>> ", !false);
-
-console.groupEnd();
-
-// Task: Вивести нагадування про знижку, якщо парне число випало на п'ятницю
-const day = "Tuesday";
-const date = 15;
-
-if (day === "Friday" && date % 2 === 0) {
-  console.log("EVEN FRIDAY Sale!");
+let mult = 1;
+for (let i = 1; i <= 15; i += 2) {
+  mult *= i; // 1 * 1 * 3 * 5 * 7 * ... * 15
 }
+console.log("mult :>> ", mult);
 
-// Task: Вивести інфо про знижку, якщо людина пенсійгого віку або має неповнолітню дитину
-const userAge = 80;
-const userChildAge = 25;
-
-if (userAge >= 60 || userChildAge < 5) {
-  console.log("Znigki)");
-}
-
-// Task: якщо неповнолітній, то обмежити доступ
-const isAdult = true;
-
-// isAdult !== true, isAdult === false
-if (!isAdult) {
-  console.log("Доступ обмежено");
-}
-
-// Task: перевітири, чи число є 0 чи ні
-
-const a = -5;
-if (a) {
-  console.log("no 0");
-} else {
-  console.log(0);
-}
-
-// falsy values: 0, null, undefined, '', false, NaN
-
-const value = "";
-if (value !== undefined || value !== null || value !== "") {
-  console.log("ok");
-}
-// або
-// Use Case: чи прийшло значення
-if (value) {
-  console.log("ok");
-}
-
-// Task: Перевірити, що прийшло число і воно не NaN
-
-const value = "dgdgdfg";
-
-if (typeof value === "number" && !Number.isNaN(value)) {
-  console.log("number not NaN");
-}
-// або
-if (!isNaN(value)) {
-  console.log("number not NaN");
-}
+// i = i + 2 ==  i += 2
