@@ -1,85 +1,50 @@
-// if tasks
-//1
-const varUser = parseInt(prompt("enter variable"));
-let unswerSeconds;
+// const greeting = 'Hello';
+// const userName = prompt('Input name');
+// console.log(greeting + ', ' + userName);
+// console.log(`${greeting}, ${userName}`); // шаблонний літерал
 
-if (varUser === 10) {
-  isVarTen = "Вірно";
-} else {
-  isVarTen = "Невірно";
-}
-alert(isVarTen);
+// 1*1=1
+// 1*2=2
+// 1*3=3
+// ....
+// 2*1=2
+// 2*2=4
+// 2*3=6
 
-//2
-const test = Boolean(prompt("enter variable"));
-let isTestUnswer;
+// for (let i = 1; i <= 10; i++) {
+//   for (let j = 1; j <= 10; j++) {
+//     // console.log(i + ' * ' + j + ' = ' + i * j); // переписати на шаблонний літерал
+//     console.log(`${i} * ${j} = ${i * j}`);
+//   }
+// }
 
-if (test === true) {
-  isTestUnswer = "Вірно";
-} else {
-  isTestUnswer = "Невірно";
-}
-alert(isTestUnswer);
+// Пользователь имеет 3 попытки ввести пароль
+// Если пароль верен, то вывести "Пароль верен"
+// Иначе "Пароль неверен"
 
-if (test !== true) {
-  isTestUnswer = "Вірно";
-} else {
-  isTestUnswer = "Невірно";
-}
-alert(isTestUnswer);
+// let userPassword = '';
+// const PASSWORD = 'qwerty';
+// const TRY_LIMIT = 3;
+// let correntTryNumber = 1;
 
-//3
-const amount = parseInt(prompt("enter the purchase amount"));
-let amountUnswer;
-if (!Number(amount)) {
-  amountUnswer = "purchase amount is not a number";
-} else {
-  if (amount > 800) {
-    amountUnswer -= (amountUnswer / 100) * 5;
-  } else if (amount > 500) {
-    amountUnswer -= (amountUnswer / 100) * 3;
-  }
-  amountUnswer += "грн";
-}
-alert(amountUnswer);
+// do {
+//   userPassword = prompt('Input password').trim();
+// } while (userPassword !== PASSWORD && correntTryNumber++ < TRY_LIMIT);
 
-// loops tasks
-//1
-let i = 25;
-while (i >= 0) {
-  console.log(i--);
-}
+// if (userPassword === PASSWORD) {
+//   console.log('Password correct');
+// } else {
+//   console.log('Password incorrect');
+// }
 
-for (let index = 25; index >= 0; index--) {
-  console.log(index);
-}
+const PASSWORD = 'qwerty';
+const TRY_LIMIT = 3;
+let userPassword = '';
+let correntTryNumber = 1;
+let isPasswordCorrect = false;
 
-//2
-let indexNum = 10;
+do {
+  isPasswordCorrect = prompt('Input password').trim() === PASSWORD;
+} while (!isPasswordCorrect && correntTryNumber++ < TRY_LIMIT);
 
-while (indexNum <= 50) {
-  console.log(indexNum);
-  indexNum += 5;
-}
-
-for (let index = 10; index <= 50; index += 5) {
-  console.log(index);
-}
-
-//3
-let sumNum = 1;
-let sumWhileUnswer = 0;
-
-while (sumNum < 101) {
-  sumWhileUnswer += sumNum++;
-}
-
-console.log(sumWhileUnswer);
-
-let sumForUnswer = 0;
-
-for (let index = 1; index < 101; index++) {
-  sumForUnswer += index;
-}
-
-console.log(sumForUnswer);
+console.log(`Password ${isPasswordCorrect ? 'correct' : 'incorrect'}`);
