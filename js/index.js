@@ -87,3 +87,59 @@ console.group(4);
 console.log('areaCalculation cone', areaCalculation(10, 50));
 console.log('areaCalculation parallelepiped', areaCalculation(10, 10, 10));
 console.groupEnd();
+
+//JS. Switch..case
+/*
+1. Запитати у користувача номер дня тижня та вивести відповідну повну рядкову назву
+ (наприклад, якщо користувач вводить 7 – виводиться повідомлення "неділя"). 
+ Передбачити обробку помилкового введення номера дня тижня (default).
+*/
+const userDayNumber = Number(prompt('Enter number of the day'));
+switch (userDayNumber) {
+  case 1:
+    alert('Monday');
+    break;
+  case 2:
+    alert('Tuesday');
+    break;
+  case 3:
+    alert('Wednesday');
+    break;
+  case 4:
+    alert('Thursday');
+    break;
+  case 5:
+    alert('Friday');
+    break;
+  case 6:
+    alert('Saturday');
+    break;
+  case 7:
+    alert('Sunday');
+    break;
+
+  default:
+    alert(`Numer ${userDayNumber} not day number`);
+    break;
+}
+/*
+2. У змінній day лежить якесь число з інтервалу від 1 до 31.
+ Визначте, до якої декади місяця потрапляє це число 
+ (до першої, другої чи третьої).
+*/
+const day = Number(prompt('Enter day of the month'));
+switch (true) {
+  case day > 0 && day < 11:
+    alert('first');
+    break;
+  case day > 10 && day < 21:
+    alert('second');
+    break;
+  case day > 20 && day < 32:
+    alert('third');
+    break;
+  case day < 1:
+  case day > 31:
+    alert('Numer ' + day + ' is out of range');
+    break;
+}
