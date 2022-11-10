@@ -1,6 +1,6 @@
 //0
 function isWorkingAgePerson(age) {
-  return age >= 16 && age <= 65 ? true : false;
+  return age >= 16 && age <= 65;
 }
 console.group(0);
 console.log('isWorkingAgePerson(20)', isWorkingAgePerson(20));
@@ -10,30 +10,26 @@ console.groupEnd();
 
 //1
 function isPrimeNumber(number) {
-  if (number === 1) {
-    return false;
-  } else if (number > 1) {
+  if (number > 1) {
     for (let i = 2; i < number; i++) {
-      if (number % i == 0) {
+      if (number % i === 0) {
         return false;
       }
     }
     return true;
-  }
-
-  // check if number is less than 1
-  else {
+  } else {
     return false;
   }
 }
 console.group(1);
+console.log('isPrimeNumber(7)', isPrimeNumber(1));
 console.log('isPrimeNumber(7)', isPrimeNumber(7));
 console.log('isPrimeNumber(8)', isPrimeNumber(8));
 console.groupEnd();
 
 //2
 const checkMultiplicity = function (dividend, divisor) {
-  return dividend % divisor === 0 ? true : false;
+  return dividend % divisor === 0;
 };
 console.group(2);
 console.log('checkMultiplicity(25, 5)', checkMultiplicity(25, 5));
@@ -69,23 +65,52 @@ console.groupEnd();
  * @param {number} c сторона паралелепіпеда
  *
  * @return {number} Повна площадь поверхні паралелепіпеда
- *
+ */
+
+function areaCalculationCone(a, b) {
+  return Math.round(Math.PI * a * (a + b), -2);
+}
+
+/**
  * Функція знаходить повну площу конуса
  * @param {number} R Радіус конуса
  * @param {number} l Висота конуса
  *
  * @return {number} Повна площадь поверхні конуса
  */
-
-function areaCalculation(a, b, c) {
-  if (c === undefined) {
-    return Math.round(Math.PI * a * (a + b), -2);
-  }
+function areaCalcParal(a, b, c) {
   return Math.round(2 * (a * b + b * c + a * c), -2);
 }
+
+/**
+ * Функція знаходить повну площу трикутника
+ * @param {number} a Cторона трикутника (правильний)
+ * @param {number} b Cторона трикутника (прямокутний)
+ * @param {number} c Cторона трикутника (довільний)
+ *
+ * @return {number} Площа трикутникв
+ */
+function areaCalculTriangle(a, b, c) {
+  if (c !== undefined) {
+    let p = (a + b + c) / 2;
+    return Math.sqrt(p * (p - a) * (p - b) * (p - c), 0.5);
+  } else if (b !== undefined) {
+    return (1 / 2) * a * b;
+  } else if (a !== undefined) {
+    return (Math.pow(a, 2) * Math.sqrt(3, 0.5)) / 4;
+  } else {
+    return 'None values';
+  }
+}
+
 console.group(4);
-console.log('areaCalculation cone', areaCalculation(10, 50));
-console.log('areaCalculation parallelepiped', areaCalculation(10, 10, 10));
+console.log('areaCalculationCone', areaCalculationCone(10, 50));
+console.log('areaCalcParal', areaCalcParal(10, 10, 10));
+console.log('areaCalculTriangle', areaCalculTriangle());
+console.log('areaCalculTriangle', areaCalculTriangle(10));
+console.log('areaCalculTriangle', areaCalculTriangle(10, 10));
+console.log('areaCalculTriangle', areaCalculTriangle(10, 10, 10));
+
 console.groupEnd();
 
 //JS. Switch..case
