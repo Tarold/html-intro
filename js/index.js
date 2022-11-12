@@ -1,228 +1,195 @@
-// const firstName = 'Test';
-// const lastName = 'Testovich';
-// const email = 'test@gmail.com';
-
-// // Оголошення об`єкту
-// const obj1 = {}; // cинтаксичний цукор
-// const obj2 = Object();
-// const obj3 = new Object();
-
-// // властивості: рядки, Symbol()
-// const user = {
-//   // key: value,
-//   firstName: 'Test',
-//   lastName: 'Testovich',
-//   email: 'test@gmail.com',
-//   password: 'qwerty',
+// const usersList = {
+//   1: { id: 1, name: 'Test' },
+//   2: { id: 2, name: 'Ivo' },
 // };
 
-// console.log('user :>> ', user);
-// // alert(user); // не вміє виводити об'єкти
+// Array - впорядкована колекція
 
-// // Доступ до властивостей (. - операція доступу до властивості)
-// // Читання властивості
-// console.log('user.email :>> ', user.email);
-// // Зміна значення властивостей
-// user.email = 'anothetmail@gmail.com';
+// const arr1 = []; // Синтаксичний цукор
+// const arr2 = new Array();
 
-// // Додавання властивості
-// user.age = 10;
-// console.log('user :>> ', user);
+// const arr3 = [1, 2, 3, 4];
 
-// // Видалення властивості
-// delete user.password;
-// console.log('user :>> ', user);
+// // arr[i] - доступ до елемента під номером i
+// // arr.length - довжина масива
 
-// // Task: Створити об'єкт машини (марка, модель, рік випуску, номер, колір)
-// // Переглянути об'єкт
-// // змінити колір
-// // видалити властивість рік випуску
-// // додати властивість ім'я/прізвище власника
-// // Переглянути об'єкт
-// const car = {
-//   mark: 'VW',
-//   model: 'Jetta',
-//   year: 1987,
-//   number: '3642',
-//   color: 'Red',
-// };
+// // const users = [
+// //   { id: 1, name: 'Test' },
+// //   { id: 2, name: 'Ivo' },
+// // ];
 
-// console.log('car before :>> ', car);
-// car.color = 'Green';
-// delete car.year;
-// car.firstName = 'John';
-// car.lastName = 'Malcovich';
-// console.log('car after :>> ', car);
+// // написати функцію для виводу елементів масиву
+// // function printArray(arr) {
+// //   for (let i = 0; i < arr.length; i++) {
+// //     console.log('arr[i] :>> ', arr[i]);
+// //   }
+// // }
 
-// const capibara = {
-//   superPower: 'cute',
-//   countOfLegs: 3,
-//   countOfEyes: 2,
-//   favoriteThing: 'sun and water',
-// };
+// // printArray(arr3);
 
-// capibara.type = 'rat';
-// capibara.countOfLegs = 4;
-// delete capibara.favoriteThing;
-// console.log('capibara', capibara);
+// // написати функцію для обчислення суми елементів масиву
+// // функція приймає масив і повертає його суму
 
-// // Типи-посилання (об'єкти) і типи-значення (примітиви) ---------
-// const a = 5;
-// const b = 5;
-// console.log('a===b :>> ', a === b);
-
-// const o1 = {};
-// const o2 = {};
-// console.log('o1===o2 :>> ', o1 === o2);
-
-// const o3 = o1;
-// console.log('o1===o3 :>> ', o1 === o3);
-// o3.name = 'property';
-// console.log('o1 :>> ', o1);
-
-// function f() {
-//   o3.lastName = 1;
+// function countSum(arr) {
+//   let sum = 0;
+//   for (let i = 0; i < arr.length; i++) {
+//     console.log(`arr[${i}] :>> `, arr[i]);
+//     sum += arr[i];
+//   }
+//   return sum;
 // }
 
-// f(o3);
-// console.log('o3 :>> ', o3);
+// console.log('countSum(arr3) :>> ', countSum(arr3));
 
-// // Копіювання ЗНАЧЕННЯ об'єктів, (а не посилань) ---------------
-// const user1 = Object.assign({}, user);
-// console.log('user1 :>> ', user1);
-// console.log('user===user1 :>> ', user === user1);
+// const arr4 = arr3; // погано, бо копіюється посилання
 
-// const user2 = { ...user };
-// console.log('user2 :>> ', user2);
-// console.log('user===user2 :>> ', user === user2);
+// // Копіювання масивів
+// const arr5 = Array.from(arr3);
 
-// // Обчислювальні властивості / Вычисляемые свойства ---------------
-// const prop = prompt('input property');
-// const value = prompt('input value');
+// const arr6 = [...arr3];
 
-// const obj = {
-//   [prop]: value,
-// };
-// console.log('obj :>> ', obj);
-// console.log(`obj${prop} :>> `, obj[prop]);
+// // Методи масивів
+// arr3[arr3.length] = 5;
+// console.log('arr3 :>> ', arr3);
 
-// // Методи об'єктів -----------------------------------------------
+// arr3.push(6);
+// console.log('arr3 :>> ', arr3);
 
-// const user3 = {
-//   // властивості
-//   firstName: 'Test',
-//   lastName: 'Testovich',
-//   email: 'test@gmail.com',
-//   password: 'qwerty',
-//   // методи
-//   // this - той, об'єкт, що стоїть перед крапкою при виклику метода
-//   // повний синтаксис:
-//   // getFullName: function () {
-//   //   return `${this.firstName} ${this.lastName}`;
-//   // },
-//   // changeEmail: function (newEmail) {
-//   //   this.email = newEmail;
-//   // },
-//   // короткий синтаксис
-//   getFullName() {
-//     return `${this.firstName} ${this.lastName}`;
-//   },
-//   changeEmail(newEmail) {
-//     this.email = newEmail;
-//   },
-// };
+// // ввести з консолі n елемнтів масиву
 
-// // Виклик методу
-// console.log('user3.getFullName() :>> ', user3.getFullName());
-// user3.changeEmail('newmail@gmail.com');
-
-// console.log('user3 :>> ', user3);
-
-// // Task: Написати метод для зміни кольору машини
-// const car2 = {
-//   mark: 'VW',
-//   model: 'Jetta',
-//   year: 1987,
-//   number: '3642',
-//   color: 'Red',
-//   changeColor(newColor) {
-//     this.color = newColor;
-//   },
-//   changeValue(valName, value) {
-//     this[valName] = value;
-//   },
-// };
-
-// car2.changeColor('yellow');
-// console.log('car :>> ', car2);
-// car2.changeValue('year', 2000);
-// console.log('car :>> ', car2);
-
-// // Перебор об'єкту за допомогою for..in --------------------------
-
-// // В key послідовно поміщаються значення всіх властивостей
-// for (const key in user3) {
-//   console.log('key :>> ', user3[key]);
+// function inputArray(n) {
+//   const arr = [];
+//   for (let i = 0; i < n; i++) {
+//     arr.push(Number(prompt('input item')));
+//   }
+//   return arr;
 // }
 
-// // Task: Використати for..in для car
-// // car[ім'я властивості] = значення
-// for (const key in car) {
-//   console.log(`car.${key} = ${car[key]}`);
+// // console.log('inputArray(5); :>> ', inputArray(5));
+
+// console.log('arr3[arr3.length-1] :>> ', arr3[arr3.length - 1]);
+
+// console.log('arr3.pop() :>> ', arr3.pop()); // повертає і видаляє останній елемент
+
+// console.log('arr3.shift(10) :>> ', arr3.shift()); // повертає і видаляє перший елемент
+
+// arr3.unshift(10); // додає на початок масива елемент
+
+// //  shift i unshift використовувати в крайніх випадках!
+
+// // slice/splice
+// const singleNumbers = arr3.slice(3);
+// console.log('singleNumbers :>> ', singleNumbers);
+
+// //скопіювати однозначні числа
+// const arr10 = [10, 15, 2, 3, 5, 122, 155];
+// const singleNumbers2 = arr10.slice(2, -2);
+// console.log('singleNumbers2 :>> ', singleNumbers2);
+
+// // видалити з arr10 5-ку
+// arr10.splice(4, 1);
+// console.log('splice', arr10);
+
+// const arr11 = [1, 2, 3];
+// const arr12 = [10, 11, 12];
+// const arr13 = arr11.concat(arr12);
+// console.log('arr11.concat(arr12) :>> ', arr13);
+
+// перебір масиву
+// for..in - проходе по індексах (властивостях)
+
+// for (key in arr13) {
+//   console.log(`arr[${key}]`, arr13[key]);
 // }
 
-// Функція-конструктор -------------------------------------
+// // for..of - проходе по значеннях
+// for (item of arr13) {
+//   console.log('item :>> ', item);
+// }
 
-function User(firstName, lastName, age) {
-  this.firstName = firstName;
-  this.lastName = lastName;
-  this.age = age;
-}
-User.prop = function () {
-  console.log('not in prototype :>> ');
-};
-// В жс прототипне наслідування
+// Task: перебрати for..of масив
+// const users = [
+//   { id: 1, name: 'Test' },
+//   { id: 2, name: 'Ivo' },
+// ];
 
-// Наслідування дозволяє всю спільну логіку для об'єктів певного типу
-// виносити в спільний батьківський елемент
+// for (const item of users) {
+//   console.log('user:', item);
+// }
 
-// Спочатку метод шукаємо в об'єкті
-// Якщо певний метод не знайдено в об'єкті, то він шукається в його прототипі
-// Якщо не знайдено там, то в прототипі прототипа, ...
-
-const userProto = {}; // або new User();
-
-userProto.getFullName = function () {
-  return `${this.firstName} ${this.lastName}`;
-};
-
-User.prototype = userProto;
-
-// User.prototype.getFullName = function () {
-//   return `${this.firstName} ${this.lastName}`;
+// Методи перебору масивів
+// const myCb = function (x) {
+//   console.log('x :>> ', x);
 // };
 
-const user4 = new User('Test', 'Testovich', 20);
-console.log('user4 :>> ', user4);
-const user5 = new User('User 2', 'Testovich 2', 21);
-console.log('user5', user5);
+// function f(cb, a) {
+//   cb(a);
+// }
 
-// Написати функцію-конструктор для створення машини
-// Додати в прототип метод для зміни кольору машини
-// Створити за допомогою функції-конструктора 2 об'єкта
+// f(myCb, 5);
 
-function Car(model, color) {
-  this.model = model;
-  this.color = color;
+// forEach виконує коллбек послідовно для всіх елементів масиву
+
+const arr20 = [1, 3, 5, 7];
+
+function printArray(currentValue, index, array) {
+  console.log(
+    `currentValue: ${currentValue}; 
+     index: ${index}; 
+     array: ${array}.`
+  );
 }
 
-Car.prototype.changeColor = function (newColor) {
-  this.color = newColor;
-};
+arr20.forEach(printArray);
 
-const car1 = new Car('Audi', 'black');
-console.log('car1', car1);
-const car2 = new Car('BMW', 'white');
-console.log('car2', car2);
-car1.changeColor('red');
-console.log('car1', car1);
+const users = [
+  { id: 1, name: 'Test' },
+  { id: 2, name: 'Ivo' },
+];
+
+users.forEach(function (user) {
+  user.isLiked = false;
+});
+
+// вивести users за допомогою forEach
+
+function printUsers(currentValue) {
+  console.log(currentValue);
+}
+users.forEach(printUsers);
+
+// map => новий масив з елементами, які повертаються з колбеку для кожного елемента вихідного масиву
+
+const arr21 = [10, 20, 30];
+
+function mapArray(currentValue) {
+  return currentValue ** 2;
+}
+
+const arr22 = arr21.map(mapArray);
+
+// filter -
+
+const arr23 = [1, 2, 3, 4];
+
+function isOdd(item) {
+  return item % 2 === 1;
+}
+
+const arr24 = arr23.filter(isOdd);
+
+const arr25 = [-5, -5, 3, -11, -55]; // відфільтрувати додатні, тобто [1,3]
+
+function isPositive(item) {
+  return item > 0;
+}
+const arr26 = arr25.filter(isPositive);
+console.log('arr26', arr26);
+
+// findIndex
+
+function find3(item) {
+  return item === -5;
+}
+
+const foundedIndex = arr25.findIndex(find3); // поверне індекс першого знайденого, або -1 якщо не знайшов
