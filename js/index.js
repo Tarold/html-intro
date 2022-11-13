@@ -12,6 +12,7 @@ for (let index = 0; index < 10; index++) {
 console.log('arr', arrFirst);
 
 let arrSecond = [...arrFirst];
+const arrThird = [...arrFirst];
 // 1 Видалити останній і початковий елемент з масиву, додати елемент до початку і кінця.
 // Firts realization
 
@@ -21,15 +22,20 @@ arrFirst.pop();
 arrFirst.push(random10());
 
 // second realization
-
 arrSecond = [random10(), ...arrSecond.slice(1, -1), random10()];
+
+//third realization
+arrThird.splice(0, 1, random10());
+arrThird.splice(-1, 1, random10());
+
 console.log('arr first realization', arrFirst);
 console.log('arr second realization', arrSecond);
+console.log('arr third realization', arrThird);
 
 // 2 Вивести розмір масиву.
 console.log('arrFirst.length', arrFirst.length);
 // 3 Зробити копію масиву.
-const arrFirstCopy = Array.from(arrSecond);
+const arrFirstCopy = Array.from(arrFirst);
 
 // // Не використовувати методи перебору масивів (forEach, filter, map, findIndex), а використати цикли
 
@@ -117,7 +123,7 @@ magicalArray.forEach((element, index) => {
 console.groupEnd();
 
 // 11 Визначити індекс елемента, квадрат якого дорівнює 100, і видалити його, або видати діагностичне повідомлення, якщо такого елементу не існує.
-let treasureArray = [2, 5, 10, 5, 8];
+const treasureArray = [2, 5, 10, 5, 8];
 const indexReturn = treasureArray.findIndex((element) => {
   return element ** 2 === 100;
 });
@@ -127,9 +133,7 @@ switch (indexReturn) {
     break;
 
   default:
-    treasureArray = treasureArray.filter(
-      (item, index) => index !== indexReturn
-    );
+    treasureArray.splice(indexReturn, 1);
     break;
 }
 console.log('treasureArray', treasureArray);
@@ -157,3 +161,66 @@ function isNegative(number) {
 }
 console.log('some negative arrFirst', arrFirst.some(isNegative));
 console.log('some negative someNegArray', someNegArray.some(isNegative));
+
+//*JS. Users array
+//прописати метод getFullName() (повертає рядок з повним ім'ям) для користувача
+console.group('JS. Users array');
+function User(name, surname, age, isMale, email, isSubscribed) {
+  this.firstName = name;
+  this.lastName = surname;
+  this.age = age;
+  this.isMale = isMale;
+  this.email = email;
+  this.isSubscribed = isSubscribed;
+}
+
+User.prototype.getFullName = function () {
+  return this.firstName;
+};
+const users = [];
+
+for (let i = 0; i < 100; i++) {
+  const user = new User(
+    `Username${i}`,
+    `Usersurname${i}`,
+    Math.floor(Math.random() * 90),
+    Math.random() > 0.5,
+    `useremail${i}@gmail.com`,
+    Math.random() > 0.5
+  );
+  users.push(user);
+}
+console.log('users[0].getFullName();', users[0].getFullName());
+
+//Отримати масив повних імен осіб жіночої статі шкільного віку (6 – 18 років).
+console.log(
+  'users',
+  users.filter((user) => {
+    return user.age >= 6 && user.age <= 8 && user.isMale === false;
+  })
+);
+
+// 1.3 Видалити з масиву користувача з email useremail5@gmail.com
+
+users.splice(
+  users.findIndex((user) => {
+    return user.email === 'useremail5@gmail.com';
+  }),
+  1
+);
+// 1.4 Перевірити, чи є серед користувачів користувач з email`ом useremail99@gmail.com
+console.log(
+  'users.some',
+  users.some((user) => {
+    return user.email === 'useremail99@gmail.com';
+  })
+);
+// 1.5 Перевірити, чи всі користувачі підписані (subscribed).
+console.log(
+  'users.every',
+  users.every((user) => {
+    return user.isSubscribed;
+  })
+);
+
+console.groupEnd();
