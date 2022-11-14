@@ -1,226 +1,215 @@
-// 0 Створити числовий масив та проініціалізувати його (*випадковими числами).
+// Необмежена кількість аргументів
 
-function random10() {
-  return Math.round(Math.random() * 10);
-}
+// 1 arguments - псевдомасив (пронумерованы + length)
 
-const arrFirst = [];
+// arguments приймає усі перераховані при виклику функції аргументи,
+// навіть якщо при оголошенні функції вказано імена для перших кількох параметрів
 
-for (let index = 0; index < 10; index++) {
-  arrFirst.push(random10());
-}
-console.log('arr', arrFirst);
+// Ex. a - arguments[0], b - arguments[1]
 
-let arrSecond = [...arrFirst];
-const arrThird = [...arrFirst];
-// 1 Видалити останній і початковий елемент з масиву, додати елемент до початку і кінця.
-// Firts realization
-
-arrFirst.shift();
-arrFirst.unshift(random10());
-arrFirst.pop();
-arrFirst.push(random10());
-
-// second realization
-arrSecond = [random10(), ...arrSecond.slice(1, -1), random10()];
-
-//third realization
-arrThird.splice(0, 1, random10());
-arrThird.splice(-1, 1, random10());
-
-console.log('arr first realization', arrFirst);
-console.log('arr second realization', arrSecond);
-console.log('arr third realization', arrThird);
-
-// 2 Вивести розмір масиву.
-console.log('arrFirst.length', arrFirst.length);
-// 3 Зробити копію масиву.
-const arrFirstCopy = Array.from(arrFirst);
-
-// // Не використовувати методи перебору масивів (forEach, filter, map, findIndex), а використати цикли
-
-// 4 Вивести елементи з парними індексами.
-let evenIndex = 0;
-console.group('only even index');
-do {
-  console.log(`arrFirst[${evenIndex}] `, arrFirst[evenIndex]);
-  evenIndex += 2;
-} while (evenIndex < arrFirst.length);
-console.groupEnd();
-
-// 5 Вивести лише парні елементи (парні числа діляться на 2 без залишку).
-console.group('only couples');
-
-for (const element in arrFirst) {
-  if (element % 2 === 0) {
-    console.log(element);
+function f(a, b) {
+  // console.log('Чи є arguments масивом  :>> ', arguments instanceof Array);
+  let sum = 0;
+  for (let i = 0; i < arguments.length; i++) {
+    sum += arguments[i];
   }
+  return sum;
 }
-console.groupEnd();
 
-// 6 Вивести індекси нульових елементів (елемент дорівнює нулю).
+console.log('f(1,2,3,4,5) :>> ', f(1, 2, 3, 4, 5));
 
-const awesomeArray = [];
-for (let index = 0; index < 10; index++) {
-  if (Math.round(Math.random()) > 0) {
-    awesomeArray.push(0);
-  } else {
-    awesomeArray.push(random10());
+// Task: Написати функцію для розрахунку добутку необмеженої кількості переданих аргументів.
+function mult() {
+  let accumulator = 1;
+  for (let i = 0; i < arguments.length; i++) {
+    accumulator *= arguments[i];
   }
+  return accumulator;
 }
 
-console.log('awesomeArray', awesomeArray);
+console.log('mult(2,6,4) :>> ', mult(2, 6, 4));
 
-console.group('indices of zero elements');
-for (let index = 0; index < awesomeArray.length; index++) {
-  if (awesomeArray[index] == 0) {
-    console.log('index: ', index);
-  }
-}
-console.groupEnd();
+// Task: Написати функцію виду
+// calculate(operation, operand1, operand2, …, operandN),
+// де operation - це операція, яка має бути виконана над операндами.
+// operation - arguments[0], тому цикл перебираємо з 1
 
-// 7 Підрахувати кількість нульових елементів.
+function calculate(operation) {
+  let calc = null;
 
-let zeroCount = 0;
-
-for (let index = 0; index < awesomeArray.length; index++) {
-  if (awesomeArray[index] == 0) {
-    zeroCount++;
-  }
-}
-console.log('zeroCount', zeroCount);
-
-// // Методи перебору масивів (forEach, filter, map, findIndex, *some, *every).
-// 8 Отримати новий масив із заданого, який міститиме лише ненульові числа (-1, 5, 0, 9, -10 => -1, 5, 9, -10).
-const excellentArray = [-1, 5, 0, 9, -10];
-console.log(
-  'excellentArray',
-  excellentArray.filter((element) => {
-    return element != 0;
-  })
-);
-
-// 9 Отримати новий масив їх заданого, який міститиме всі елементи вихідного, поділені на 100 (99, 5, 0, 9, 30 => 0.99, 0.05, 0, 0.09, 0.3).
-
-const prettyArray = [99, 5, 0, 9, 30];
-console.log(
-  'prettyArray',
-  prettyArray.map((element) => element / 100)
-);
-
-// 10 Вивести елементи масиву, зведені у куб.
-
-const magicalArray = [];
-for (let index = 0; index < 10; index++) {
-  magicalArray.push(random10());
-}
-console.log('magicalArray', magicalArray);
-
-console.group('magicalArray**2');
-magicalArray.forEach((element, index) => {
-  console.log(`element[${index}]`, element ** 2);
-});
-console.groupEnd();
-
-// 11 Визначити індекс елемента, квадрат якого дорівнює 100, і видалити його, або видати діагностичне повідомлення, якщо такого елементу не існує.
-const treasureArray = [2, 5, 10, 5, 8];
-const indexReturn = treasureArray.findIndex((element) => {
-  return element ** 2 === 100;
-});
-switch (indexReturn) {
-  case -1:
-    alert('no such element exists');
-    break;
-
-  default:
-    treasureArray.splice(indexReturn, 1);
-    break;
-}
-console.log('treasureArray', treasureArray);
-
-// 12 *Перевірити, чи всі елементи масиву є парними числами (* або простими числами).
-const primeArray = [2, 3, 5, 7, 11];
-function isPrime(number) {
-  if (number > 1) {
-    for (let i = 2; i < number; i++) {
-      if (number % i === 0) {
-        return false;
+  switch (operation) {
+    case '+':
+      calc = 0;
+      for (let i = 1; i < arguments.length; i++) {
+        calc += arguments[i];
       }
-    }
-    return true;
+      break;
+    case '*':
+      calc = 1;
+      for (let i = 1; i < arguments.length; i++) {
+        calc *= arguments[i];
+      }
+      break;
+    default:
+      console.log('Incorrect operation');
   }
-  return false;
-}
-console.log('every prime arrFirst', arrFirst.every(isPrime));
-console.log('every prime clearArray', primeArray.every(isPrime));
 
-// 13 *Перевірити, чи є у масиві бодай один від'ємний елемент.
-const someNegArray = [5, 2, 3, -1, 5];
-function isNegative(number) {
-  return number < 0;
+  return calc;
 }
-console.log('some negative arrFirst', arrFirst.some(isNegative));
-console.log('some negative someNegArray', someNegArray.some(isNegative));
+console.log('calculate', calculate('+', 1, 2, 3));
+console.log('calculate', calculate('*', 1, 2, 4));
 
-//*JS. Users array
-//прописати метод getFullName() (повертає рядок з повним ім'ям) для користувача
-console.group('JS. Users array');
-function User(name, surname, age, isMale, email, isSubscribed) {
-  this.firstName = name;
-  this.lastName = surname;
-  this.age = age;
-  this.isMale = isMale;
-  this.email = email;
-  this.isSubscribed = isSubscribed;
+// 2 rest parameters
+
+// rest parameters - масив
+// rest parameters треба оголошувати
+
+function sum1(...args) {
+  const sumCallback = function (accumulator, currentValue) {
+    return accumulator + currentValue;
+  };
+
+  const sum = args.reduce(sumCallback, 0);
+  return sum;
 }
 
-User.prototype.getFullName = function () {
-  return this.firstName;
+console.log('sum1(1, 2, 3) :>> ', sum1(1, 2, 3));
+console.log('sum1(1, 2, 3, 8) :>> ', sum1(1, 2, 3, 8));
+
+function f2(a, b, ...args) {
+  console.log('args :>> ', args); // окрім перерахованих до ...args
+  console.log('arguments :>> ', arguments); // всі
+}
+
+function calculate1(operation, ...operands) {
+  let calc = 0;
+
+  if (operation === '*') calc++;
+
+  for (let i = 0; i < operands.length; i++) {
+    switch (operation) {
+      case '+':
+        calc += operands[i];
+        break;
+      case '*':
+        calc *= operands[i];
+        break;
+      default:
+        console.log('Incorrect operation');
+    }
+  }
+  return calc;
+}
+
+console.log('calculate', calculate1('+', 1, 2, 3, 8));
+console.log('calculate', calculate1('*', 1, 2, 3, 8));
+
+//           Порівняння arguments і rest parameters
+//           | властивість функції | треба оголошувати |    тип    | всі параметри?
+// arguments |          +          |        -          | Arguments |      +
+// rest      |          -          |        +          |   Array   |      -
+
+// Arrow (стрілочна, стрелочная) function ----------------------------------
+
+// function declaration
+// function funcName (p1, p2) {}
+
+// function expression
+// const fName = function (p1, p2) {}
+
+// arrow function
+// const fName = (p1, p2) => {}
+
+function sum1(a, b) {
+  return a + b;
+}
+
+// const sum2 = (a, b) => {
+//   return a + b;
+// };
+
+// або скорочено:
+
+const sum2 = (a, b) => a + b;
+
+console.log('sum2(1,2) :>> ', sum2(1, 2));
+
+// Task: Записати isAdult у вигляді стріочної функції
+// Приймає вік
+// Повертає істину для повнолітнього, false для неповнолыітнього
+
+// const isAdult = age => {
+//   return age >= 18;
+// };
+
+// або скорочено
+
+const isAdult = (age) => age >= 18;
+
+console.log('isAdult(33) :>> ', isAdult(33));
+
+// Task: Запакувати у функції об'єкт
+
+const packObject = (firstName, lastName) => ({
+  firstName: firstName,
+  lastName: lastName,
+});
+
+console.log(
+  'packObject("Test", "Testovich") :>> ',
+  packObject('Test', 'Testovich')
+);
+
+// Спрощення при запису стрілочної функції
+
+// 1 Якщо параметр 1, то можна не брати його у дужки
+const isAdult = (age) => {
+  return age >= 18;
 };
-const users = [];
 
-for (let i = 0; i < 100; i++) {
-  const user = new User(
-    `Username${i}`,
-    `Usersurname${i}`,
-    Math.floor(Math.random() * 90),
-    Math.random() > 0.5,
-    `useremail${i}@gmail.com`,
-    Math.random() > 0.5
-  );
-  users.push(user);
-}
-console.log('users[0].getFullName();', users[0].getFullName());
+// 2 Якщо в тілі функції тільки повернення значення,
+//        то дужки і return можна опустити
+const isAdult = (age) => age >= 18;
 
-//Отримати масив повних імен осіб жіночої статі шкільного віку (6 – 18 років).
-console.log(
-  'users',
-  users.filter((user) => {
-    return user.age >= 6 && user.age <= 8 && user.isMale === false;
-  })
-);
+// 3 Якщо в скороченому записі вигляду 2 повертається об'єкт,
+//        то його портібно взяти в ()
 
-// 1.3 Видалити з масиву користувача з email useremail5@gmail.com
+const packObject = (firstName, lastName) => ({
+  firstName: firstName,
+  lastName: lastName,
+});
 
-users.splice(
-  users.findIndex((user) => {
-    return user.email === 'useremail5@gmail.com';
-  }),
-  1
-);
-// 1.4 Перевірити, чи є серед користувачів користувач з email`ом useremail99@gmail.com
-console.log(
-  'users.some',
-  users.some((user) => {
-    return user.email === 'useremail99@gmail.com';
-  })
-);
-// 1.5 Перевірити, чи всі користувачі підписані (subscribed).
-console.log(
-  'users.every',
-  users.every((user) => {
-    return user.isSubscribed;
-  })
-);
+// Task: Перевірити число a на парність (повертати true/false)
+const isEven = (a) => a % 2 === 0;
+console.log('isEven(10) :>> ', isEven(10));
 
-console.groupEnd();
+// Task: Функція greeting(lang, userName), яка має повертати
+// 'Hello ' + userName, if lang==='en'
+// 'Привет ' + userName, if lang==='ru'
+// 'Вiтаю ' + userName, if lang==='ua'
+
+const greetingOptions = {
+  en: 'Hello',
+  ru: 'Привет',
+  ua: 'Вiтаю',
+};
+
+const greeting = (lang, userName) => {
+  return `${greetingOptions[lang]} ${userName}`;
+};
+
+console.log('greeting("en", "Ivo") :>> ', greeting('ua', 'Ivo'));
+
+// Обмеження:
+// 1 Нема arguments
+// 2 Нема свого this. Бере з середовища
+
+const o = {
+  name: 'Test',
+  method: () => {
+    console.log('this :>> ', this);
+  },
+};
+o.method();
+
+console.log('this global:>> ', this);
