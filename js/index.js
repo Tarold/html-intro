@@ -1,215 +1,119 @@
-// Необмежена кількість аргументів
-
-// 1 arguments - псевдомасив (пронумерованы + length)
-
-// arguments приймає усі перераховані при виклику функції аргументи,
-// навіть якщо при оголошенні функції вказано імена для перших кількох параметрів
-
-// Ex. a - arguments[0], b - arguments[1]
-
-function f(a, b) {
-  // console.log('Чи є arguments масивом  :>> ', arguments instanceof Array);
-  let sum = 0;
-  for (let i = 0; i < arguments.length; i++) {
-    sum += arguments[i];
-  }
-  return sum;
+function Phone(id, brand, model, makeYear, color, isNfc, price) {
+  this.id = id;
+  this.brand = brand;
+  this.model = model;
+  this.makeYear = makeYear;
+  this.color = color;
+  this.isNfc = isNfc;
+  this.price = price;
 }
 
-console.log('f(1,2,3,4,5) :>> ', f(1, 2, 3, 4, 5));
+const phonesCount = 100;
 
-// Task: Написати функцію для розрахунку добутку необмеженої кількості переданих аргументів.
-function mult() {
-  let accumulator = 1;
-  for (let i = 0; i < arguments.length; i++) {
-    accumulator *= arguments[i];
-  }
-  return accumulator;
+const phones = [];
+
+for (let i = 0; i < phonesCount; i++) {
+  const phone = new Phone(
+    i,
+    Math.random() > 0.5 ? 'Sumsung' : 'IPhone',
+    `Series ${Math.trunc(Math.random() * 20)}`,
+    2015 + Math.trunc(Math.random() * 8),
+    Math.random() > 0.5 ? 'white' : 'black',
+    Math.random() > 0.5,
+    5000 + Math.trunc(Math.random() * 7000)
+  );
+  phones.push(phone);
 }
 
-console.log('mult(2,6,4) :>> ', mult(2, 6, 4));
+console.dir(phones);
 
-// Task: Написати функцію виду
-// calculate(operation, operand1, operand2, …, operandN),
-// де operation - це операція, яка має бути виконана над операндами.
-// operation - arguments[0], тому цикл перебираємо з 1
+// forEach виконує колббек послідовно для всіх елементів масиву
+// filter => новий масив з елеметами, які задовольняють умові в колбеку
+// map => новий масив з елементами, які повернуті з колбеку для кожного елемента вихідного масиву
+// findIndex => індекс знайденого елемента (для якого з колбека повертається true,
+//              або -1, якщо його не знайдено (для кожного повернулося false))
+// every => true (виконується всім) / false
+// some => true (виконується хоча б для одного) / false
 
-function calculate(operation) {
-  let calc = null;
+//! 1 Відібрати телефони дорожче 8000
 
-  switch (operation) {
-    case '+':
-      calc = 0;
-      for (let i = 1; i < arguments.length; i++) {
-        calc += arguments[i];
-      }
-      break;
-    case '*':
-      calc = 1;
-      for (let i = 1; i < arguments.length; i++) {
-        calc *= arguments[i];
-      }
-      break;
-    default:
-      console.log('Incorrect operation');
-  }
+// function filter8000Phone(currentValue) {
+//   return currentValue.price > 8000;
+// }
+// const priceBigger8000Phones = phones.filter(filter8000Phone);
 
-  return calc;
+const priceBigger8000Phones = phones.filter((p) => p.price > 8000);
+
+//! 2 Відібрати телефони 2018 року випуску (filter)
+function filter2018Phone(currentValue) {
+  return currentValue.makeYear === 2018;
 }
-console.log('calculate', calculate('+', 1, 2, 3));
-console.log('calculate', calculate('*', 1, 2, 4));
+const year2018Phones = phones.filter(filter2018Phone);
 
-// 2 rest parameters
+// const makeYear2018Phones = phones.filter(p => p.makeYear === 2018);
+// console.dir(makeYear2018Phones);
 
-// rest parameters - масив
-// rest parameters треба оголошувати
-
-function sum1(...args) {
-  const sumCallback = function (accumulator, currentValue) {
-    return accumulator + currentValue;
-  };
-
-  const sum = args.reduce(sumCallback, 0);
-  return sum;
+//! 3 Вивести 'brand: model year' кожного телефону (forEach)
+function printPhone(phone) {
+  console.log(`${phone.brand}: ${phone.model} ${phone.makeYear}`);
 }
 
-console.log('sum1(1, 2, 3) :>> ', sum1(1, 2, 3));
-console.log('sum1(1, 2, 3, 8) :>> ', sum1(1, 2, 3, 8));
+phones.forEach(printPhone);
 
-function f2(a, b, ...args) {
-  console.log('args :>> ', args); // окрім перерахованих до ...args
-  console.log('arguments :>> ', arguments); // всі
+//! 4 Видалати телефон з id 10 (findIndex + splice)
+
+function findPhoneIndex(phone) {
+  return phone.id === 10;
 }
 
-function calculate1(operation, ...operands) {
-  let calc = 0;
+const foundedPhoneIndex = phones.findIndex(findPhoneIndex);
 
-  if (operation === '*') calc++;
+phones.splice(foundedPhoneIndex, 1);
+// phones.splice(
+//   phones.findIndex(p => p.id === 10),
+//   1
+// );
+console.log('phones :>> ', phones);
 
-  for (let i = 0; i < operands.length; i++) {
-    switch (operation) {
-      case '+':
-        calc += operands[i];
-        break;
-      case '*':
-        calc *= operands[i];
-        break;
-      default:
-        console.log('Incorrect operation');
-    }
-  }
-  return calc;
+//! 5 Отримати масив з телефонами, ціна яких нижча на 5% від вихідної
+console.log('phones[0].price :>> ', phones[0].price);
+function mapPhones(phone) {
+  const p = { ...phone };
+  p.price = p.price * 0.95;
+
+  return p;
 }
 
-console.log('calculate', calculate1('+', 1, 2, 3, 8));
-console.log('calculate', calculate1('*', 1, 2, 3, 8));
+const salePhones = phones.map(mapPhones);
+console.log('salePhones[0].price :>> ', salePhones[0].price);
+console.log('phones[0].price :>> ', phones[0].price);
+//! 6 Вивести бренд+модель телефонів із nfc.
 
-//           Порівняння arguments і rest parameters
-//           | властивість функції | треба оголошувати |    тип    | всі параметри?
-// arguments |          +          |        -          | Arguments |      +
-// rest      |          -          |        +          |   Array   |      -
-
-// Arrow (стрілочна, стрелочная) function ----------------------------------
-
-// function declaration
-// function funcName (p1, p2) {}
-
-// function expression
-// const fName = function (p1, p2) {}
-
-// arrow function
-// const fName = (p1, p2) => {}
-
-function sum1(a, b) {
-  return a + b;
+function filterNfsPhone(phone) {
+  return phone.isNfc;
 }
 
-// const sum2 = (a, b) => {
-//   return a + b;
-// };
+const nfcPhones = phones.filter(filterNfsPhone);
 
-// або скорочено:
+function printBrandModel(phone) {
+  console.log(`${phone.brand} ${phone.model}`);
+}
 
-const sum2 = (a, b) => a + b;
+nfcPhones.forEach(printBrandModel);
+console.log('nfcPhones.length :>> ', nfcPhones.length);
 
-console.log('sum2(1,2) :>> ', sum2(1, 2));
+// phones
+//   .filter(p => p.isNfc)
+//   .forEach(p => console.log(`${phone.brand} ${phone.model}`));
 
-// Task: Записати isAdult у вигляді стріочної функції
-// Приймає вік
-// Повертає істину для повнолітнього, false для неповнолыітнього
+//! 7 Вивести дані про моделі apple 2016 року
 
-// const isAdult = age => {
-//   return age >= 18;
-// };
-
-// або скорочено
-
-const isAdult = (age) => age >= 18;
-
-console.log('isAdult(33) :>> ', isAdult(33));
-
-// Task: Запакувати у функції об'єкт
-
-const packObject = (firstName, lastName) => ({
-  firstName: firstName,
-  lastName: lastName,
-});
-
-console.log(
-  'packObject("Test", "Testovich") :>> ',
-  packObject('Test', 'Testovich')
+const arrApple2016 = phones.filter(
+  (item) => item.makeYear === 2016 && item.brand === 'IPhone'
 );
+console.dir(arrApple2016);
 
-// Спрощення при запису стрілочної функції
-
-// 1 Якщо параметр 1, то можна не брати його у дужки
-const isAdult = (age) => {
-  return age >= 18;
-};
-
-// 2 Якщо в тілі функції тільки повернення значення,
-//        то дужки і return можна опустити
-const isAdult = (age) => age >= 18;
-
-// 3 Якщо в скороченому записі вигляду 2 повертається об'єкт,
-//        то його портібно взяти в ()
-
-const packObject = (firstName, lastName) => ({
-  firstName: firstName,
-  lastName: lastName,
-});
-
-// Task: Перевірити число a на парність (повертати true/false)
-const isEven = (a) => a % 2 === 0;
-console.log('isEven(10) :>> ', isEven(10));
-
-// Task: Функція greeting(lang, userName), яка має повертати
-// 'Hello ' + userName, if lang==='en'
-// 'Привет ' + userName, if lang==='ru'
-// 'Вiтаю ' + userName, if lang==='ua'
-
-const greetingOptions = {
-  en: 'Hello',
-  ru: 'Привет',
-  ua: 'Вiтаю',
-};
-
-const greeting = (lang, userName) => {
-  return `${greetingOptions[lang]} ${userName}`;
-};
-
-console.log('greeting("en", "Ivo") :>> ', greeting('ua', 'Ivo'));
-
-// Обмеження:
-// 1 Нема arguments
-// 2 Нема свого this. Бере з середовища
-
-const o = {
-  name: 'Test',
-  method: () => {
-    console.log('this :>> ', this);
-  },
-};
-o.method();
-
-console.log('this global:>> ', this);
+// (+ every, some)
+// *8 Перевірити, чи є золоті телефони
+// *9 Перевірити, чи всі телефони пізніше 2013 випуску
+// *10 Дізнатися, чи всі білі айфони з нфc
