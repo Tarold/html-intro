@@ -1,119 +1,78 @@
-function Phone(id, brand, model, makeYear, color, isNfc, price) {
-  this.id = id;
-  this.brand = brand;
-  this.model = model;
-  this.makeYear = makeYear;
-  this.color = color;
-  this.isNfc = isNfc;
-  this.price = price;
+// Scope -----------------------------------------------------------------------
+
+// Змінні, оголошені поза будь-яким блоком - глобальні, видно всім блокам (Scope - Script)
+// Змінні, оголошені усередині блоку, тобто в {} - локальні, видно тільки всередині блоку (Scope - Block/Local)
+
+const globalVar = 'global';
+
+if (true) {
+  const localVarIn1If = 'local in 1 if';
+
+  if (true) {
+    const localVarIn2If = 'local in 2 if';
+    console.log('globalVar :>> ', globalVar);
+    console.log('localVarIn1If :>> ', localVarIn1If);
+    console.log('localVarIn2If :>> ', localVarIn2If);
+  }
 }
 
-const phonesCount = 100;
+// Lexical Environment / Лексичне оточення / Лексическое окружение -------------
 
-const phones = [];
+// Лексичне оточення - концепція, згідно з якою оточення ф-і формується
+// згідно з місцем її оголошення в коді
 
-for (let i = 0; i < phonesCount; i++) {
-  const phone = new Phone(
-    i,
-    Math.random() > 0.5 ? 'Sumsung' : 'IPhone',
-    `Series ${Math.trunc(Math.random() * 20)}`,
-    2015 + Math.trunc(Math.random() * 8),
-    Math.random() > 0.5 ? 'white' : 'black',
-    Math.random() > 0.5,
-    5000 + Math.trunc(Math.random() * 7000)
-  );
-  phones.push(phone);
+const a = 'global';
+
+function f1() {
+  const a = 'local';
+
+  f2();
 }
 
-console.dir(phones);
-
-// forEach виконує колббек послідовно для всіх елементів масиву
-// filter => новий масив з елеметами, які задовольняють умові в колбеку
-// map => новий масив з елементами, які повернуті з колбеку для кожного елемента вихідного масиву
-// findIndex => індекс знайденого елемента (для якого з колбека повертається true,
-//              або -1, якщо його не знайдено (для кожного повернулося false))
-// every => true (виконується всім) / false
-// some => true (виконується хоча б для одного) / false
-
-//! 1 Відібрати телефони дорожче 8000
-
-// function filter8000Phone(currentValue) {
-//   return currentValue.price > 8000;
-// }
-// const priceBigger8000Phones = phones.filter(filter8000Phone);
-
-const priceBigger8000Phones = phones.filter((p) => p.price > 8000);
-
-//! 2 Відібрати телефони 2018 року випуску (filter)
-function filter2018Phone(currentValue) {
-  return currentValue.makeYear === 2018;
-}
-const year2018Phones = phones.filter(filter2018Phone);
-
-// const makeYear2018Phones = phones.filter(p => p.makeYear === 2018);
-// console.dir(makeYear2018Phones);
-
-//! 3 Вивести 'brand: model year' кожного телефону (forEach)
-function printPhone(phone) {
-  console.log(`${phone.brand}: ${phone.model} ${phone.makeYear}`);
+function f2() {
+  console.log('a :>> ', a);
 }
 
-phones.forEach(printPhone);
+f1();
 
-//! 4 Видалати телефон з id 10 (findIndex + splice)
+// Замикання / Closure / Замыкание ---------------------------------------------------
 
-function findPhoneIndex(phone) {
-  return phone.id === 10;
+// Замикання - це комбінація функції та лексичного оточення, в якому ця функція була визначена.
+// У Closure в Scope - локальні змінні функції, всередині якої функція, що виконується, була створена.
+
+const a = 'global';
+
+f1();
+
+function f1() {
+  const a = 'local';
+
+  return function f2() {
+    console.log('a :>> ', a);
+  };
 }
 
-const foundedPhoneIndex = phones.findIndex(findPhoneIndex);
+const f2Returned = f1();
+f2Returned();
 
-phones.splice(foundedPhoneIndex, 1);
-// phones.splice(
-//   phones.findIndex(p => p.id === 10),
-//   1
-// );
-console.log('phones :>> ', phones);
+// Task: використовуючи замикання, реалізувати лічильник
 
-//! 5 Отримати масив з телефонами, ціна яких нижча на 5% від вихідної
-console.log('phones[0].price :>> ', phones[0].price);
-function mapPhones(phone) {
-  const p = { ...phone };
-  p.price = p.price * 0.95;
+function counter() {
+  let i = 0;
 
-  return p;
+  return function () {
+    return ++i;
+  };
 }
 
-const salePhones = phones.map(mapPhones);
-console.log('salePhones[0].price :>> ', salePhones[0].price);
-console.log('phones[0].price :>> ', phones[0].price);
-//! 6 Вивести бренд+модель телефонів із nfc.
+const counter1 = counter();
+console.log('counter1() :>> ', counter1());
+console.log('counter1() :>> ', counter1());
+console.log('counter1() :>> ', counter1());
+console.log('counter1() :>> ', counter1());
 
-function filterNfsPhone(phone) {
-  return phone.isNfc;
-}
+const counter2 = counter();
+console.log('counter2() :>> ', counter2());
+console.log('counter2() :>> ', counter2());
 
-const nfcPhones = phones.filter(filterNfsPhone);
-
-function printBrandModel(phone) {
-  console.log(`${phone.brand} ${phone.model}`);
-}
-
-nfcPhones.forEach(printBrandModel);
-console.log('nfcPhones.length :>> ', nfcPhones.length);
-
-// phones
-//   .filter(p => p.isNfc)
-//   .forEach(p => console.log(`${phone.brand} ${phone.model}`));
-
-//! 7 Вивести дані про моделі apple 2016 року
-
-const arrApple2016 = phones.filter(
-  (item) => item.makeYear === 2016 && item.brand === 'IPhone'
-);
-console.dir(arrApple2016);
-
-// (+ every, some)
-// *8 Перевірити, чи є золоті телефони
-// *9 Перевірити, чи всі телефони пізніше 2013 випуску
-// *10 Дізнатися, чи всі білі айфони з нфc
+console.log('counter1() :>> ', counter1());
