@@ -1,7 +1,11 @@
 // 0 Створити числовий масив та проініціалізувати його (*випадковими числами).
 
 function random10() {
-  return Math.round(Math.random() * 10);
+  let add = 0;
+  if (arguments[0] != undefined) {
+    add = arguments[0];
+  }
+  return Math.round(Math.random() * 10) + add;
 }
 
 const arrFirst = [];
@@ -17,16 +21,16 @@ const arrThird = [...arrFirst];
 // Firts realization
 
 arrFirst.shift();
-arrFirst.unshift(random10());
+arrFirst.unshift(random10(10));
 arrFirst.pop();
-arrFirst.push(random10());
+arrFirst.push(random10(10));
 
 // second realization
-arrSecond = [random10(), ...arrSecond.slice(1, -1), random10()];
+arrSecond = [random10(10), ...arrSecond.slice(1, -1), random10(10)];
 
 //third realization
-arrThird.splice(0, 1, random10());
-arrThird.splice(-1, 1, random10());
+arrThird.splice(0, 1, random10(10));
+arrThird.splice(-1, 1, random10(10));
 
 console.log('arr first realization', arrFirst);
 console.log('arr second realization', arrSecond);
@@ -95,9 +99,7 @@ console.log('zeroCount', zeroCount);
 const excellentArray = [-1, 5, 0, 9, -10];
 console.log(
   'excellentArray',
-  excellentArray.filter((element) => {
-    return element != 0;
-  })
+  excellentArray.filter((element) => element != 0)
 );
 
 // 9 Отримати новий масив їх заданого, який міститиме всі елементи вихідного, поділені на 100 (99, 5, 0, 9, 30 => 0.99, 0.05, 0, 0.09, 0.3).
@@ -117,16 +119,14 @@ for (let index = 0; index < 10; index++) {
 console.log('magicalArray', magicalArray);
 
 console.group('magicalArray**2');
-magicalArray.forEach((element, index) => {
-  console.log(`element[${index}]`, element ** 2);
-});
+magicalArray.forEach((element, index) =>
+  console.log(`element[${index}]`, element ** 2)
+);
 console.groupEnd();
 
 // 11 Визначити індекс елемента, квадрат якого дорівнює 100, і видалити його, або видати діагностичне повідомлення, якщо такого елементу не існує.
 const treasureArray = [2, 5, 10, 5, 8];
-const indexReturn = treasureArray.findIndex((element) => {
-  return element ** 2 === 100;
-});
+const indexReturn = treasureArray.findIndex((element) => element ** 2 === 100);
 switch (indexReturn) {
   case -1:
     alert('no such element exists');
@@ -195,32 +195,24 @@ console.log('users[0].getFullName();', users[0].getFullName());
 //Отримати масив повних імен осіб жіночої статі шкільного віку (6 – 18 років).
 console.log(
   'users',
-  users.filter((user) => {
-    return user.age >= 6 && user.age <= 8 && user.isMale === false;
-  })
+  users.filter((user) => user.age >= 6 && user.age <= 8 && !user.isMale)
 );
 
 // 1.3 Видалити з масиву користувача з email useremail5@gmail.com
 
 users.splice(
-  users.findIndex((user) => {
-    return user.email === 'useremail5@gmail.com';
-  }),
+  users.findIndex((user) => user.email === 'useremail5@gmail.com'),
   1
 );
 // 1.4 Перевірити, чи є серед користувачів користувач з email`ом useremail99@gmail.com
 console.log(
   'users.some',
-  users.some((user) => {
-    return user.email === 'useremail99@gmail.com';
-  })
+  users.some((user) => user.email === 'useremail99@gmail.com')
 );
 // 1.5 Перевірити, чи всі користувачі підписані (subscribed).
 console.log(
   'users.every',
-  users.every((user) => {
-    return user.isSubscribed;
-  })
+  users.every((user) => user.isSubscribed)
 );
 
 console.groupEnd();
