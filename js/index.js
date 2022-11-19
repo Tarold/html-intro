@@ -1,92 +1,66 @@
-try {
-  // код, який потенційно може викликати помилки
-} catch (err) {
-  // блок, куди буде передане куревання, якщо виникла вбудована помилка
-  // або згенерувалася вручну в throw
+// Деструктуроване присвоєння
+
+// Об'єктів
+function f({
+  name: userName = 'Anonymous',
+  title = 'pan',
+  phone = '+380123456789',
+}) {
+  // const name = params.name
+  // const title = params.title;
+  // const phone = params.phone;
+  // або
+  // диструктуроване просвоєння
+  // const { name, title, phone } = params;
+  // або в списку параметрів
+
+  console.log('in f :>> ', userName);
+  console.log('in f :>> ', title);
+  console.log('in f :>> ', phone);
 }
 
-// throw генерує помилку (виняткову ситуацію/исключительную ситуацию/exception)
-// вона передається в catch:
-// throw new Error
-//          ||
-//          \/
-// catch  (error)
+f({ title: 'pan' });
 
-function fact(n) {
-  if (typeof n !== 'number') {
-    throw new TypeError('n must be number value'); // на catch
-  }
-  if (n < 0 || !Number.isSafeInteger(n)) {
-    throw new RangeError('n must be positive integer value'); // на catch
-  }
-  if (n === 0) return 1;
-  return n * fact(n - 1);
-}
+// імена змінних мають відповідати іменам властивостей об'єкта або вказані після :
+const book = {
+  author: {
+    firstName: 'Test',
+    lastName: 'Testovich',
+  },
+  price: 12,
+};
 
-try {
-  fact(-5);
-} catch (err) {
-  console.dir(err);
-  if (err instanceof TypeError) {
-    console.log('Input incorrect type');
-  } else if (err instanceof RangeError) {
-    console.log('Value must be pisitive integer');
-  } else {
-    console.log('Something went wrong');
-  }
-}
+const {
+  author: { firstName, lastName },
+  price,
+} = book;
 
-// Task: написати функцію для валідації імені користувача (4-32, string)
-// якщо значення валідне, то повернути його
-// якщо ні, то згенерувати помилку
+console.log('price :>> ', price);
+console.log('firstName :>> ', firstName);
+console.log('lastName :>> ', lastName);
 
-function validateName(value) {
-  if (typeof value !== 'string') {
-    throw new TypeError('name must be string');
-  }
-  if (value.length < 4 || value.length > 32) {
-    throw new RangeError('name must be 4-32 characters');
-  }
-  return value;
-}
+// Масивів
+// Оголошені змінні співставляються за порядком елементів
+const [firstItem, , thirdItem] = [1, 2, 3];
+console.log('firstItem :>> ', firstItem);
+console.log('thirdItem :>> ', thirdItem);
 
-try {
-  const validatedName = validateName('Test');
-} catch (error) {
-  if (error instanceof TypeError) {
-    console.log('name must be');
-  } else if (error instanceof RangeError) {
-    console.log('error');
-  } else {
-    console.log('error');
-  }
-}
+const user1 = {
+  name: 'Test',
+  age: 23,
+  emails: ['test1@test.com', 'test2@test.com'],
+  isMale: true,
+};
 
-// Task: Реалізувати функцію, яка приймає вік,
-// повертає вік, якщо параметр відповідає вимогам,
-// інакше генерує помилку
+// Task: name, age, email (email1, email2)
+// перейменувати name -> userName, age -> userAge
 
-function validateAge(value) {
-  if (typeof value !== 'number') {
-    throw new TypeError('age must be a number');
-  }
-  if (value < 0 || value > 150 || !Number.isSafeInteger(value)) {
-    throw new RangeError(
-      'Age must be bigger than 0 but smaller than 150 and it must be integer value.'
-    );
-  }
-  return value;
-}
-
-try {
-  const validatedAge = validateAge(0.5);
-  console.log('validatedAge :>> ', validatedAge);
-} catch (error) {
-  if (error instanceof TypeError) {
-    console.log('error : ', error);
-  } else if (error instanceof RangeError) {
-    console.log('error : ', error);
-  } else {
-    console.log('something went wrong.');
-  }
-}
+const {
+  name: userName,
+  age: userAge,
+  emails: [firstMail, secondMail],
+  isMale,
+} = user1;
+console.log('userName :>> ', userName);
+console.log('userAge :>> ', userAge);
+console.log('emails :>> ', secondMail);
