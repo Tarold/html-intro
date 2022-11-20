@@ -1,81 +1,57 @@
-// Деструктуроване присвоєння
+// Перелічувані властивості / перечисляемые свойства / enumerable properties
 
-// Об'єктів
-function f({
-  name: userName = 'Anonymous',
-  title = 'pan',
-  phone = '+380123456789',
-}) {
-  // const name = params.name
-  // const title = params.title;
-  // const phone = params.phone;
-  // або
-  // диструктуроване просвоєння
-  // const { name, title, phone } = params;
-  // або в списку параметрів
+const user = {
+  name: 'Test',
+  age: 15,
+};
 
-  console.log('in f :>> ', userName);
-  console.log('in f :>> ', title);
-  console.log('in f :>> ', phone);
+for (let key in user) {
+  console.log('key :>> ', key);
 }
 
-f({ title: 'pan' });
+const arr = [1, 2, 3, 4];
 
-// імена змінних мають відповідати іменам властивостей об'єкта або вказані після :
-const book = {
-  author: {
-    firstName: 'Test',
-    lastName: 'Testovich',
-  },
-  price: 12,
+for (let key in arr) {
+  console.log('key :>> ', key);
+}
+
+// for..in перелічує тільки перелічувані (enumerable: true) властивості (власні та успадковані)
+
+function User1(name, surname, age, isMale, email, isSubscribed) {
+  this.firstName = name;
+  this.lastName = surname;
+  this.age = age;
+  this.isMale = isMale;
+  this.email = email;
+  this.isSubscribed = isSubscribed;
+}
+
+User1.prototype.getFullName = function () {
+  return `${this.firstName} ${this.lastName}`;
 };
 
-const {
-  author: { firstName, lastName },
-  price,
-} = book;
+const user1 = new User1('test', 'test2', 20, true, 't@g.com', true);
 
-console.log('price :>> ', price);
-console.log('firstName :>> ', firstName);
-console.log('lastName :>> ', lastName);
+for (let key in user1) {
+  console.log('key :>> ', key);
+}
 
-// Масивів
-// Оголошені змінні співставляються за порядком елементів
-const [firstItem, , thirdItem] = [1, 2, 3];
+for (const key in user1) {
+  // перевірка, чи є властивість власною
+  if (user1.hasOwnProperty(key)) {
+    console.log('key own:>> ', key);
+  }
+}
 
-console.log('firstItem :>> ', firstItem);
-console.log('thirdItem :>> ', thirdItem);
+// повертає масив з власних перелічуваних властивостей
+Object.keys(user).forEach((key) => console.log('key value :>> ', user[key]));
 
-const user1 = {
-  name: 'Test',
-  age: 23,
-  emails: ['test1@test.com', 'test2@test.com'],
-  isMale: true,
-};
+Object.keys(user1).forEach((key) =>
+  console.log('key value user1:>> ', user1[key])
+);
 
-// Task: name, age, email (email1, email2)
-// перейменувати name -> userName, age -> userAge
+// повертає масив з власних перелічуваних значень властивостей
+console.log('Object.values(user1) :>> ', Object.values(user1));
 
-const {
-  name: userName,
-  age: userAge,
-  emails: [firstMail, secondMail],
-  isMale,
-} = user1;
-
-console.log('userName :>> ', userName);
-console.log('userAge :>> ', userAge);
-console.log('emails :>> ', secondMail);
-
-const [firstItem1, ...restItems] = [1, 2, 3, 4, 5];
-console.log('firstItem1 :>> ', firstItem1);
-console.log('restItems :>> ', restItems);
-
-const { style, ...restAttrs } = {
-  title: 'title',
-  style: 'color:red;',
-  id: '1',
-};
-
-console.log('style :>> ', style);
-console.log('restAttrs :>> ', restAttrs);
+// повертає масив з власних перелічуваних пар [властивість,ключ]
+console.log('Object.entries(user1) :>> ', Object.entries(user1));
