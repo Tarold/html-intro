@@ -86,7 +86,7 @@
 // Принципи ООП:
 // інкапсуляція - приховання логіки (особливостей реалізації)
 // спадкування  - перевикористання структури та логіки (альт. назва - спеціалізація, is a)
-// поліморфізм  - можливість через однаковий інтерфейс працювати з різними типами
+// поліморфізм  - можливість через однаковий інтерфейс працювати з різними типами (в js поліморфізм підтипів)
 
 /***** Спадкування **************************************************************** */
 
@@ -236,6 +236,24 @@ class Square extends Figure {
 }
 
 const square1 = new Square(6);
-console.log('square1.getAria() :>> ', square1.getAria());
 
 // Реалізувати клас для Rectangle
+class Rectangle extends Figure {
+  constructor(sideLength, sideWidth) {
+    super('rectangle');
+    this.a = sideLength;
+    this.b = sideWidth;
+  }
+  getAria() {
+    return this.a * this.b;
+  }
+}
+
+const rectangle1 = new Rectangle(3, 5);
+
+function calcAria(fig) {
+  if (fig instanceof Figure) {
+    return fig.getAria();
+  }
+  console.log('fig is not a Figure ');
+}
