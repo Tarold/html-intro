@@ -1,43 +1,217 @@
-/*const set1 = new Set();
+// function User1(name, surname, age, isMale, email, isSubscribed) {
+//   this.firstName = name;
+//   this.lastName = surname;
+//   this.age = age;
+//   this.isMale = isMale;
+//   this.email = email;
+//   this.isSubscribed = isSubscribed;
+// }
 
-set1.add(3).add(2).add(1);
+// User1.prototype.getFullName = function () {
+//   return `${this.firstName} ${this.lastName}`;
+// };
 
-for (let a in set1) {
-  console.log('a :>> ', a);
+// User1.isUser1 = function (obj) {
+//   return obj instanceof User1;
+// };
+
+// // Класи - синтаксичний цукор над вбудованими в жс функціями-конструкторами і прототипами
+// class User {
+//   constructor(name, surname, age, isMale, email, isSubscribed) {
+//     this.firstName = name;
+//     this.lastName = surname;
+//     this.age = age; // спрацьовує сеттер
+//     this.isMale = isMale;
+//     this.email = email;
+//     this.isSubscribed = isSubscribed;
+//   }
+//   // сеттер - спеціального вигляду метод
+//   set age(value) {
+//     if (typeof value !== 'number') {
+//       throw new TypeError('age must be number');
+//     }
+//     if (value < 0 || value > 150 || !Number.isInteger(value)) {
+//       throw new RangeError('age must be 0-130 integer');
+//     }
+//     this._age = value;
+//   }
+//   get age() {
+//     return this._age;
+//   }
+//   getFullName() {
+//     return `${this.firstName} ${this.lastName}`;
+//   }
+//   // статичний метод - працює для класа, а не для його екземпляра
+//   static isUser(obj) {
+//     return obj instanceof User;
+//   }
+// }
+
+// // constructor - аналог функції-конструктора
+// const user11 = new User('Test', 'Testovich', 25, true, 'test@gmail.com', true);
+
+// try {
+//   const user1 = new User('Test', 'Testovich', 25, true, 'test@gmail.com', true);
+//   console.log('user1.getFullName() :>> ', user1.getFullName());
+//   console.log('User.isUser({}) :>> ', User.isUser({}));
+//   console.log('User.isUser(user1) :>> ', User.isUser(user1));
+//   user1.age = 26; // спрацьовує сеттер (дозволяє звернутися до метода і встановити значення за синтаксисом властивості)
+//   console.log('user.age :>> ', user1.age); // спрацьовує геттер (дозволяє звернутися до метода і отримати значення за синтаксисом властивості)
+// } catch (err) {
+//   console.log('err :>> ', err);
+// }
+
+// // Task: реалізувати клас для телефонів (марка, модель, колір, ціна, рік випуску)
+// // реалізувати метод для розрахунку віку телефону
+// // створити екземпляр класу, викликати для нього метод
+
+// class Phone {
+//   constructor(mark, model, color, price, year) {
+//     this.mark = mark;
+//     this.model = model;
+//     this.color = color;
+//     this.price = price;
+//     this.year = year;
+//   }
+//   getAge() {
+//     return new Date().getFullYear() - this.year;
+//   }
+// }
+
+// const telephone1 = new Phone('Nokia', '3310', 'black', 2000, 2010);
+// console.log(telephone1.getAge());
+
+// Об'єктно-орієнтоване програмування ------------------------------------------
+
+// Принципи ООП:
+// інкапсуляція - приховання логіки (особливостей реалізації)
+// спадкування  - перевикористання структури та логіки (альт. назва - спеціалізація, is a)
+// поліморфізм  - можливість через однаковий інтерфейс працювати з різними типами
+
+/***** Спадкування **************************************************************** */
+
+// базовий / бальківський
+class User {
+  constructor(name, surname, age, isMale, email) {
+    this.firstName = name;
+    this.lastName = surname;
+    this.age = age;
+    this.isMale = isMale;
+    this.email = email;
+    this.isBanned = false;
+  }
+
+  getFullName() {
+    return `${this.firstName} ${this.lastName}`;
+  }
 }
 
-const set1Keys = [...set1.keys()];
-console.log('set1Keys :>> ', set1Keys);
-const set1Values = [...set1.values()];
-console.log('set1Values :>> ', set1Values);
+const user1 = new User('Test', 'Testovych', 25, false, 'test@test.com');
 
-set1.forEach((a, b, c) => {
-  console.log('a :>> ', a);
-  console.log('b :>> ', b);
-  console.log('c :>> ', c);
-});
-const arr = [1, 1, 1, 2, 2, 3, 4, 4, 4, 4];
-const arr3 = [4, 4, 4, 5, 6, 55, 8];
+// дочірній / спадкоємець
+class Moderator extends User {
+  constructor(name, surname, age, isMale, email, permission) {
+    super(name, surname, age, isMale, email); // виклик конструктора базового класу
+    this.permission = permission;
+  }
+  sendMessage(user, message) {
+    console.log(
+      `Moderator ${this.getFullName()} send message "${message}" to ${user.getFullName()}`
+    );
+  }
+}
 
-const set2 = new Set(arr);
-console.log('set2 :>> ', set2);
+const permission = {};
+const moderator1 = new Moderator(
+  'Mod',
+  'Moderovych',
+  35,
+  true,
+  'mod@test.com',
+  permission
+);
 
-const arr2 = new Array(...set2);
-console.log('arr2 :>> ', arr2);
-*/
-const users = [
-  { name: 'Test0', brand: 'IPhone' },
-  { name: 'Test1', brand: 'Samsung' },
-  { name: 'Test2', brand: 'IPhone' },
-  { name: 'Test3', brand: 'Xiaomi' },
-  { name: 'Test4', brand: 'Samsung' },
-  { name: 'Test5', brand: 'Xiaomi' },
-  { name: 'Test6', brand: 'IPhone' },
-];
-const usersWithPhones = {};
-users.forEach((item) => {
-  usersWithPhones[item.brand] === undefined
-    ? (usersWithPhones[item.brand] = [item.name])
-    : usersWithPhones[item.brand].push(item.name);
-});
-console.log('usersWithPhones :>> ', usersWithPhones);
+console.log('moderator1.getFullName() :>> ', moderator1.getFullName());
+moderator1.sendMessage(user1, 'Your message was banned');
+
+// Task: Реалізувати клас Admin, який є модератором, і на додачу має
+// властивість category (1,2)
+// реалізує логіку (забанити або зняти бан з конкретного користувача):
+// - bann
+// - unbann
+
+// Створити об'єкт класу Admin, протустувати роботу методі bann, unbann
+
+class Admin extends Moderator {
+  constructor(name, surname, age, isMale, email, permission, category) {
+    super(name, surname, age, isMale, email, permission);
+    this.category = category;
+  }
+  bann(user) {
+    user.isBanned = true;
+    console.log(`You were banned by ${this.getFullName()}`);
+  }
+  unbann(user) {
+    user.isBanned = false;
+    console.log(`You were unbanned by ${this.getFullName()}`);
+  }
+  // перевизначення
+  sendMessage(user, message) {
+    console.log(
+      `Admin ${this.getFullName()} send message "${message}" to ${user.getFullName()}`
+    );
+  }
+}
+
+const admin1 = new Admin(
+  'Admin',
+  'Adminovych',
+  30,
+  true,
+  'admin@gmail.com',
+  permission,
+  1
+);
+
+console.log('admin1.getFullName', admin1.getFullName());
+
+admin1.bann(user1);
+admin1.unbann(user1);
+
+// ПЕРЕВИЗНАЧЕННЯ
+// Ex.: squirrel (ість, що дадуть), flyingSquirrel (їсть тілько горіхи)
+
+class Squirrel {
+  constructor(name) {
+    this.name = name;
+  }
+
+  run() {
+    console.log(`squirrel ${this.name} is running`);
+  }
+
+  eat(food) {
+    console.log(`squirrel ${this.name} is eating ${food}`);
+  }
+}
+
+class FlyingSquirrel extends Squirrel {
+  constructor(name, maxDistance) {
+    super(name);
+    this.maxDistance = maxDistance;
+  }
+
+  flying() {
+    console.log(`squirrel ${this.name} is flying up to ${this.maxDistance}`);
+  }
+
+  eat() {
+    console.log(`squirrel ${this.name} is eating nuts`);
+  }
+}
+
+const sqiurrel = new Squirrel('Lilia');
+
+const fSquirrel = new FlyingSquirrel('Boing 777', 30);
+
+/***************************************************************************** */
