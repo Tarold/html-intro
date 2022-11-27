@@ -215,3 +215,27 @@ const sqiurrel = new Squirrel('Lilia');
 const fSquirrel = new FlyingSquirrel('Boing 777', 30);
 
 /***************************************************************************** */
+// абстрактний клас - клас без реалізації
+class Figure {
+  constructor(name) {
+    this.name = name;
+  }
+  getAria() {
+    return null;
+  }
+}
+
+class Square extends Figure {
+  constructor(sideLength) {
+    super('square');
+    this.a = sideLength;
+  }
+  getAria() {
+    return this.a * this.a;
+  }
+}
+
+const square1 = new Square(6);
+console.log('square1.getAria() :>> ', square1.getAria());
+
+// Реалізувати клас для Rectangle
