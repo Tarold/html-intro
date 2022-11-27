@@ -1,74 +1,52 @@
-const doc = document;
-console.dir(doc);
+// Task: При натисканні на кнопку:
 
-const docHead = document.head;
-console.dir(docHead);
+// Отримати заголовок першого рівня і встановити для нього інший колір тла.
+// * Виставити для заголовків другого рівня розмір шрифта 20px і їх колір.
 
-const docBody = document.body;
-console.dir(docBody);
+// Встановити src i alt, розміри для головного зображення.
+// * Встановити src i alt, розміри для зображень в кожному атіклі.
 
-const divRoot = document.getElementById('root');
-const divs = document.getElementsByTagName('div');
-const contentClassDivs = document.getElementsByClassName('content');
+// 1
 
-// for (const el of divs) {
-//   console.dir(el);
-// }
+const [button] = document.querySelectorAll('button');
 
-// const [div1, div2, div3] = document.getElementsByTagName('div');
+button.onclick = function () {
+  const h1Style = document.querySelector('h1');
+  h1Style.style.backgroundColor = 'red';
 
-const divRoot2 = document.querySelector('#root');
-const divs2 = document.querySelectorAll('div');
-// Отримати список елементів з класом content
-const contentClassDivs2 = document.querySelectorAll('body > .content');
-
-// Обробка подій -------------------------------------------------------------------------
-
-const [btn1, btn2] = document.querySelectorAll('button');
-
-btn1.onclick = function () {
-  console.log('The btn1 was clicked');
+  const imgStyle = document.querySelector('img');
+  imgStyle.setAttribute('alt', 'new alt');
+  imgStyle.setAttribute(
+    'src',
+    'https://ecooboi.com.ua/files/cache/b1/ec/44/ecooboi-abstrakciya-listjya-1559645107.jpg'
+  );
+  imgStyle.setAttribute('style', 'width: 20px; height: 35px;');
 };
 
-// btn1.onclick = null;
+// 2
 
-const btn2ClickHandler = () => {
-  console.log('The btn2 was clicked');
-};
+const btnCklick = document.querySelector('button');
+const h1 = document.querySelector('h1');
+const h2All = document.querySelectorAll('h2');
+const mainImg = document.querySelector('h1+img');
+const primaryMainImg = document.querySelectorAll('h2+img');
 
-btn2.addEventListener('click', btn2ClickHandler);
+btnCklick.addEventListener('click', btnClickHandler);
 
-btn2.removeEventListener('click', btn2ClickHandler);
-
-// при натисканні на <div id="root">Привіт</div> вивести алертом привітання
-
-divRoot.onclick = function () {
-  alert('Hello');
-};
-
-// divRoot.onmouseover = function () {
-//   alert('Hello');
-// };
-
-divRoot.addEventListener(
-  'click',
-  (div1ClickHandler = () => {
-    alert('Привіт');
-  })
-);
-
-// Атрибути ------------------------------------------------------------
-
-console.log('divRoot.title :>> ', divRoot.title);
-divRoot.title = 'new title';
-divRoot.style.color = 'green';
-divRoot.style.backgroundColor = 'red';
-// divRoot.hidden = true;
-
-console.log(
-  'divRoot.getAttribute("title") :>> ',
-  divRoot.getAttribute('title')
-);
-divRoot.setAttribute('title', 'new title 2');
-divRoot.setAttribute('style', 'color: blue; font-size: 20px;');
-divRoot.setAttribute('hidden', 'hidden');
+function btnClickHandler() {
+  h1.style.backgroundColor = 'green';
+  h2All.forEach((el) => {
+    el.style.fontSize = '20px';
+    el.style.color = 'red';
+  });
+  mainImg.src =
+    'https://ecooboi.com.ua/files/cache/b1/ec/44/ecooboi-abstrakciya-listjya-1559645107.jpg';
+  mainImg.alt = '#';
+  mainImg.style.width = mainImg.style.hight = '200px';
+  primaryMainImg.forEach((el) => {
+    el.src =
+      'https://ecooboi.com.ua/files/cache/b1/ec/44/ecooboi-abstrakciya-listjya-1559645107.jpg';
+    el.alt = '#';
+    el.style.width = el.style.hight = '200px';
+  });
+}
