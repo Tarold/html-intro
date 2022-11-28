@@ -19,8 +19,11 @@ const slides = [
   },
 ];
 
-const [prevBtn, nextBtn] = document.querySelectorAll('button');
-const sliderImg = document.querySelector('.sliderWrapper img');
+const [testBtn, prevBtn, nextBtn] = document.querySelectorAll('button');
+const sliderImgBehind = document.querySelector('#behind');
+const sliderImg = document.querySelector('#now');
+const sliderImgNext = document.querySelector('#next');
+const geaderImg = document.querySelector('header img');
 
 let currentSlideIndex = 0;
 
@@ -28,30 +31,45 @@ updateSlider(currentSlideIndex);
 
 prevBtn.onclick = prevBtnHandler;
 nextBtn.onclick = nextBtnHandler;
-
+testBtn.onclick = () => {
+  const text = document.querySelector('h1');
+  text.style.color = 'blue';
+  testBtn.style.color = 'white';
+  testBtn.style.backgroundColor = 'blue';
+};
+geaderImg.onmouseover = () => {
+  geaderImg.src = slides[0].src;
+};
 function prevBtnHandler() {
-  // if (currentSlideIndex > 0) {
-  //   currentSlideIndex--;
-  // } else {
-  //   currentSlideIndex = slides.length - 1;
-  // }
   currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
   updateSlider(currentSlideIndex);
 }
 
 function nextBtnHandler() {
-  // if (currentSlideIndex < slides.length - 1) {
-  //   currentSlideIndex++;
-  // } else {
-  //   currentSlideIndex = 0;
-  // }
   currentSlideIndex = (currentSlideIndex + 1) % slides.length;
   updateSlider(currentSlideIndex);
 }
 
 function updateSlider(currentSlideIndex) {
-  sliderImg.src = slides[currentSlideIndex].src;
-  sliderImg.alt = slides[currentSlideIndex].alt;
+  sliderImg.style.opacity = '0';
+  sliderImgBehind.style.opacity = '0';
+  sliderImgNext.style.opacity = '0';
+  setTimeout(function () {
+    sliderImg.src = slides[currentSlideIndex].src;
+    sliderImg.alt = slides[currentSlideIndex].alt;
+
+    sliderImgBehind.src =
+      slides[(currentSlideIndex - 1 + slides.length) % slides.length].src;
+    sliderImgBehind.alt =
+      slides[(currentSlideIndex - 1 + slides.length) % slides.length].alt;
+
+    sliderImgNext.src = slides[(currentSlideIndex + 1) % slides.length].src;
+    sliderImgNext.alt = slides[(currentSlideIndex + 1) % slides.length].alt;
+
+    sliderImg.style.opacity = '1';
+    sliderImgBehind.style.opacity = '1';
+    sliderImgNext.style.opacity = '1';
+  }, 400);
 
   sliderImg.onerror = () => {
     sliderImg.src = './../images/defaultSlide.jpeg';
