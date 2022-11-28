@@ -1,52 +1,59 @@
-// Task: При натисканні на кнопку:
+'use strict';
 
-// Отримати заголовок першого рівня і встановити для нього інший колір тла.
-// * Виставити для заголовків другого рівня розмір шрифта 20px і їх колір.
+const slides = [
+  {
+    src: 'https://images.pexels.com/photos/624015/pexels-photo-624015.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    alt: 'landscape1',
+  },
+  {
+    src: 'https://images.pexels.com/photos/1287145/pexels-photo-1287145.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    alt: 'landscape2',
+  },
+  {
+    src: 'https://images.pexels.com/photos/371589/pexels-photo-371589.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    alt: 'landscape3',
+  },
+  {
+    src: 'https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    alt: 'landscape4',
+  },
+];
 
-// Встановити src i alt, розміри для головного зображення.
-// * Встановити src i alt, розміри для зображень в кожному атіклі.
+const [prevBtn, nextBtn] = document.querySelectorAll('button');
+const sliderImg = document.querySelector('.sliderWrapper img');
 
-// 1
+let currentSlideIndex = 0;
 
-const [button] = document.querySelectorAll('button');
+updateSlider(currentSlideIndex);
 
-button.onclick = function () {
-  const h1Style = document.querySelector('h1');
-  h1Style.style.backgroundColor = 'red';
+prevBtn.onclick = prevBtnHandler;
+nextBtn.onclick = nextBtnHandler;
 
-  const imgStyle = document.querySelector('img');
-  imgStyle.setAttribute('alt', 'new alt');
-  imgStyle.setAttribute(
-    'src',
-    'https://ecooboi.com.ua/files/cache/b1/ec/44/ecooboi-abstrakciya-listjya-1559645107.jpg'
-  );
-  imgStyle.setAttribute('style', 'width: 20px; height: 35px;');
-};
+function prevBtnHandler() {
+  // if (currentSlideIndex > 0) {
+  //   currentSlideIndex--;
+  // } else {
+  //   currentSlideIndex = slides.length - 1;
+  // }
+  currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+  updateSlider(currentSlideIndex);
+}
 
-// 2
+function nextBtnHandler() {
+  // if (currentSlideIndex < slides.length - 1) {
+  //   currentSlideIndex++;
+  // } else {
+  //   currentSlideIndex = 0;
+  // }
+  currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+  updateSlider(currentSlideIndex);
+}
 
-const btnCklick = document.querySelector('button');
-const h1 = document.querySelector('h1');
-const h2All = document.querySelectorAll('h2');
-const mainImg = document.querySelector('h1+img');
-const primaryMainImg = document.querySelectorAll('h2+img');
+function updateSlider(currentSlideIndex) {
+  sliderImg.src = slides[currentSlideIndex].src;
+  sliderImg.alt = slides[currentSlideIndex].alt;
 
-btnCklick.addEventListener('click', btnClickHandler);
-
-function btnClickHandler() {
-  h1.style.backgroundColor = 'green';
-  h2All.forEach((el) => {
-    el.style.fontSize = '20px';
-    el.style.color = 'red';
-  });
-  mainImg.src =
-    'https://ecooboi.com.ua/files/cache/b1/ec/44/ecooboi-abstrakciya-listjya-1559645107.jpg';
-  mainImg.alt = '#';
-  mainImg.style.width = mainImg.style.hight = '200px';
-  primaryMainImg.forEach((el) => {
-    el.src =
-      'https://ecooboi.com.ua/files/cache/b1/ec/44/ecooboi-abstrakciya-listjya-1559645107.jpg';
-    el.alt = '#';
-    el.style.width = el.style.hight = '200px';
-  });
+  sliderImg.onerror = () => {
+    sliderImg.src = './../images/defaultSlide.jpeg';
+  };
 }
