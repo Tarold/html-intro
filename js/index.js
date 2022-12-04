@@ -37,3 +37,30 @@ const users = [
       'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
   },
 ];
+
+const usersListEl = document.querySelector('.usersList');
+
+users.forEach((u) => {
+  const usersListItemEl = document.createElement('li');
+  usersListItemEl.classList.add('usersListItem');
+  usersListEl.append(usersListItemEl);
+
+  const userPhotoEl = document.createElement('img');
+  userPhotoEl.classList.add('userProfilePhoto');
+  userPhotoEl.src = u.photoSrc;
+  userPhotoEl.alt = `${u.firstName} ${u.lastName}`;
+  usersListItemEl.append(userPhotoEl);
+
+  const userNameEl = document.createElement('p');
+  userNameEl.classList.add('userName');
+  userNameEl.textContent = `${u.firstName} ${u.lastName}`;
+  usersListItemEl.append(userNameEl);
+
+  const userAge = document.createElement('div');
+  userAge.textContent = u.age;
+  usersListItemEl.append(userAge);
+
+  const removeUserBtn = document.createElement('button');
+  removeUserBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
+  usersListItemEl.append(removeUserBtn);
+});
