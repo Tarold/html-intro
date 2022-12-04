@@ -1,52 +1,55 @@
-// Task: При натисканні на кнопку:
+'use strict';
 
-// Отримати заголовок першого рівня і встановити для нього інший колір тла.
-// * Виставити для заголовків другого рівня розмір шрифта 20px і їх колір.
+// Родитель:
+// element.parentElement – родитель-элемент.
 
-// Встановити src i alt, розміри для головного зображення.
-// * Встановити src i alt, розміри для зображень в кожному атіклі.
+// Соседи:
+// element.previousElementSibling – предыдущий сосед-элемент.
+// element.nextElementSibling – lastElementChildследующий сосед-элемент.
 
-// 1
+// Дети:
+// element.children – коллекция детей, которые являются элементами.
+// element.firstElementChild – первый дочерний элемент.
+// element.lastElementChild – последний дочерний элемент.
 
-const [button] = document.querySelectorAll('button');
+// element.closest(selector) - найближчий батьківський елемент по селектору
 
-button.onclick = function () {
-  const h1Style = document.querySelector('h1');
-  h1Style.style.backgroundColor = 'red';
+const articleEl = document.querySelector('article.class1');
+console.log('articleEl.parentElement :>> ', articleEl.parentElement);
 
-  const imgStyle = document.querySelector('img');
-  imgStyle.setAttribute('alt', 'new alt');
-  imgStyle.setAttribute(
-    'src',
-    'https://ecooboi.com.ua/files/cache/b1/ec/44/ecooboi-abstrakciya-listjya-1559645107.jpg'
-  );
-  imgStyle.setAttribute('style', 'width: 20px; height: 35px;');
+const p1El = document.querySelector('p:first-of-type');
+console.log('p1El.previousElementSibling :>> ', p1El.previousElementSibling);
+console.log('p1El.nextElementSibling :>> ', p1El.nextElementSibling);
+console.log('p1El.previouSibling :>> ', p1El.previousSibling);
+console.log('p1El.nextSibling :>> ', p1El.nextSibling);
+
+console.log('articleEl.children :>> ', articleEl.children);
+console.log('articleEl.firstElementChild :>> ', articleEl.firstElementChild);
+console.log('articleEl.lastElementChild :>> ', articleEl.lastElementChild);
+
+// знайти h3 через ul
+const ulEl = document.querySelector('ul');
+console.log('findH3:>> ', ulEl.previousElementSibling.previousElementSibling);
+console.log('ulEl :>> ', ulEl.parentElement.firstElementChild);
+
+console.log('ulEl.closest(".class1") :>> ', ulEl.closest('.class1'));
+
+// Повісити обробника подійн на всі елементи списку
+// і законсолеложити іх textContent, маючи посилання на ul
+
+const liClickHandler = function (e) {
+  console.log('this.textContent :>> ', this.textContent);
+  console.log('e.target.textContent :>> ', e.target.textContent);
+  console.log('e.target.innerHTML :>> ', e.target.innerHTML);
 };
 
-// 2
-
-const btnCklick = document.querySelector('button');
-const h1 = document.querySelector('h1');
-const h2All = document.querySelectorAll('h2');
-const mainImg = document.querySelector('h1+img');
-const primaryMainImg = document.querySelectorAll('h2+img');
-
-btnCklick.addEventListener('click', btnClickHandler);
-
-function btnClickHandler() {
-  h1.style.backgroundColor = 'green';
-  h2All.forEach(el => {
-    el.style.fontSize = '20px';
-    el.style.color = 'red';
-  });
-  mainImg.src =
-    'https://ecooboi.com.ua/files/cache/b1/ec/44/ecooboi-abstrakciya-listjya-1559645107.jpg';
-  mainImg.alt = '#';
-  mainImg.style.width = mainImg.style.hight = '200px';
-  primaryMainImg.forEach(el => {
-    el.src =
-      'https://ecooboi.com.ua/files/cache/b1/ec/44/ecooboi-abstrakciya-listjya-1559645107.jpg';
-    el.alt = '#';
-    el.style.width = el.style.hight = '200px';
-  });
+for (const liEl of ulEl.children) {
+  liEl.onclick = liClickHandler;
 }
+
+// [...ulEl.children].forEach(
+//   liEl =>
+//     (liEl.onclick = () => {
+//       console.log('liEl.textContent :>> ', liEl.textContent);
+//     })
+// );
