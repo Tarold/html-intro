@@ -1,98 +1,23 @@
-body {
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-li {
-  border-radius: 15px;
-  overflow: hidden;
-}
-.headTitle {
-  text-align: center;
-}
-.news {
-  display: flex;
-  flex-direction: column;
+.usersList {
   margin: 10px;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  max-width: 500px;
-  transition: all 0.2s;
 }
-.titleImg {
-  height: 250px;
+
+.usersListItem {
   display: flex;
-  justify-content: center;
+  gap: 10px;
   align-items: center;
-  text-align: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  position: relative;
+  margin: 10px;
+  box-shadow: 0 0 5px grey;
+  padding: 10px;
 }
-.like {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  height: 30px;
-  width: 30px;
-  top: 10px;
-  right: 10px;
-  border: 1px solid #fff;
+
+.userProfilePhoto {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
   border-radius: 50%;
-  color: #fff;
-  cursor: pointer;
-  transition: all 0.3s;
 }
-.fill {
-  color: red;
-}
-.like:hover {
-  border-color: grey;
-}
-.hide {
-  display: none;
-}
-.title {
-  padding: 20px;
-  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
-    0 0 40px #fff, 0 0 55px #fff, 0 0 70px #fff;
-}
-.bodyNews {
-  display: flex;
-  flex-direction: column;
-  padding: 0 20px;
-  height: 100%;
-}
-.category {
-  color: grey;
-  text-transform: capitalize;
-  margin: 20px 0;
-}
-.newsText {
-  text-indent: 50px;
-  text-align: justify;
-}
-.delete {
-  margin-top: auto;
+
+.fa-trash-alt {
   margin-left: auto;
-  align-self: right;
-  background-color: rgb(245, 79, 79);
-  border: none;
-  color: white;
-  cursor: pointer;
-  padding: 7px 20px;
-  font-size: 16px;
-  transition: all 0.5s;
-}
-.delete:hover {
-  background-color: red;
-}
-.date {
-  color: grey;
-  text-align: right;
 }
