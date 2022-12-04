@@ -31,3 +31,39 @@ sectionEl.before(asideEl);
 sectionEl.onclick = e => {
   e.currentTarget.remove();
 };
+
+// ------------------------------------------------------
+// Task: Динамічно створити структуру, наведену в html.
+// Заповнити контентом з об’єкту:
+const newsItem = {
+  sectionTitle: 'World news',
+  title: 'Another news',
+  body: 'Somewhere something happened.',
+};
+
+const rootDivEl = document.querySelector('#root');
+
+// створити секшн і вбудувати в рут
+const newsSectionEl = document.createElement('section');
+rootDivEl.append(newsSectionEl);
+
+// створити заголовок
+const newsSectionH2El = document.createElement('h2');
+newsSectionH2El.textContent = newsItem.sectionTitle;
+
+// створити атікл
+const newsArricleEl = document.createElement('article');
+
+// вбудувати заголовок і атікл в секшн
+newsSectionEl.append(newsSectionH2El, newsArricleEl);
+
+// створити заголовок
+const newsArticleH3El = document.createElement('h3');
+newsArticleH3El.textContent = newsItem.title;
+
+//створити абзац
+const newsParagraphEl = document.createElement('p');
+newsParagraphEl.textContent = newsItem.body;
+
+// вбудувати заголовок і абзац в атікл
+newsArricleEl.append(newsArticleH3El, newsParagraphEl);
