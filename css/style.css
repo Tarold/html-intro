@@ -28,8 +28,9 @@ ul {
   background-position: center;
   position: relative;
 }
-.fa-heart {
+.like {
   position: absolute;
+
   padding: 5px;
   top: 10px;
   right: 10px;
@@ -37,11 +38,20 @@ ul {
   border-radius: 50%;
   color: #fff;
   cursor: pointer;
-  transition: color 0.3s;
+  transition: all 0.3s;
 }
-.fa-heart:hover {
-  color: grey;
+.fill {
+  color: red;
+}
+.like:hover {
   border-color: grey;
+}
+.hide {
+  display: none;
+}
+.fa-like {
+  height: 16px;
+  width: 16px;
 }
 .title {
   padding: 20px;

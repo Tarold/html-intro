@@ -53,13 +53,22 @@ news.forEach(({ title, headerBgSrc, category, body, date }) => {
   newTitleImg.className = 'titleImg';
   newTitleImg.style.backgroundImage = `url('${headerBgSrc}')`;
 
+  const newLikeDiv = document.createElement('div');
+  newLikeDiv.className = 'like';
   const newLike = document.createElement('i');
   newLike.className = 'far fa-heart';
+  newLikeDiv.append(newLike);
+
+  const newLikeDivHide = document.createElement('div');
+  newLikeDivHide.className = 'like hide';
+  const newLikeFill = document.createElement('i');
+  newLikeFill.className = 'fas fa-heart fill';
+  newLikeDivHide.append(newLikeFill);
 
   const newH2 = document.createElement('h2');
   newH2.className = 'title';
   newH2.textContent = title;
-  newTitleImg.append(newLike, newH2);
+  newTitleImg.append(newLikeDiv, newLikeDivHide, newH2);
 
   const newBodyNews = document.createElement('div');
   newBodyNews.className = 'bodyNews';
@@ -84,9 +93,25 @@ news.forEach(({ title, headerBgSrc, category, body, date }) => {
   newLi.append(newTitleImg, newBodyNews);
 });
 
-const docLikes = document.querySelectorAll('.fa-heart');
+const docLikes = document.querySelectorAll('.like');
 const docDeletes = document.querySelectorAll('.delete');
 const docLi = document.querySelectorAll('li');
+
+const fill = function (e) {
+  e.stopPropagation();
+  const likes = e.currentTarget.parentElement.querySelectorAll('.like');
+  if (likes[0].className == 'like') {
+    likes[0].className = 'like hide';
+    likes[1].className = 'like';
+  } else {
+    likes[1].className = 'like hide';
+    likes[0].className = 'like';
+  }
+};
+
+for (const like of docLikes) {
+  like.onclick = fill;
+}
 
 const paint = function () {
   this.style.backgroundColor = 'pink';
@@ -102,13 +127,4 @@ const del = function (e) {
 
 for (const button of docDeletes) {
   button.onclick = del;
-}
-
-const fill = function (e) {
-  e.stopPropagation();
-  e.currentTarget.className = 'fas fa-heart';
-};
-
-for (const like of docLikes) {
-  like.addEventListener(fill, { capture: true });
 }
