@@ -114,7 +114,11 @@ for (const like of docLikes) {
 }
 
 const paint = function () {
-  this.style.backgroundColor = 'pink';
+  if (this.style.backgroundColor == 'pink') {
+    this.style.backgroundColor = '#fff';
+  } else {
+    this.style.backgroundColor = 'pink';
+  }
 };
 
 for (const li of docLi) {

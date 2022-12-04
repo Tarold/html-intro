@@ -1,10 +1,15 @@
 body {
   box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+li {
+  border-radius: 15px;
+  overflow: hidden;
 }
 .headTitle {
   text-align: center;
@@ -29,9 +34,12 @@ ul {
   position: relative;
 }
 .like {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
-
-  padding: 5px;
+  height: 30px;
+  width: 30px;
   top: 10px;
   right: 10px;
   border: 1px solid #fff;
@@ -48,10 +56,6 @@ ul {
 }
 .hide {
   display: none;
-}
-.fa-like {
-  height: 16px;
-  width: 16px;
 }
 .title {
   padding: 20px;
@@ -70,12 +74,23 @@ ul {
   margin: 20px 0;
 }
 .newsText {
+  text-indent: 50px;
+  text-align: justify;
 }
 .delete {
   margin-top: auto;
   margin-left: auto;
-  width: 50px;
   align-self: right;
+  background-color: rgb(245, 79, 79);
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 7px 20px;
+  font-size: 16px;
+  transition: all 0.5s;
+}
+.delete:hover {
+  background-color: red;
 }
 .date {
   color: grey;
