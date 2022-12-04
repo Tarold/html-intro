@@ -40,27 +40,47 @@ const users = [
 
 const usersListEl = document.querySelector('.usersList');
 
-users.forEach((u) => {
+const usersListItems = users.map((u) => createUsersListItem(u));
+usersListEl.append(...usersListItems);
+
+function createUsersListItem({ photoSrc, age, firstName, lastName }) {
   const usersListItemEl = document.createElement('li');
   usersListItemEl.classList.add('usersListItem');
-  usersListEl.append(usersListItemEl);
 
+  usersListItemEl.append(
+    createUserPhoto(photoSrc, `${firstName} ${lastName}`),
+    createUserName(`${firstName} ${lastName}`),
+    createUserAge(age),
+    createRemoveBtn()
+  );
+  return usersListItemEl;
+}
+
+function createUserPhoto(src, alt) {
   const userPhotoEl = document.createElement('img');
   userPhotoEl.classList.add('userProfilePhoto');
-  userPhotoEl.src = u.photoSrc;
-  userPhotoEl.alt = `${u.firstName} ${u.lastName}`;
-  usersListItemEl.append(userPhotoEl);
+  userPhotoEl.src = src;
+  userPhotoEl.alt = alt;
+  return userPhotoEl;
+}
 
+function createUserName(content) {
   const userNameEl = document.createElement('p');
   userNameEl.classList.add('userName');
-  userNameEl.textContent = `${u.firstName} ${u.lastName}`;
-  usersListItemEl.append(userNameEl);
+  userNameEl.textContent = content;
+  return userNameEl;
+}
 
+function createUserAge(age) {
   const userAge = document.createElement('div');
-  userAge.textContent = u.age;
-  usersListItemEl.append(userAge);
-
+  userAge.textContent = age;
+  return userAge;
+}
+function createRemoveBtn() {
   const removeUserBtn = document.createElement('button');
   removeUserBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
-  usersListItemEl.append(removeUserBtn);
-});
+  removeUserBtn.onclick = (e) => {
+    e.target.closest('.usersListItem').remove();
+  };
+  return removeUserBtn;
+}
