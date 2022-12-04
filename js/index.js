@@ -1,77 +1,52 @@
-'use strict';
+// Task: При натисканні на кнопку:
 
-const slides = [
-  {
-    src: 'https://images.pexels.com/photos/624015/pexels-photo-624015.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    alt: 'landscape1',
-  },
-  {
-    src: 'https://images.pexels.com/photos/1287145/pexels-photo-1287145.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    alt: 'landscape2',
-  },
-  {
-    src: 'https://images.pexels.com/photos/371589/pexels-photo-371589.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    alt: 'landscape3',
-  },
-  {
-    src: 'https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    alt: 'landscape4',
-  },
-];
+// Отримати заголовок першого рівня і встановити для нього інший колір тла.
+// * Виставити для заголовків другого рівня розмір шрифта 20px і їх колір.
 
-const [testBtn, prevBtn, nextBtn] = document.querySelectorAll('button');
-const sliderImgBehind = document.querySelector('#behind');
-const sliderImg = document.querySelector('#now');
-const sliderImgNext = document.querySelector('#next');
-const geaderImg = document.querySelector('header img');
+// Встановити src i alt, розміри для головного зображення.
+// * Встановити src i alt, розміри для зображень в кожному атіклі.
 
-let currentSlideIndex = 0;
+// 1
 
-updateSlider(currentSlideIndex);
+const [button] = document.querySelectorAll('button');
 
-prevBtn.onclick = prevBtnHandler;
-nextBtn.onclick = nextBtnHandler;
-testBtn.onclick = () => {
-  const text = document.querySelector('h1');
-  text.style.color = 'blue';
-  testBtn.style.color = 'white';
-  testBtn.style.backgroundColor = 'blue';
+button.onclick = function () {
+  const h1Style = document.querySelector('h1');
+  h1Style.style.backgroundColor = 'red';
+
+  const imgStyle = document.querySelector('img');
+  imgStyle.setAttribute('alt', 'new alt');
+  imgStyle.setAttribute(
+    'src',
+    'https://ecooboi.com.ua/files/cache/b1/ec/44/ecooboi-abstrakciya-listjya-1559645107.jpg'
+  );
+  imgStyle.setAttribute('style', 'width: 20px; height: 35px;');
 };
-geaderImg.onmouseover = () => {
-  geaderImg.src = slides[0].src;
-};
-function prevBtnHandler() {
-  currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
-  updateSlider(currentSlideIndex);
-}
 
-function nextBtnHandler() {
-  currentSlideIndex = (currentSlideIndex + 1) % slides.length;
-  updateSlider(currentSlideIndex);
-}
+// 2
 
-function updateSlider(currentSlideIndex) {
-  sliderImg.style.opacity = '0';
-  sliderImgBehind.style.opacity = '0';
-  sliderImgNext.style.opacity = '0';
-  setTimeout(function () {
-    sliderImg.src = slides[currentSlideIndex].src;
-    sliderImg.alt = slides[currentSlideIndex].alt;
+const btnCklick = document.querySelector('button');
+const h1 = document.querySelector('h1');
+const h2All = document.querySelectorAll('h2');
+const mainImg = document.querySelector('h1+img');
+const primaryMainImg = document.querySelectorAll('h2+img');
 
-    sliderImgBehind.src =
-      slides[(currentSlideIndex - 1 + slides.length) % slides.length].src;
-    sliderImgBehind.alt =
-      slides[(currentSlideIndex - 1 + slides.length) % slides.length].alt;
+btnCklick.addEventListener('click', btnClickHandler);
 
-    sliderImgNext.src = slides[(currentSlideIndex + 1) % slides.length].src;
-    sliderImgNext.alt = slides[(currentSlideIndex + 1) % slides.length].alt;
-
-    sliderImg.style.opacity = '1';
-    sliderImgBehind.style.opacity = '1';
-    sliderImgNext.style.opacity = '1';
-  }, 400);
-
-  sliderImg.onerror = () => {
-    sliderImg.src = './../images/defaultSlide.jpeg';
-  };
+function btnClickHandler() {
+  h1.style.backgroundColor = 'green';
+  h2All.forEach(el => {
+    el.style.fontSize = '20px';
+    el.style.color = 'red';
+  });
+  mainImg.src =
+    'https://ecooboi.com.ua/files/cache/b1/ec/44/ecooboi-abstrakciya-listjya-1559645107.jpg';
+  mainImg.alt = '#';
+  mainImg.style.width = mainImg.style.hight = '200px';
+  primaryMainImg.forEach(el => {
+    el.src =
+      'https://ecooboi.com.ua/files/cache/b1/ec/44/ecooboi-abstrakciya-listjya-1559645107.jpg';
+    el.alt = '#';
+    el.style.width = el.style.hight = '200px';
+  });
 }
