@@ -1,13 +1,21 @@
 body {
   box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-ul {
+.newsList {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
+li {
+  border-radius: 15px;
+  overflow: hidden;
+}
 .headTitle {
   text-align: center;
+  margin: 20px 0;
+  font-size: 24px;
+  font-weight: 600;
 }
 .news {
   display: flex;
@@ -17,6 +25,26 @@ ul {
   max-width: 500px;
   transition: all 0.2s;
 }
+.news:hover .bg {
+  opacity: 0.1;
+}
+.news:hover .title {
+  background-color: rgba(255, 255, 255, 0.3);
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.555);
+  border-radius: 12px;
+}
+.bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: white;
+  opacity: 0.5;
+  z-index: 0;
+  transition: all 0.2s;
+}
+
 .titleImg {
   height: 250px;
   display: flex;
@@ -29,9 +57,12 @@ ul {
   position: relative;
 }
 .like {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
-
-  padding: 5px;
+  height: 30px;
+  width: 30px;
   top: 10px;
   right: 10px;
   border: 1px solid #fff;
@@ -49,14 +80,14 @@ ul {
 .hide {
   display: none;
 }
-.fa-like {
-  height: 16px;
-  width: 16px;
-}
 .title {
-  padding: 20px;
-  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
-    0 0 40px #fff, 0 0 55px #fff, 0 0 70px #fff;
+  font-size: 24px;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px white;
+  margin: 15px 20px;
+  padding: 5px 0;
+  z-index: 1;
+  transition: all 0.2s;
 }
 .bodyNews {
   display: flex;
@@ -65,19 +96,32 @@ ul {
   height: 100%;
 }
 .category {
+  font-size: 18px;
   color: grey;
-  text-transform: capitalize;
+  text-transform: uppercase;
   margin: 20px 0;
 }
 .newsText {
+  text-indent: 50px;
+  text-align: justify;
 }
 .delete {
   margin-top: auto;
   margin-left: auto;
-  width: 50px;
   align-self: right;
+  background-color: rgb(245, 79, 79);
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 7px 20px;
+  font-size: 16px;
+  transition: all 0.5s;
+}
+.delete:hover {
+  background-color: red;
 }
 .date {
+  margin: 10px 0 20px;
   color: grey;
   text-align: right;
 }
