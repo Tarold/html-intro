@@ -131,3 +131,7 @@ header {
   z-index: 1;
   background-color: rgba(100, 100, 100, 0.5);
 }
+
+.classH1 {
+  color: red;
+}
