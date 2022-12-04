@@ -1,31 +1,33 @@
 'use strict';
 
-// приклад роботи з classList
-// classlist - рядок, в якому класи роздылено пробылами (як в html)
-// const h1El = document.querySelector('h1');
-// h1El.classList.add('classH1');
-// h1El.classList.remove('classH1');
+const sectionEl = document.querySelector('section');
 
-// const burgerBtn = document.querySelector('.burgerMenuBtn');
+// append/prepend - додавання чайлдів
+const newEl = document.createElement('article');
+newEl.textContent = 'ARTICLE 2';
 
-// burgerBtn.onclick = () => {
-//   h1El.classList.toggle('classH1');
-// };
+sectionEl.append(newEl); // додати останній чайлд
 
-// при кліку на кнопку змінювати клас на burgerMenuContainerActive
+const h2El = document.createElement('h2');
+h2El.textContent = 'Section title';
+h2El.style.color = 'red';
 
-// при кліку на body знімювати на burgerMenuContainerHide
+sectionEl.prepend(h2El); //  додати перший чайлд
 
-const burgerBtn = document.querySelector('.burgerMenuBtn');
-const burgerContainer = document.querySelector('.burgerMenuContainer');
+// before/after - додавання сіблінгів
 
-burgerBtn.addEventListener('click', e => {
-  burgerContainer.classList.toggle('burgerMenuContainerActive');
-  burgerContainer.classList.toggle('burgerMenuContainerHide');
-  e.stopPropagation();
-});
+const newSection = document.createElement('section');
+newSection.textContent = 'SECTION 2';
 
-document.body.addEventListener('click', () => {
-  burgerContainer.classList.remove('burgerMenuContainerActive');
-  burgerContainer.classList.add('burgerMenuContainerHide');
-});
+sectionEl.after(newSection); // додає сіблінга
+
+const asideEl = document.createElement('aside');
+asideEl.textContent = 'ASIDE';
+
+sectionEl.before(asideEl);
+
+// remove
+
+sectionEl.onclick = e => {
+  e.currentTarget.remove();
+};
