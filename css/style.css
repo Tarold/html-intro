@@ -1,0 +1,73 @@
+body {
+  box-sizing: border-box;
+}
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.headTitle {
+  text-align: center;
+}
+.news {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  max-width: 500px;
+  transition: all 0.2s;
+}
+.titleImg {
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.fa-heart {
+  position: absolute;
+  padding: 5px;
+  top: 10px;
+  right: 10px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.fa-heart:hover {
+  color: grey;
+  border-color: grey;
+}
+.title {
+  padding: 20px;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
+    0 0 40px #fff, 0 0 55px #fff, 0 0 70px #fff;
+}
+.bodyNews {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+  height: 100%;
+}
+.category {
+  color: grey;
+  text-transform: capitalize;
+  margin: 20px 0;
+}
+.newsText {
+}
+.delete {
+  margin-top: auto;
+  margin-left: auto;
+  width: 50px;
+  align-self: right;
+}
+.date {
+  color: grey;
+  text-align: right;
+}
