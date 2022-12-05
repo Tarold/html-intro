@@ -4,7 +4,7 @@ const timeEl = document.querySelector('.time');
 const [startBtn, resetBtn, stopBtn] = document.querySelectorAll('button');
 
 let time = new Date(0);
-const DELAY = 100;
+const DELAY = 10;
 
 let timerId = null;
 
@@ -31,11 +31,15 @@ stopBtn.onclick = () => {
 function updateTimer(time) {
   timeEl.textContent = `${formatMinutesOrSeconds(
     time.getMinutes()
-  )}:${formatMinutesOrSeconds(time.getSeconds())}.${time.getMilliseconds()}`;
+  )}:${formatMinutesOrSeconds(time.getSeconds())}.${formatMilliseconds(
+    time.getMilliseconds()
+  )}`;
 }
 
 function formatMinutesOrSeconds(m) {
   return m < 10 ? `0${m}` : m;
 }
 
-function formatMilliseconds() {}
+function formatMilliseconds(ms) {
+  return ms < 100 ? (ms < 10 ? `00${ms}` : `0${ms}`) : ms;
+}
