@@ -1,45 +1,80 @@
 'use strict';
 
-const timeEl = document.querySelector('.time');
-const [startBtn, resetBtn, stopBtn] = document.querySelectorAll('button');
+//Напишіть функцію printNumbers(from, to, interval) Використовуючи setInterval
+function printNumbers(from, to, interval) {
+  let current = from;
+  let timerId = null;
+  let negative = 1;
 
-let time = new Date(0);
-const DELAY = 10;
-
-let timerId = null;
-
-startBtn.onclick = () => {
-  if (timerId) {
-    return;
+  if (from > to) {
+    negative = -1;
+    current *= -1;
+    to *= -1;
   }
-  timerId = setInterval(() => {
-    time.setMilliseconds(time.getMilliseconds() + DELAY);
-    updateTimer(time);
-  }, DELAY);
-};
 
-resetBtn.onclick = () => {
-  time = new Date(0);
-  updateTimer(time);
-};
-
-stopBtn.onclick = () => {
-  clearInterval(timerId);
-  timerId = null;
-};
-
-function updateTimer(time) {
-  timeEl.textContent = `${formatMinutesOrSeconds(
-    time.getMinutes()
-  )}:${formatMinutesOrSeconds(time.getSeconds())}.${formatMilliseconds(
-    time.getMilliseconds()
-  )}`;
+  timerId = setInterval(function () {
+    console.log('setInterval :>> ', current * negative);
+    if (current < to) {
+      current++;
+    } else {
+      clearInterval(timerId);
+    }
+  }, interval);
 }
 
-function formatMinutesOrSeconds(m) {
-  return m < 10 ? `0${m}` : m;
+//Використовуючи рекурсивний setTimeout
+function printNumbersTimeout(from, to, interval) {
+  let current = from;
+  let negative = 1;
+
+  if (current > to) {
+    negative = -1;
+    current *= -1;
+    to *= -1;
+  }
+  setTimeout(function go() {
+    console.log(`setTimeout :>> `, current * negative);
+    if (current < to) {
+      setTimeout(go, interval);
+    }
+    current++;
+  }, interval);
+}
+printNumbers(-20, -10, 100);
+printNumbersTimeout(-20, -10, 100);
+
+/*
+Виводити посилання через певний час після завантаження сторінки. 
+Поки повідомлення не відображається, на його місці виводити зворотній відлік "Зачекайте хвилин:секунд".
+ */
+
+const timer = document.querySelector('.time');
+const site = document.querySelector('.download');
+
+function startCount() {
+  let time = 60;
+
+  function counting() {
+    time -= 1;
+    if (time < 0) {
+      return false;
+    }
+    timer.textContent = time;
+    return true;
+  }
+
+  setTimeout(function go() {
+    if (counting()) {
+      setTimeout(go, 1000);
+    } else {
+      endCount();
+    }
+  });
 }
 
-function formatMilliseconds(ms) {
-  return ms < 100 ? (ms < 10 ? `00${ms}` : `0${ms}`) : ms;
+function endCount() {
+  timer.parentNode.classList.add('hide');
+  site.classList.remove('hide');
 }
+
+startCount();
