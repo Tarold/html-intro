@@ -24,5 +24,28 @@ setTimeout(() => {
   document.querySelector('.bestPropositionLink').remove();
 }, 5000);
 
-// При натисканні на кнопку перефарбувати її через 2000 секунди
+// При натисканні на кнопку перефарбувати її через 2 секунди
+// const btn = document.querySelector('button');
+
+// function paint(e) {
+//   setTimeout(() => {
+//     // e.target.style.background = 'green';
+//   }, 2000);
+// }
+
+// btn.onclick = paint;
+
 // * Після натискання на кнопку змінювати її колір кожні 2 секунди рандомно
+const btn = document.querySelector('button');
+
+function paintBtn(e) {
+  setInterval(() => {
+    e.target.style.background = `#${getRandomInt(255)}`;
+  }, 500);
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+btn.onclick = paintBtn;
