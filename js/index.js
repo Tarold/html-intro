@@ -49,3 +49,19 @@ function getRandomInt(max) {
 }
 
 btn.onclick = paintBtn;
+
+// Callback hell problem:
+// get(data => {
+//   get(data => {
+//     get(() => {}, '');
+//   }, '');
+// }, 'http://....');
+
+// Callback hell problem pesolve - Promise
+// get('')
+//   .then(data => parse(data))
+//   .then();
+//   .then();
+//   .then();
+//   .then();
+//   .then();
