@@ -1,202 +1,186 @@
-// JS - мова з динамічною типізацією, високорівнева, інтерпретована, мультипарадигмова, скриптова
+'use  strict';
 
-// js виконується браузером (движком)
+// const regExp1 = new RegExp(шаблон, прапорці);
+const regExp1 = new RegExp('qwerty', 'ig');
 
-// Стандарт ECMASctipt
+// const regExp2 = /шаблон/прапорці;
+const regExp2 = /qwerty/g;
 
-// Виведення в консоль
-console.log('Hello, world!');
+// прапор i - незалежність від регістру
+// прапор g - пошук по всьому рядку
 
-// Вивести в модальне вікно
-alert('Hello, world!');
+console.log(regExp2.test('44564qwerty84545qwerty'));
 
-// Однорядковий коментар
-/*
-  Багаторядковий коментар
-*/
+console.log('54515qwerty1256qwerty'.match(regExp2));
 
-// Змінні
+// Межі ------------------------------------------------------------
+// ^ - початок рядка
+// $ - кінець рядка
+// \b - границя слова
+// \B - не межа слова
 
-let a = 1;
-console.log('a =', a);
-a = a + 1;
-console.log('a =', a);
+// Перевірити, що qwerty э всим рядком
+console.log('qwerty'.match(/^qwerty$/));
 
-// для уникнення випадкового переприсвоювання важливої інф-ї
-// рекомендується МАКСИМАЛЬНО вживати const
-const pi = 3.14; // не можна переприсвоювати значення!
-console.log(pi);
+// Task: Перевірити, чи стоїть qwerty на початку рядка, ігноруючи регістр
+// "qwerty"          +
+// "qwertynjknkjnkl" +
+// "QWerty513"       +
+// "777qwerty"       -
+console.log('qwerty'.match(/^qwerty/i));
 
-var b = 10; // старий стиль
-console.log('b =', b);
+// Перевірити, чи dog є окремим словом
+console.log('My dog is cute'.match(/\bdog\b/i));
 
-// Стиль іменування: camelCase
-// lowerCamelCase - типовий для простих змінних
-// UpperCamelCase
+console.log('My hotdog is cute'.match(/\bdog\b/i));
 
-// PI, MATH_PI - для констант
+// . - один будь-який символ ---------------------------------------------
 
-// 1    a-z, A-Z, _, $
-// 2... a-z, A-Z, _, $, 0-9
+// Перевірити, чи пароль починається на qw  і закінчується на ty,
+// посередині має бути 2 символи
+console.log('qwerty'.match(/^qw..ty$/));
+console.log('qw55ty'.match(/^qw..ty$/));
+console.log('qwfty'.match(/^qw..ty$/));
 
-// Типи даних - примітивні (7)
-//            - object
+// Task: Перевірити, що рядок містить 7 символів і починається на 111
+console.log('1114567'.match(/^111....$/));
+console.log('1214567'.match(/^111....$/));
+console.log('11145h67'.match(/^111....$/));
+console.log('qw11145'.match(/^111....$/));
 
-// string
-// 'string', "string", `string`
-const stringVariable1 = 'string1';
-const stringVariable2 = 'string2'; // подвійні лапки
-const stringVariable3 = `string3`;
-// "string2" - літерально задане значення
+// Квантифікатори -----------------------------------------------------
+// {8} - строго 8 символів
+// {1,10} - від 1 до 10
+// {1,} - від 1 до нескінченності
+// + - {1,} - від 1 до нескінченності
+// * - {0,} - від 0 до нескінченності
+// ? - {0,1} - від 0 до 1
 
-console.log('He says :"Hello"');
+// Перевірити, що рядок містить 7 символів і починається на 111
+console.log('1115647'.match(/^1{3}.{4}$/));
+console.log('{1115647'.match(/^\{1{3}.{4}$/));
 
-// number
-// 1, 22, -50, 10.5, 10e5, Infinity, -Infinity, 0 (+0, -0), NaN
+// Task: Перевірити чи відповідає рядок имейлу 1-10@1-10
+// fff@fff   +
+// @lkljl    -
+// hjghjhj@  -
+// 12345678901234@sdfsdf -
+console.log('11@qq'.match(/^.{1,10}@.{1,10}$/));
+console.log('11111111111@qrwrewrewrewrq'.match(/^.{1,10}@.{1,10}$/));
+console.log('@qq'.match(/^.{1,10}@.{1,10}$/));
+console.log('11@'.match(/^.{1,10}@.{1,10}$/));
+console.log('11%qq'.match(/^.{1,10}@.{1,10}$/));
 
-const numberVariable1 = Infinity;
-console.log('numberVariable1 :>> ', numberVariable1);
+// Альтернативні символи / один з групи символів ---------------------
 
-const numberVariable2 = NaN;
-console.log('numberVariable2 :>> ', numberVariable2);
+// \d = [0123456789] = [0-9]
+// \D = ^\d
+// [a-z]
+// [A-Z]
+// [a-zA-Z]
+// \w [a-zA-Z0-9_] - символи слова
+// \W = ^\w
+// \s - space
+// \S
 
-const numberVariable3 = 10.5;
-console.log('numberVariable3 :>> ', numberVariable3);
+// Перевірити, чи в рядку тільки цифри
+console.log('1234560'.match(/^[0123456789]+$/));
+// or
+console.log('1234560'.match(/^[0-9]+$/));
+// or
+console.log('1234560'.match(/^\d+$/));
 
-console.log('10 / 0 :>> ', 10 / 0); // Infinity
-console.log('10 / -0 :>> ', 10 / -0); // -Infinity
-console.log('"abc" / 5 :>> ', 'abc' / 5); // NaN - Not a Number
-// Number.MAX_VALUE
-// Number.MAX_SAFE_INTEGER
+// Task: Перевірити, що вказано номер телефона у форматі: +380-2цифри-3цифри-4цифри
+console.log('+380-88-444-5555'.match(/^\+380-[0-9]{2}-[0-9]{3}-[0-9]{4}$/));
+console.log('+38088-444-5555'.match(/^\+380-[0-9]{2}-[0-9]{3}-[0-9]{4}$/));
 
-// bigint
+console.log('380-88-444-5555'.match(/^\+380-[0-9]{2}-[0-9]{3}-[0-9]{4}$/));
+console.log('+380-88-444-5555eeee'.match(/^\+380-[0-9]{2}-[0-9]{3}-[0-9]{4}$/));
+console.log('+380-11-111-1111'.match(/^\+380-\d{2}-\d{3}-\d{4}$/));
 
-const bigintValue = 9999999999999999n;
-console.log('bigintValue :>> ', bigintValue);
+// Перевірити на ім'я (Aqeqewqewqe)2-20
+console.log('Anna'.match(/^[A-Z][a-z]{1,19}$/));
 
-// boolean - value: true, false
+// Перевірити, що число
+// 11111.55555;
+// -11111.55555;
+console.log('"111.555".match(/-/) :>> ', '111.555'.match(/^-?\d+\.\d+$/));
+console.log('"-111.555".match(/-/) :>> ', '-111.555'.match(/^-?\d+\.\d+$/));
+console.log('"-111.f55".match(/-/) :>> ', '-11f.555'.match(/^-?\d+\.\d+$/));
+console.log('"-11155".match(/-/) :>> ', '-11555'.match(/^-?\d+\.\d+$/));
 
-const boolValue = false;
-console.log('boolValue :>> ', boolValue);
+// Альтернативні слова --------------------------------------------------
+// [123] = (1|2|3)
+// (cat|dog)
+// Перевірити, чи є в рядку cat чи dog
+console.log('A like cat'.match(/\b(cat|dog)\b/));
+// Перевірити, чи є в рядку cat, cats чи dog, dogs
+console.log('A like cats'.match(/\b(cat|dog)s?\b/));
 
-// symbol
-const symbolValue = Symbol();
-console.log('symbolValue :>> ', symbolValue);
+// Перевірка складного імені Aaaa(-Aaaaa)?
+console.log('Anna-Maria'.match(/^[A-Z][a-z]{1,19}(-[A-Z][a-z]{1,19})?$/));
 
-// undefined - value: undefined
+// Task: переписати
+console.log('+380-11-111-11-11'.match(/^\+380-\d{2}-\d{3}(-\d{2}){2}$/));
+// щоб в номері були тільки існуючі коди (99,98,97,96,95,73,50,67,68,63,93)
+console.log(
+  '+380-98-111-11-11'.match(
+    /^\+380-(99|98|97|96|95|73|50|67|68|63|93)-\d{3}(-\d{2}){2}$/
+  )
+);
 
-// const undValue = undefined
-let undValue;
-console.log('undValue :>> ', undValue);
+// ? переводе квантифікатор з жадного режима в лінивий --------------------------
+// Знайти цитати
+console.log("I say 'yes', but think and say 'no'".match(/'.*?'/g));
 
-// null - value: null
+// Виокремити речення
+console.log(
+  'Adsnfdsfjdsk sdfsdf sdfdsf. Fkjfkdsfsd sdfdsf fdd. Hlkjslf: dfkjdsk kl.'.match(
+    /[A-Z].*?\./g
+  )
+);
 
-const nullValue = null;
-console.log('nullValue :>> ', nullValue);
+// Позитивна випереджаюча перевірка / positive lookahead
+console.log('I bought 10 apple by 1$'.match(/\d+(?=\$)/g));
 
-// не примітив / object
-const obj = {};
+// Є також:
+// Негативна випереджаюча перевірка / positive lookahead
+// Позитивна ретроспективна перевірка / positive lookbehind
+// Негативна ретроспективна перевірка / positive lookbehind
 
-// typeof значення
-console.log('typeof 5 :>> ', typeof 5); // 'number'
-console.log('typeof "5" :>> ', typeof '5'); // 'string'
-console.log('typeof NaN :>> ', typeof NaN); // 'number'
-console.log('typeof true :>> ', typeof true); // 'boolean'
-console.log('typeof null :>> ', typeof null); // 'object'
+// Для перевырки пароля
+// довжина: 8-16, мають бути букви верхнього і нижнього регістру, цифри, спец. символи
+// Qq1.gggg
+console.log(
+  'Aq1g.qqy'.match(
+    /^(?=.*[A-Z].*)(?=.*[a-z].*)(?=.*\d.*)(?=.*[!@#$%^&.].*).{8,16}$/
+  )
+);
 
-// Операції
+// Методи з використанням регулярок
 
-const a1 = 1; // ініціалізація - присвоювання при оголошенні
-const b1 = 2;
+// replace - замінити частину рядка за критерієм
+const str1 = 'Fkjhjk       jsdjfs dsfsdf   dsfsfd    sdfsdfsf';
+const srt1Result = str1.replace(/\s{2,}/g, ' ');
 
-let c1 = null; // ініціалізація
-c1 = a1 + b1; // присвоювання
+// Task: Прибрати ненормативну лексику з повідомлень (fuck, ass, asshole)
+const str2 = 'Fuck you. )))) You are asshole';
+const str2Result = str2.replace(/(fuck|ass|asshole)\b/gi, '!@#$');
 
-console.log('c :>> ', c);
+const str3 =
+  'Fuck you dude! AAAAAASSHOLE!! FuCCCKKK Fuck Fuck Fuck Fuck Fuck!!!';
+const str3Result = str3.replace(/(f+u+c+k+|a+s{2,}h+o+l+e+)/gi, '####');
 
-console.log('1 + 2 =', 1 + 2);
-console.log('1 - 2 =', 1 - 2);
-console.log('1 * 2 =', 1 * 2);
-console.log('1 / 2 =', 1 / 2);
-console.log('1 % 2 =', 1 % 2); // остача від ділення: 7/2 = 3 (1)/2
-console.log('2 ** 2 =', 2 ** 2);
-console.log('Math.sqrt(9) :>> ', Math.sqrt(9));
-console.log('Math.abs(-10) :>> ', Math.abs(-10));
+// split - розділення на масив за вказаним роздільником
+// Отримати масив слів з рядка
+const str4 = 'Fkjhjk       jsdjfs dsfsdf   dsfsfd    sdfsdfsf';
+const str4Result = str4.split(/\s{1,}/g);
 
-// Task: a = 3, b = 4; c - ?
-const a2 = 3;
-const b2 = 4;
-const c2 = Math.sqrt(a2 ** 2 + b2 ** 2);
-console.log('c :>> ', c2);
+// Task: Отримати масив з рядка дати з роком, місяцем, датою
+// '1999-01-01' => ['1999', '01', '01']
+// '1999/01/01' => ['1999', '01', '01']
+// '1999.01.01' => ['1999', '01', '01']
 
-// Task: squareSide = 5; S-?, P-?
-const squareSide = 5;
-const S = Math.pow(squareSide, 2); // squareSide ** 2;
-const P = squareSide * 4;
-console.log('P =', P);
-console.log('S =', S);
-
-// Короткі записи операцій
-let value = 10;
-value += 20; // value = value + 20;
-console.log('value :>> ', value);
-
-let value2 = 10;
-value2 -= 20; // value2 = value2 - 20;
-console.log('value2 :>> ', value2);
-// є аналогічні *=, /=
-
-// Інкремент і декремент
-// i = i + 1
-// i += 1
-// i++, ++i
-
-let i = 1;
-// постфіксний інкремент i++
-console.log('i++ :>> ', i++);
-console.log('i :>> ', i);
-
-let j = 1;
-// інфіксний інкремент ++j
-console.log('++j :>> ', ++j);
-console.log('j :>> ', j);
-
-let k = 1;
-// постфіксний декремент k--
-console.log(k--);
-console.log('k = ', k);
-
-let l = 1;
-// інфіксний декремент --l
-console.log(--l);
-console.log('l = ', l);
-
-// Пріоритетність операцій
-const result1 = 2 ** (3 ** 2); // 512
-
-// Приведення типу (явне)
-
-console.log('Number(5) :>> ', Number(5));
-console.log('Number("5") :>> ', Number('5'));
-console.log('Number("abc") :>> ', Number('abc'));
-// Task: привести true, false, null, undefined, 55n, Symbol() до Number
-console.log('true =', Number(true));
-console.log('false =', Number(false));
-console.log('null =', Number(null));
-console.log('undefined =', Number(undefined));
-console.log('55n =', Number(55n));
-// console.log('Symbol() =', Number(Symbol())); // помилка!!
-
-// Неявне приведення типів
-console.log('true + 10 :>> ', true + 10);
-
-// Введення даних
-const inputValue = Number(prompt('Введіть число:')); // 50
-const result2 = inputValue + inputValue; // Без явного приведення типів: '50' + '50' = '5050'
-console.log('result :>> ', result2);
-
-// Task: ввести 2 числа і вивести їх суму
-const a3 = +prompt('input value');
-const b3 = Number(prompt('input value'));
-const result3 = a3 + b3;
-console.log('You summ is ', result3);
+const str5 = '1999.01.01';
+const str5Result = str5.split(/-|\/|\./g);
+// const str5Result = str5.split(/\!|@|#|\$|%|\^|-|\.|:/g);
