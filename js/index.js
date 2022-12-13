@@ -1,186 +1,241 @@
-'use  strict';
+'use strict';
 
-// const regExp1 = new RegExp(шаблон, прапорці);
-const regExp1 = new RegExp('qwerty', 'ig');
+let selectedList = [];
+const userList = document.querySelector('#list');
+const select = document.querySelector('.selectedUsers');
+const buttonStart = document.querySelector('#start');
+const buttonNext = document.querySelector('#next');
+const buttonPrev = document.querySelector('#prev');
+const buttonEnd = document.querySelector('#end');
+const allInfo = document.querySelector('.allInfo');
 
-// const regExp2 = /шаблон/прапорці;
-const regExp2 = /qwerty/g;
-
-// прапор i - незалежність від регістру
-// прапор g - пошук по всьому рядку
-
-console.log(regExp2.test('44564qwerty84545qwerty'));
-
-console.log('54515qwerty1256qwerty'.match(regExp2));
-
-// Межі ------------------------------------------------------------
-// ^ - початок рядка
-// $ - кінець рядка
-// \b - границя слова
-// \B - не межа слова
-
-// Перевірити, що qwerty э всим рядком
-console.log('qwerty'.match(/^qwerty$/));
-
-// Task: Перевірити, чи стоїть qwerty на початку рядка, ігноруючи регістр
-// "qwerty"          +
-// "qwertynjknkjnkl" +
-// "QWerty513"       +
-// "777qwerty"       -
-console.log('qwerty'.match(/^qwerty/i));
-
-// Перевірити, чи dog є окремим словом
-console.log('My dog is cute'.match(/\bdog\b/i));
-
-console.log('My hotdog is cute'.match(/\bdog\b/i));
-
-// . - один будь-який символ ---------------------------------------------
-
-// Перевірити, чи пароль починається на qw  і закінчується на ty,
-// посередині має бути 2 символи
-console.log('qwerty'.match(/^qw..ty$/));
-console.log('qw55ty'.match(/^qw..ty$/));
-console.log('qwfty'.match(/^qw..ty$/));
-
-// Task: Перевірити, що рядок містить 7 символів і починається на 111
-console.log('1114567'.match(/^111....$/));
-console.log('1214567'.match(/^111....$/));
-console.log('11145h67'.match(/^111....$/));
-console.log('qw11145'.match(/^111....$/));
-
-// Квантифікатори -----------------------------------------------------
-// {8} - строго 8 символів
-// {1,10} - від 1 до 10
-// {1,} - від 1 до нескінченності
-// + - {1,} - від 1 до нескінченності
-// * - {0,} - від 0 до нескінченності
-// ? - {0,1} - від 0 до 1
-
-// Перевірити, що рядок містить 7 символів і починається на 111
-console.log('1115647'.match(/^1{3}.{4}$/));
-console.log('{1115647'.match(/^\{1{3}.{4}$/));
-
-// Task: Перевірити чи відповідає рядок имейлу 1-10@1-10
-// fff@fff   +
-// @lkljl    -
-// hjghjhj@  -
-// 12345678901234@sdfsdf -
-console.log('11@qq'.match(/^.{1,10}@.{1,10}$/));
-console.log('11111111111@qrwrewrewrewrq'.match(/^.{1,10}@.{1,10}$/));
-console.log('@qq'.match(/^.{1,10}@.{1,10}$/));
-console.log('11@'.match(/^.{1,10}@.{1,10}$/));
-console.log('11%qq'.match(/^.{1,10}@.{1,10}$/));
-
-// Альтернативні символи / один з групи символів ---------------------
-
-// \d = [0123456789] = [0-9]
-// \D = ^\d
-// [a-z]
-// [A-Z]
-// [a-zA-Z]
-// \w [a-zA-Z0-9_] - символи слова
-// \W = ^\w
-// \s - space
-// \S
-
-// Перевірити, чи в рядку тільки цифри
-console.log('1234560'.match(/^[0123456789]+$/));
-// or
-console.log('1234560'.match(/^[0-9]+$/));
-// or
-console.log('1234560'.match(/^\d+$/));
-
-// Task: Перевірити, що вказано номер телефона у форматі: +380-2цифри-3цифри-4цифри
-console.log('+380-88-444-5555'.match(/^\+380-[0-9]{2}-[0-9]{3}-[0-9]{4}$/));
-console.log('+38088-444-5555'.match(/^\+380-[0-9]{2}-[0-9]{3}-[0-9]{4}$/));
-
-console.log('380-88-444-5555'.match(/^\+380-[0-9]{2}-[0-9]{3}-[0-9]{4}$/));
-console.log('+380-88-444-5555eeee'.match(/^\+380-[0-9]{2}-[0-9]{3}-[0-9]{4}$/));
-console.log('+380-11-111-1111'.match(/^\+380-\d{2}-\d{3}-\d{4}$/));
-
-// Перевірити на ім'я (Aqeqewqewqe)2-20
-console.log('Anna'.match(/^[A-Z][a-z]{1,19}$/));
-
-// Перевірити, що число
-// 11111.55555;
-// -11111.55555;
-console.log('"111.555".match(/-/) :>> ', '111.555'.match(/^-?\d+\.\d+$/));
-console.log('"-111.555".match(/-/) :>> ', '-111.555'.match(/^-?\d+\.\d+$/));
-console.log('"-111.f55".match(/-/) :>> ', '-11f.555'.match(/^-?\d+\.\d+$/));
-console.log('"-11155".match(/-/) :>> ', '-11555'.match(/^-?\d+\.\d+$/));
-
-// Альтернативні слова --------------------------------------------------
-// [123] = (1|2|3)
-// (cat|dog)
-// Перевірити, чи є в рядку cat чи dog
-console.log('A like cat'.match(/\b(cat|dog)\b/));
-// Перевірити, чи є в рядку cat, cats чи dog, dogs
-console.log('A like cats'.match(/\b(cat|dog)s?\b/));
-
-// Перевірка складного імені Aaaa(-Aaaaa)?
-console.log('Anna-Maria'.match(/^[A-Z][a-z]{1,19}(-[A-Z][a-z]{1,19})?$/));
-
-// Task: переписати
-console.log('+380-11-111-11-11'.match(/^\+380-\d{2}-\d{3}(-\d{2}){2}$/));
-// щоб в номері були тільки існуючі коди (99,98,97,96,95,73,50,67,68,63,93)
-console.log(
-  '+380-98-111-11-11'.match(
-    /^\+380-(99|98|97|96|95|73|50|67|68|63|93)-\d{3}(-\d{2}){2}$/
+const usersCount = 34;
+let page = 0;
+//TODO page counter, dont show standart allInfoCard, some persons dont show, street number: name:, dont fetch data wath we know, normalize code
+function renderList() {
+  fetch(
+    `https://randomuser.me/api/?page=${page + 1}&results=${
+      usersCount - page * 10 > 10 ? 10 : usersCount - page * 10
+    }&inc=name,gender,picture,registered&seed=0458a254c596df4b&noinfo`
   )
-);
+    .then((response) => response.json())
+    .then((data) => renderUsers(data.results))
+    .catch((err) => console.log(err))
+    .then(checkAvailable());
+}
 
-// ? переводе квантифікатор з жадного режима в лінивий --------------------------
-// Знайти цитати
-console.log("I say 'yes', but think and say 'no'".match(/'.*?'/g));
+renderList();
 
-// Виокремити речення
-console.log(
-  'Adsnfdsfjdsk sdfsdf sdfdsf. Fkjfkdsfsd sdfdsf fdd. Hlkjslf: dfkjdsk kl.'.match(
-    /[A-Z].*?\./g
+function renderUsers(data) {
+  userList.textContent = '';
+  for (const user of data) {
+    renderUserCard(user);
+  }
+}
+
+function renderUserCard(data) {
+  userList.append(createUserCard(data));
+}
+
+function createUserCard({ name, picture, gender, registered }) {
+  name = objToString(name);
+
+  const newLi = document.createElement('li');
+  newLi.classList.add('user', gender);
+
+  //перевірка чи була вибрана картка раніше
+  if (selectedList.some((element) => element === name)) {
+    newLi.classList.add('selected');
+  }
+
+  newLi.append(
+    createImgElement('img', 'userImg', picture.medium),
+    createContent(name, registered)
+  );
+  newLi.onclick = selecteUser;
+  return newLi;
+}
+
+function createContent(name, { age }) {
+  const element = createTextElement('div', 'userContent', '');
+  element.append(
+    createTextElement('p', 'userName', name),
+    createTextElement('p', 'userAgeOnForum', `years at site: ${age}`)
+  );
+  return element;
+}
+
+function createTextElement(typeEL, classEL, texEL) {
+  const element = document.createElement(typeEL);
+  element.className = classEL;
+  element.textContent = texEL;
+  return element;
+}
+
+function createImgElement(typeEL, classEL, urlEL) {
+  const element = document.createElement(typeEL);
+  element.className = classEL;
+  element.src = urlEL;
+  element.onclick = imgClick;
+  return element;
+}
+
+function selecteUser() {
+  if (this.classList.contains('selected')) {
+    this.classList.remove('selected');
+    selectedList = selectedList.filter(
+      (item) => item !== this.querySelector('.userName').textContent
+    );
+  } else {
+    this.classList.add('selected');
+    selectedList.push(this.querySelector('.userName').textContent);
+  }
+  reloadList();
+}
+
+function reloadList() {
+  select.textContent = `Selected Users: ${selectedList.toString()}`;
+}
+
+function startPage() {
+  page = 0;
+  renderList();
+}
+
+function prevPage() {
+  if (page - 1 > -1) {
+    page -= 1;
+  }
+  renderList();
+}
+
+function nextPage() {
+  if ((page + 1) * 10 < usersCount) {
+    page += 1;
+  }
+  renderList();
+}
+function endPage() {
+  while ((page + 1) * 10 < usersCount) {
+    page += 1;
+  }
+  renderList();
+}
+
+function checkAvailable() {
+  if (page === 0) {
+    buttonPrev.setAttribute('disabled', '');
+    buttonStart.setAttribute('disabled', '');
+  } else {
+    buttonPrev.removeAttribute('disabled');
+    buttonStart.removeAttribute('disabled');
+  }
+  if ((page + 1) * 10 > usersCount) {
+    buttonNext.setAttribute('disabled', '');
+    buttonEnd.setAttribute('disabled', '');
+  } else {
+    buttonNext.removeAttribute('disabled');
+    buttonEnd.removeAttribute('disabled');
+  }
+}
+
+function imgClick(e) {
+  e.stopPropagation();
+  disabledScroll();
+  getAllInfo(e);
+  allInfo.classList.toggle('hide');
+}
+function getAllInfo(e) {
+  fetch(
+    `https://randomuser.me/api/?page=${page + 1}&results=${
+      usersCount - page * 10 > 10 ? 10 : usersCount - page * 10
+    }&exc=login,cell,id,nat,gender&seed=0458a254c596df4b&noinfo`
   )
-);
+    .then((response) => response.json())
+    .then((data) => findUser(data.results, e))
+    .catch((err) => console.log(err));
+}
 
-// Позитивна випереджаюча перевірка / positive lookahead
-console.log('I bought 10 apple by 1$'.match(/\d+(?=\$)/g));
+function findUser(data, e) {
+  for (const user of data) {
+    if (
+      objToString(user.name) ===
+      e.target.parentNode.querySelector('.userName').textContent
+    ) {
+      updateAllInfo(user);
+      break;
+    }
+  }
+}
 
-// Є також:
-// Негативна випереджаюча перевірка / positive lookahead
-// Позитивна ретроспективна перевірка / positive lookbehind
-// Негативна ретроспективна перевірка / positive lookbehind
+function updateAllInfo({
+  name,
+  email,
+  dob,
+  registered,
+  phone,
+  picture: { large },
+  location,
+}) {
+  const nameInfo = document.querySelector('.infoName');
+  const locationInfo = document.querySelector('.infoLocation');
+  const emailInfo = document.querySelector('.infoEmail');
+  const dobInfo = document.querySelector('.infoDob');
+  const regInfo = document.querySelector('.infoReg');
+  const phoneInfo = document.querySelector('.infoPhone');
+  const imgInfo = document.querySelector('.infoImg');
 
-// Для перевырки пароля
-// довжина: 8-16, мають бути букви верхнього і нижнього регістру, цифри, спец. символи
-// Qq1.gggg
-console.log(
-  'Aq1g.qqy'.match(
-    /^(?=.*[A-Z].*)(?=.*[a-z].*)(?=.*\d.*)(?=.*[!@#$%^&.].*).{8,16}$/
-  )
-);
+  nameInfo.textContent = objToString(name);
+  const birthday = new Date(dob.date);
+  dobInfo.textContent = `Date of birth: ${birthday.getFullYear()}-${birthday.getMonth()}-${birthday.getDate()}`;
+  const registr = new Date(registered.date);
+  regInfo.textContent = `Date of registration: ${registr.getFullYear()}-${registr.getMonth()}-${registr.getDate()}`;
+  emailInfo.textContent = email;
+  emailInfo.href = `mailto:${email}`;
+  phoneInfo.textContent = `${phone}`;
+  phoneInfo.href = `tel:${phone}`;
+  imgInfo.src = large;
+  delete location.coordinates;
+  delete location.timezone;
+  location.street.number = location.street.number;
+  locationInfo.textContent = objToString(location, ', ', true);
+}
 
-// Методи з використанням регулярок
+function hideInfo() {
+  enableScroll();
+  allInfo.classList.toggle('hide');
+}
 
-// replace - замінити частину рядка за критерієм
-const str1 = 'Fkjhjk       jsdjfs dsfsdf   dsfsfd    sdfsdfsf';
-const srt1Result = str1.replace(/\s{2,}/g, ' ');
+function objToString(object, splitter, isShowKeys) {
+  let str = '';
+  if (splitter === undefined) {
+    splitter = ' ';
+  }
+  if (isShowKeys === undefined) {
+    for (const iterator in object) {
+      if (typeof object[iterator] === 'object') {
+        str += objToString(object[iterator], ' ', true);
+      } else {
+        str += object[iterator];
+      }
+      str += splitter;
+    }
+  } else {
+    for (const iterator in object) {
+      if (typeof object[iterator] === 'object') {
+        str += iterator + ' ' + objToString(object[iterator], ' ', true);
+      } else {
+        str += iterator + ': ' + object[iterator];
+      }
+      str += splitter;
+    }
+  }
 
-// Task: Прибрати ненормативну лексику з повідомлень (fuck, ass, asshole)
-const str2 = 'Fuck you. )))) You are asshole';
-const str2Result = str2.replace(/(fuck|ass|asshole)\b/gi, '!@#$');
+  return str.slice(0, splitter.length * -1);
+}
 
-const str3 =
-  'Fuck you dude! AAAAAASSHOLE!! FuCCCKKK Fuck Fuck Fuck Fuck Fuck!!!';
-const str3Result = str3.replace(/(f+u+c+k+|a+s{2,}h+o+l+e+)/gi, '####');
-
-// split - розділення на масив за вказаним роздільником
-// Отримати масив слів з рядка
-const str4 = 'Fkjhjk       jsdjfs dsfsdf   dsfsfd    sdfsdfsf';
-const str4Result = str4.split(/\s{1,}/g);
-
-// Task: Отримати масив з рядка дати з роком, місяцем, датою
-// '1999-01-01' => ['1999', '01', '01']
-// '1999/01/01' => ['1999', '01', '01']
-// '1999.01.01' => ['1999', '01', '01']
-
-const str5 = '1999.01.01';
-const str5Result = str5.split(/-|\/|\./g);
-// const str5Result = str5.split(/\!|@|#|\$|%|\^|-|\.|:/g);
+buttonStart.onclick = startPage;
+buttonNext.onclick = nextPage;
+buttonPrev.onclick = prevPage;
+buttonEnd.onclick = endPage;
+allInfo.onclick = hideInfo;
