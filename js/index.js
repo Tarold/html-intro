@@ -1,36 +1,50 @@
 'use strict';
 
-let selectedList = [];
 const userList = document.querySelector('#list');
 const select = document.querySelector('.selectedUsers');
 const buttonStart = document.querySelector('#start');
 const buttonNext = document.querySelector('#next');
+const buttonNumber = document.querySelector('#number');
 const buttonPrev = document.querySelector('#prev');
 const buttonEnd = document.querySelector('#end');
 const allInfo = document.querySelector('.allInfo');
-
+const nameInfo = document.querySelector('.infoName');
+const locationInfo = document.querySelector('.infoLocation');
+const emailInfo = document.querySelector('.infoEmail');
+const dobInfo = document.querySelector('.infoDob');
+const regInfo = document.querySelector('.infoReg');
+const phoneInfo = document.querySelector('.infoPhone');
+const imgInfo = document.querySelector('.infoImg');
 const usersCount = 34;
+let selectedList = [];
 let page = 0;
-//TODO page counter, dont show standart allInfoCard, some persons dont show, street number: name:, dont fetch data wath we know, normalize code
+let allData;
+
 function renderList() {
   fetch(
     `https://randomuser.me/api/?page=${page + 1}&results=${
       usersCount - page * 10 > 10 ? 10 : usersCount - page * 10
-    }&inc=name,gender,picture,registered&seed=0458a254c596df4b&noinfo`
+    }&exc=login,cell,id,nat&seed=0458a254c596df4b&noinfo`
   )
     .then((response) => response.json())
     .then((data) => renderUsers(data.results))
     .catch((err) => console.log(err))
+    .then((data) => saveData(data))
     .then(checkAvailable());
 }
 
 renderList();
+
+function saveData(data) {
+  allData = data;
+}
 
 function renderUsers(data) {
   userList.textContent = '';
   for (const user of data) {
     renderUserCard(user);
   }
+  return data;
 }
 
 function renderUserCard(data) {
@@ -122,6 +136,18 @@ function endPage() {
   renderList();
 }
 
+function setPage() {
+  debugger;
+  let temp = Number.parseInt(prompt('Set page:')) - 1;
+  if (temp > -1 && temp * 10 < usersCount) {
+    page = temp;
+  } else {
+    alert('Page not find');
+  }
+
+  renderList();
+}
+
 function checkAvailable() {
   if (page === 0) {
     buttonPrev.setAttribute('disabled', '');
@@ -137,23 +163,20 @@ function checkAvailable() {
     buttonNext.removeAttribute('disabled');
     buttonEnd.removeAttribute('disabled');
   }
+  buttonNumber.textContent = page + 1;
 }
 
 function imgClick(e) {
   e.stopPropagation();
   disabledScroll();
-  getAllInfo(e);
+  findUser(allData, e);
   allInfo.classList.toggle('hide');
 }
-function getAllInfo(e) {
-  fetch(
-    `https://randomuser.me/api/?page=${page + 1}&results=${
-      usersCount - page * 10 > 10 ? 10 : usersCount - page * 10
-    }&exc=login,cell,id,nat,gender&seed=0458a254c596df4b&noinfo`
-  )
-    .then((response) => response.json())
-    .then((data) => findUser(data.results, e))
-    .catch((err) => console.log(err));
+
+function hideInfo() {
+  enableScroll();
+  allInfo.classList.toggle('hide');
+  imgInfo.src = '#';
 }
 
 function findUser(data, e) {
@@ -171,39 +194,50 @@ function findUser(data, e) {
 function updateAllInfo({
   name,
   email,
-  dob,
-  registered,
+  dob: { date: dobDate },
+  registered: { date: regDate },
   phone,
   picture: { large },
   location,
 }) {
-  const nameInfo = document.querySelector('.infoName');
-  const locationInfo = document.querySelector('.infoLocation');
-  const emailInfo = document.querySelector('.infoEmail');
-  const dobInfo = document.querySelector('.infoDob');
-  const regInfo = document.querySelector('.infoReg');
-  const phoneInfo = document.querySelector('.infoPhone');
-  const imgInfo = document.querySelector('.infoImg');
-
-  nameInfo.textContent = objToString(name);
-  const birthday = new Date(dob.date);
-  dobInfo.textContent = `Date of birth: ${birthday.getFullYear()}-${birthday.getMonth()}-${birthday.getDate()}`;
-  const registr = new Date(registered.date);
-  regInfo.textContent = `Date of registration: ${registr.getFullYear()}-${registr.getMonth()}-${registr.getDate()}`;
-  emailInfo.textContent = email;
-  emailInfo.href = `mailto:${email}`;
-  phoneInfo.textContent = `${phone}`;
-  phoneInfo.href = `tel:${phone}`;
-  imgInfo.src = large;
-  delete location.coordinates;
-  delete location.timezone;
-  location.street.number = location.street.number;
-  locationInfo.textContent = objToString(location, ', ', true);
+  changeName(name);
+  changeDOB(dobDate);
+  changeReg(regDate);
+  changeEmail(email);
+  changePhone(phone);
+  changePic(large);
+  changeLocation(location);
 }
 
-function hideInfo() {
-  enableScroll();
-  allInfo.classList.toggle('hide');
+function changeName(name) {
+  nameInfo.textContent = `Name:${objToString(name)}`;
+}
+function changeDOB(dob) {
+  dobInfo.textContent = `Date of birth: ${
+    new Date(dob).toLocaleString().split(',')[0]
+  }  `;
+}
+function changeReg(regDate) {
+  regInfo.textContent = `Date of registration: ${
+    new Date(regDate).toLocaleString().split(',')[0]
+  }`;
+}
+function changeEmail(email) {
+  emailInfo.textContent = email;
+  emailInfo.href = `mailto:${email}`;
+}
+
+function changePhone(phone) {
+  phoneInfo.textContent = `Telephone: ${phone}`;
+  phoneInfo.href = `tel:${phone}`;
+}
+function changePic(large) {
+  imgInfo.src = large;
+}
+function changeLocation(location) {
+  delete location.coordinates;
+  delete location.timezone;
+  locationInfo.textContent = objToString(location, ', ', true);
 }
 
 function objToString(object, splitter, isShowKeys) {
@@ -211,26 +245,16 @@ function objToString(object, splitter, isShowKeys) {
   if (splitter === undefined) {
     splitter = ' ';
   }
-  if (isShowKeys === undefined) {
-    for (const iterator in object) {
-      if (typeof object[iterator] === 'object') {
-        str += objToString(object[iterator], ' ', true);
-      } else {
-        str += object[iterator];
-      }
-      str += splitter;
+  for (const key in object) {
+    const addKey =
+      isShowKeys === true && splitter !== undefined ? key + ':' : ' ';
+    if (typeof object[key] === 'object') {
+      str += `${addKey} [${objToString(object[key], ' ', isShowKeys)}]`;
+    } else {
+      str += `${addKey} ${object[key]}`;
     }
-  } else {
-    for (const iterator in object) {
-      if (typeof object[iterator] === 'object') {
-        str += iterator + ' ' + objToString(object[iterator], ' ', true);
-      } else {
-        str += iterator + ': ' + object[iterator];
-      }
-      str += splitter;
-    }
+    str += splitter;
   }
-
   return str.slice(0, splitter.length * -1);
 }
 
@@ -239,3 +263,4 @@ buttonNext.onclick = nextPage;
 buttonPrev.onclick = prevPage;
 buttonEnd.onclick = endPage;
 allInfo.onclick = hideInfo;
+buttonNumber.onclick = setPage;
