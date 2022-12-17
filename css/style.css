@@ -1,0 +1,51 @@
+* {
+  box-sizing: border-box;
+  font-size: 20px;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  min-width: 320px;
+  width: 100%;
+  max-width: 800px;
+}
+
+label {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+input {
+  width: 40%;
+  outline: none;
+}
+
+/* input:valid {
+  border: 2px solid green;
+}
+input:invalid {
+  border: 2px solid red;
+} */
+
+.valid {
+  border: 2px solid green;
+}
+
+.invalid {
+  border: 2px solid red;
+}
