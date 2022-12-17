@@ -1,56 +1,47 @@
-// const form = document.querySelector('form');
+'use strict';
 
-// form.addEventListener('submit', submitHandler);
+const todoForm = document.querySelector('.todoContainer>form');
+const todoInput = document.querySelector('.todoContainer input');
+const todoList = document.querySelector('.todoList');
 
-// function submitHandler(e) {
-//   e.preventDefault();
+const TODO_REX_EXP = /^\s*$/;
 
-//   const [nameInput] = document.querySelectorAll('input');
-
-//   if (/^[A-Z][a-z]{2,19}$/.test(nameInput.value)) {
-//     nameInput.classList.add('valid');
-//     nameInput.classList.remove('invalid');
-//   } else {
-//     nameInput.classList.remove('valid');
-//     nameInput.classList.add('invalid');
-//   }
-// }
-
-// const [nameInput] = document.querySelectorAll('input');
-// nameInput.addEventListener('input', inputNameHandler);
-
-// function inputNameHandler(e) {
-//   console.dir(e.target);
-//   if (/^[A-Z][a-z]{1,19}$/.test(e.target.value)) {
-//     nameInput.classList.add('valid');
-//     nameInput.classList.remove('invalid');
-//   } else {
-//     nameInput.classList.remove('valid');
-//     nameInput.classList.add('invalid');
-//   }
-// }
-
-const INPUTS_REG_EXP = {
-  'first-name': /^[A-Z][a-z]{2,19}(-[A-Z][a-z]{2,19})?$/,
-  'last-name': /^[A-Z][a-z]{2,19}(-[A-Z][a-z]{2,19})?$/,
-  email: /^.+@.+$/,
-  'phone-number': /^\+380\d{9}$/,
-  password: /^(?=.*[A-Z].*)(?=.*[a-z].*)(?=.*\d.*)(?=.*[!@#$%^&*_].*).{8,32}$/,
-  'password-confirmation':
-    /^(?=.*[A-Z].*)(?=.*[a-z].*)(?=.*\d.*)(?=.*[!@#$%^&*_].*).{8,32}$/,
+todoInput.oninput = ({ target }) => {
+  if (!TODO_REX_EXP.test(target.value)) {
+    target.classList.add('valid');
+    target.classList.remove('invalid');
+  } else {
+    target.classList.remove('valid');
+    target.classList.add('invalid');
+  }
 };
 
-const inputs = document.querySelectorAll('input');
-
-inputs.forEach((i) => i.addEventListener('input', inputHandler));
-
-function inputHandler(e) {
-  console.dir(e.target);
-  if (INPUTS_REG_EXP[e.target.name].test(e.target.value)) {
-    e.target.classList.add('valid');
-    e.target.classList.remove('invalid');
+todoForm.onsubmit = (e) => {
+  e.preventDefault();
+  const todoItem = e.target.elements['todo-item'];
+  if (!TODO_REX_EXP.test(todoItem.value)) {
+    const todoListItem = createTodoItem(todoItem.value);
+    todoList.append(todoListItem);
+    todoItem.value = '';
+    todoItem.classList.remove('valid');
   } else {
-    e.target.classList.remove('valid');
-    e.target.classList.add('invalid');
+    todoItem.classList.add('invalid');
   }
+};
+
+function createTodoItem(value) {
+  const todoListItem = document.createElement('li');
+
+  const delBtn = document.createElement('button');
+  delBtn.textContent = 'X';
+  delBtn.onclick = (e) => {
+    e.target.parentElement.remove();
+  };
+
+  const todoValue = document.createElement('span');
+  todoValue.textContent = value;
+
+  todoListItem.append(delBtn, todoValue);
+
+  return todoListItem;
 }
