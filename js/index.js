@@ -1,47 +1,23 @@
-'use strict';
+// іменований імпорт -----------------
+// import { sum as mySum, mult, PI } from './math.js';
 
-const todoForm = document.querySelector('.todoContainer>form');
-const todoInput = document.querySelector('.todoContainer input');
-const todoList = document.querySelector('.todoList');
+// console.log('sum(1,2) :>> ', mySum(1, 2));
+// console.log('mult(PI,2) :>> ', mult(PI, 2));
 
-const TODO_REX_EXP = /^\s*$/;
+// або
+// import * as MyMath from './math.js';
 
-todoInput.oninput = ({ target }) => {
-  if (!TODO_REX_EXP.test(target.value)) {
-    target.classList.add('valid');
-    target.classList.remove('invalid');
-  } else {
-    target.classList.remove('valid');
-    target.classList.add('invalid');
-  }
-};
+// console.log('MyMath.sum(PI,3) :>> ', MyMath.sum(MyMath.PI, 3));
 
-todoForm.onsubmit = (e) => {
-  e.preventDefault();
-  const todoItem = e.target.elements['todo-item'];
-  if (!TODO_REX_EXP.test(todoItem.value)) {
-    const todoListItem = createTodoItem(todoItem.value);
-    todoList.append(todoListItem);
-    todoItem.value = '';
-    todoItem.classList.remove('valid');
-  } else {
-    todoItem.classList.add('invalid');
-  }
-};
+// дефолтний імпорт -----------------------
+// import MyClass from './math.js';
 
-function createTodoItem(value) {
-  const todoListItem = document.createElement('li');
+// console.log('new MyClass(5) :>> ', new MyClass(5));
 
-  const delBtn = document.createElement('button');
-  delBtn.textContent = 'X';
-  delBtn.onclick = (e) => {
-    e.target.parentElement.remove();
-  };
+// поэднаний варіант -------------------------
 
-  const todoValue = document.createElement('span');
-  todoValue.textContent = value;
+// import { default as MyTest, sum, mult, PI } from './math.js';
+import MyTest, { sum, mult, PI } from './math.js';
 
-  todoListItem.append(delBtn, todoValue);
-
-  return todoListItem;
-}
+console.log('mult(PI,2) :>> ', mult(PI, 2));
+console.log('new MyTest(5) :>> ', new MyTest(5));
