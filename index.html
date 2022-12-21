@@ -4,19 +4,103 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Todo List</title>
+    <title>Registration Form</title>
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/style.css" />
     <script defer src="./js/index.js"></script>
   </head>
   <body>
-    <div class="todoContainer">
-      <h2>TODO LIST</h2>
-      <form>
-        <input type="text" name="todo-item" placeholder="Add todo" autofocus />
-        <button type="submit">+</button>
+    <section class="form">
+      <h2>Contact form</h2>
+      <p>Please fill in your information and we`ll be sending your order</p>
+      <form action="#" method="post">
+        <label>
+          Name
+          <fieldset>
+            <input
+              type="text"
+              name="first-name"
+              placeholder="first name"
+              minlength="2"
+              maxlength="20"
+              pattern="[A-Z][a-z]{1,19}"
+              value=""
+              autofocus
+            />
+            <input
+              type="text"
+              name="last-name"
+              placeholder="last name"
+              minlength="2"
+              maxlength="20"
+              pattern="[A-Z][a-z]{1,19}"
+              value=""
+            />
+          </fieldset>
+        </label>
+
+        <label>
+          Email
+          <input
+            type="email"
+            name="email"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}"
+          />
+        </label>
+
+        <label>
+          Phone*
+          <fieldset>
+            <input
+              type="tel"
+              name="tel-number1"
+              placeholder="000"
+              maxlength="3"
+              pattern="[0-9]{3}"
+              required
+            />
+            <input
+              type="tel"
+              name="tel-number2"
+              placeholder="000"
+              maxlength="3"
+              pattern="[0-9]{3}"
+              required
+            />
+            <input
+              type="tel"
+              name="tel-number3"
+              placeholder="0000"
+              maxlength="4"
+              pattern="[0-9]{4}"
+              required
+            />
+          </fieldset>
+        </label>
+
+        <label>
+          Message subject*
+          <select name="subject" required>
+            <option value="other">Other</option>
+            <option value="free">free delivery</option>
+            <option value="available">available</option>
+            <option value="new">new</option>
+            <option value="alert">alert</option>
+            <option value="news">news</option>
+            <option value="update">update</option>
+            <option value="summer">summer</option>
+            <option value="weekend">weekend</option>
+          </select>
+        </label>
+
+        <label>
+          Message*
+          <textarea rows="4" cols="50" name="comment" required></textarea>
+        </label>
+
+        <hr />
+        <button type="submit">Send</button>
       </form>
-      <ul class="todoList"></ul>
-    </div>
+    </section>
   </body>
 </html>

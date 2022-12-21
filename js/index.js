@@ -1,47 +1,19 @@
-'use strict';
+form = document.querySelector('form');
 
-const todoForm = document.querySelector('.todoContainer>form');
-const todoInput = document.querySelector('.todoContainer input');
-const todoList = document.querySelector('.todoList');
-
-const TODO_REX_EXP = /^\s*$/;
-
-todoInput.oninput = ({ target }) => {
-  if (!TODO_REX_EXP.test(target.value)) {
-    target.classList.add('valid');
-    target.classList.remove('invalid');
-  } else {
-    target.classList.remove('valid');
-    target.classList.add('invalid');
-  }
-};
-
-todoForm.onsubmit = (e) => {
+form.onsubmit = (e) => {
   e.preventDefault();
-  const todoItem = e.target.elements['todo-item'];
-  if (!TODO_REX_EXP.test(todoItem.value)) {
-    const todoListItem = createTodoItem(todoItem.value);
-    todoList.append(todoListItem);
-    todoItem.value = '';
-    todoItem.classList.remove('valid');
-  } else {
-    todoItem.classList.add('invalid');
-  }
+  console.log(getData(e.target));
 };
 
-function createTodoItem(value) {
-  const todoListItem = document.createElement('li');
-
-  const delBtn = document.createElement('button');
-  delBtn.textContent = 'X';
-  delBtn.onclick = (e) => {
-    e.target.parentElement.remove();
+function getData(form) {
+  let formData = Object.fromEntries(new FormData(form));
+  return {
+    name: `${formData['first-name']}${formData['last-name'] === '' ? '' : ' '}${
+      formData['last-name']
+    }`,
+    email: formData['email'],
+    telephone: `${formData['tel-number1']}-${formData['tel-number2']}-${formData['tel-number3']}`,
+    subject: formData['subject'],
+    message: formData['comment'].replace(/ {2,}/g, ' ').replace(/^ *| *$/g, ''),
   };
-
-  const todoValue = document.createElement('span');
-  todoValue.textContent = value;
-
-  todoListItem.append(delBtn, todoValue);
-
-  return todoListItem;
 }

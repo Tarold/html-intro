@@ -1,11 +1,85 @@
-.valid {
-  background-color: aquamarine;
+* {
+  box-sizing: border-box;
 }
 
-.invalid {
-  background-color: lightcoral;
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('https://i.pinimg.com/originals/cb/2f/02/cb2f02ad2b3aca984cc6d0576e19d9cc.jpg');
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-input {
+h2 {
+  text-align: left;
+  font-size: 26px;
+  margin: 20px 20px 20px 0;
+}
+
+p {
+  font-size: 12px;
+  margin: 0 20px 20px 0;
+}
+
+.form {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.171);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  min-width: 320px;
+  width: 100%;
+  max-width: 800px;
+  gap: 10px;
+}
+
+label {
+  width: 100%;
+  display: flex;
+  gap: 5px;
+  justify-content: space-between;
+}
+
+input,
+select,
+textarea {
+  width: 70%;
   outline: none;
+}
+
+fieldset {
+  display: flex;
+  gap: 10px;
+  width: 70%;
+}
+
+input:valid,
+select:valid,
+textarea:valid {
+  border: 2px solid rgba(0, 128, 0, 0.507);
+}
+
+input:invalid,
+select:invalid,
+textarea:invalid {
+  border: 2px solid rgba(255, 0, 0, 0.486);
+}
+
+hr {
+  width: 100%;
+  color: white;
+}
+
+button {
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  border: 1px solid white;
+  padding: 10px;
+  width: 70%;
+  margin-left: auto;
 }
