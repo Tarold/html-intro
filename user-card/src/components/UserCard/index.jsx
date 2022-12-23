@@ -16,7 +16,8 @@ function UserCard({ data }) {
 }
 
 function UserHeadCard({ name, tag, gender, photo }) {
-  const genderColor = gender === 'male' ? { color: 'blue' } : { color: 'pink' };
+  const genderColor =
+    gender === 'male' ? { color: 'lightblue' } : { color: 'pink' };
 
   return (
     <div
@@ -25,8 +26,13 @@ function UserHeadCard({ name, tag, gender, photo }) {
         backgroundImage: `url(${photo}`,
       }}
     >
-      <h2 style={genderColor}>{name}</h2>
-      <a href={tag}>{tag}</a>
+      <h2 className={styles.userName}>{name}</h2>
+      <a className={styles.userLink} href={tag}>
+        {tag}
+      </a>
+      <div className={styles.plus} style={genderColor}>
+        +
+      </div>
     </div>
   );
 }
@@ -35,8 +41,8 @@ function UserBottomCard({ tweets, following, followers }) {
   return (
     <div className={styles.bottomCard}>
       <UserCardStats nameStat="Tweets" stat={tweets} />
-      <UserCardStats nameStat="following" stat={following} />
-      <UserCardStats nameStat="followers" stat={followers} />
+      <UserCardStats nameStat="Following" stat={following} />
+      <UserCardStats nameStat="Followers" stat={followers} />
     </div>
   );
 }
