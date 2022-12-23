@@ -6,7 +6,7 @@ function App() {
   const userData = [
     {
       name: 'Emma Watson',
-      tag: '@EmWatson',
+      link: '@EmWatson',
       gender: 'female',
       tweets: 1337,
       following: 561,
@@ -16,7 +16,7 @@ function App() {
     },
     {
       name: 'Daniel Radcliffetson',
-      tag: '@DanRad',
+      link: '@DanRad',
       gender: 'male',
       tweets: 900,
       following: 301,

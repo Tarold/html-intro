@@ -1,11 +1,20 @@
-import styles from './card.module.css';
+import style from './card.module.css';
+const {
+  userCard,
+  headCard,
+  userName,
+  userLink,
+  plus,
+  bottomCard,
+  infoSection,
+} = style;
 
 function UserCard({ data }) {
-  const { name, tag, tweets, following, followers, gender, photo } = data;
+  const { name, link, tweets, following, followers, gender, photo } = data;
 
   return (
-    <div className={styles.userCard}>
-      <UserHeadCard name={name} tag={tag} gender={gender} photo={photo} />
+    <div className={userCard}>
+      <UserHeadCard name={name} link={link} gender={gender} photo={photo} />
       <UserBottomCard
         tweets={tweets}
         following={following}
@@ -15,31 +24,47 @@ function UserCard({ data }) {
   );
 }
 
-function UserHeadCard({ name, tag, gender, photo }) {
-  const genderColor =
-    gender === 'male' ? { color: 'lightblue' } : { color: 'pink' };
-
+function UserHeadCard({ name, link, photo, gender }) {
   return (
     <div
-      className={styles.headCard}
+      className={headCard}
       style={{
         backgroundImage: `url(${photo}`,
       }}
     >
-      <h2 className={styles.userName}>{name}</h2>
-      <a className={styles.userLink} href={tag}>
-        {tag}
-      </a>
-      <div className={styles.plus} style={genderColor}>
-        +
-      </div>
+      <UserName name={name} />
+      <UserLink link={link} />
+      <UserPlus gender={gender} />
+    </div>
+  );
+}
+
+function UserName({ name }) {
+  return <h2 className={userName}>{name}</h2>;
+}
+
+function UserLink({ link }) {
+  return (
+    <a className={userLink} href={link}>
+      {link}
+    </a>
+  );
+}
+
+function UserPlus({ gender }) {
+  const genderColor =
+    gender === 'male' ? { color: 'lightblue' } : { color: 'pink' };
+
+  return (
+    <div className={plus} style={genderColor}>
+      +
     </div>
   );
 }
 
 function UserBottomCard({ tweets, following, followers }) {
   return (
-    <div className={styles.bottomCard}>
+    <div className={bottomCard}>
       <UserCardStats nameStat="Tweets" stat={tweets} />
       <UserCardStats nameStat="Following" stat={following} />
       <UserCardStats nameStat="Followers" stat={followers} />
@@ -49,7 +74,7 @@ function UserBottomCard({ tweets, following, followers }) {
 
 function UserCardStats({ nameStat, stat }) {
   return (
-    <div className={styles.infoSection}>
+    <div className={infoSection}>
       <p>{nameStat}</p>
       <p>{stat}</p>
     </div>
