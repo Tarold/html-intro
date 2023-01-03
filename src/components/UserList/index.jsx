@@ -36,16 +36,17 @@ class UserList extends Component {
     this.setState({ selectedUsers: list });
   };
 
-  deleteItem = (e) => {
+  deleteItem = (e, u) => {
+    e.stopPropagation();
     let userList = this.state.users;
     let list = this.state.selectedUsers;
 
     userList = userList.filter(function (value) {
-      return value.name.first !== e;
+      return value.name.first !== u;
     });
-    if (list.includes(e)) {
+    if (list.includes(u)) {
       list = list.filter(function (value) {
-        return value !== e;
+        return value !== u;
       });
     }
     this.setState({

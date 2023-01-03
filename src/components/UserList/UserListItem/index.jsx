@@ -20,7 +20,7 @@ const UserListItem = (props) => {
       </div>
       <button
         className={styles.deleteButton}
-        onClick={() => deleteItem(name.first)}
+        onClick={(e) => deleteItem(e, name.first)}
       >
         <BsFillTrashFill />
       </button>
