@@ -1,28 +1,15 @@
 import { Component } from 'react';
-import ViewPortParams from './components/ViewPortParams';
+import UserList from './components/UserList';
 
 class App extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      isVisible: false,
-    };
+    console.log('props', props);
   }
-
-  handleClick = () => {
-    const { isVisible } = this.state;
-    this.setState({ isVisible: !isVisible });
-  };
-
   render() {
-    const { isVisible } = this.state;
     return (
       <>
-        <button onClick={this.handleClick}>
-          {isVisible ? 'Unmount' : 'Mount'}
-        </button>
-        {isVisible && <ViewPortParams />}
+        <UserList />
       </>
     );
   }
