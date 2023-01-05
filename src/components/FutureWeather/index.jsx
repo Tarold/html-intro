@@ -27,9 +27,28 @@ class FutureWeather extends Component {
     return transData;
   };
 
+  getDate = () => {
+    const start = new Date();
+    const end = new Date();
+
+    start.setDate(start.getDate() + 1);
+    end.setDate(end.getDate() + 3);
+
+    const startParam = `${start.getFullYear()}-${padTo2Digits(
+      start.getMonth() + 1
+    )}-${padTo2Digits(start.getDate())}`;
+
+    const endParam = `${end.getFullYear()}-${padTo2Digits(
+      end.getMonth() + 1
+    )}-${padTo2Digits(end.getDate())}`;
+
+    return [startParam, endParam];
+  };
+
   getData = () => {
+    const [startParam, endParam] = this.getDate();
     fetch(
-      'https://api.open-meteo.com/v1/forecast?latitude=47.85&longitude=35.12&daily=temperature_2m_max,temperature_2m_min,windspeed_10m_max,winddirection_10m_dominant&timezone=Europe%2FBerlin&start_date=2023-01-06&end_date=2023-01-08'
+      `https://api.open-meteo.com/v1/forecast?latitude=47.85&longitude=35.12&daily=temperature_2m_max,temperature_2m_min,windspeed_10m_max,winddirection_10m_dominant&timezone=Europe%2FBerlin&start_date=${startParam}&end_date=${endParam}`
     )
       .then((response) => {
         return response.json();
@@ -73,3 +92,7 @@ class FutureWeather extends Component {
 }
 
 export default FutureWeather;
+
+function padTo2Digits(num) {
+  return num.toString().padStart(2, '0');
+}
