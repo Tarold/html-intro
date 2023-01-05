@@ -1,7 +1,7 @@
-import UsersList from './components/UserList';
+import FutureWeather from './components/FutureWeather';
 
 function App(props) {
-  return <UsersList />;
+  return <FutureWeather />;
 }
 
 export default App;
