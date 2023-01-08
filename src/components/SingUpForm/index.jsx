@@ -38,8 +38,8 @@ class LoginForm extends Component {
   }
 
   handleChange = ({ target: { value, name, checked } }) => {
-    const input = this.state.input;
-    const valid = this.state.isValid;
+    const input = Object.assign({}, this.state.input);
+    const valid = Object.assign({}, this.state.isValid);
 
     input[name] = name === 'isRoolsAgree' ? checked : value;
 
@@ -57,7 +57,7 @@ class LoginForm extends Component {
   };
 
   readyCheck = () => {
-    const isValid = this.state.isValid;
+    const isValid = Object.assign({}, this.state.isValid);
 
     if (String(this.state.input.isRoolsAgree) === 'false') {
       return false;
@@ -75,6 +75,7 @@ class LoginForm extends Component {
     e.preventDefault();
     if (this.readyCheck()) {
       // send request
+      alert('Sing Up');
 
       this.setState({
         input: { ...INITIAL_VALUES.input },
@@ -233,7 +234,10 @@ class LoginForm extends Component {
           </button>
           <span className={styles.singIn}>
             I`m already a member!
-            <a href="#" className={styles.singInLink}>
+            <a
+              href="https://youtu.be/dQw4w9WgXcQ"
+              className={styles.singInLink}
+            >
               Sing In
             </a>
           </span>
