@@ -22,16 +22,29 @@
   justify-content: space-between;
   align-items: center;
 }
-
 .input {
+  margin-left: auto;
+}
+.input,
+.showButton {
   padding: 10px;
   outline: none;
 }
 
+.showButton {
+  height: 100%;
+  border-radius: 0;
+}
 .inputValid {
   border: 2px solid green;
+  -webkit-box-shadow: 0px 0px 0px 1px green;
+  -moz-box-shadow: 0px 0px 0px 1px green;
+  box-shadow: 0px 0px 0px 1px green;
 }
 
 .inputInvalid {
   border: 2px solid red;
+  -webkit-box-shadow: 0px 0px 0px 1px red;
+  -moz-box-shadow: 0px 0px 0px 1px red;
+  box-shadow: 0px 0px 0px 1px red;
 }
