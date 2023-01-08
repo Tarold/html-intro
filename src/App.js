@@ -1,7 +1,7 @@
-import FutureWeather from './components/FutureWeather';
+import LoginForm from './components/LoginForm';
 
 function App(props) {
-  return <FutureWeather />;
+  return <LoginForm />;
 }
 
 export default App;
