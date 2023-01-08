@@ -1,9 +1,7 @@
-import SingUpForm from './components/SingUpForm';
+import UsersLoader from './components/UsersLoader';
 
-function App(props) {
-  return <SingUpForm />;
+function App() {
+  return <UsersLoader />;
 }
 
 export default App;
-
-// new Counter().render();
