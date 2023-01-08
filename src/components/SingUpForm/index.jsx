@@ -125,9 +125,9 @@ class LoginForm extends Component {
       [styles.inputValid]: isPasswordConfirmValid,
       [styles.inputInvalid]: !isPasswordConfirmValid,
     });
-    const isRoolsAgreeClassName = classNames(styles.input, {
-      [styles.inputValid]: isRoolsAgree,
-      [styles.inputInvalid]: !isRoolsAgree,
+    const isRoolsAgreeClassName = classNames(styles.ckeckbox, {
+      [styles.checkboxValid]: isRoolsAgree,
+      [styles.checkboxInvalid]: !isRoolsAgree,
     });
 
     const passwordType = classNames({
@@ -141,7 +141,13 @@ class LoginForm extends Component {
 
     return (
       <div className={styles.formContainer}>
-        <h1 className={styles.formHeader}>LoginForm</h1>
+        <h1 className={styles.siteHeader}>Sing Up #01</h1>
+        <img
+          className={styles.avatar}
+          src="https://st4.depositphotos.com/4329009/19956/v/600/depositphotos_199564354-stock-illustration-creative-vector-illustration-default-avatar.jpg"
+          alt="avatar"
+        />
+        <h2 className={styles.formHeader}>Create your account</h2>
         <form className={styles.loginForm} onSubmit={this.handleSubmit}>
           <label className={styles.label}>
             <span className={styles.inputName}>Name</span>
@@ -168,46 +174,49 @@ class LoginForm extends Component {
           </label>
           <label className={styles.label}>
             <span className={styles.inputName}>Password</span>
-            <input
-              className={passwordClassName}
-              type={passwordType}
-              name="password"
-              placeholder="********"
-              value={password}
-              onChange={this.handleChange}
-            />
-            <button
-              type="button"
-              className={styles.showButton}
-              onClick={() => {
-                this.showPassword('password');
-              }}
-            >
-              <AiOutlineEye />
-            </button>
+            <div className={styles.passwordSection}>
+              <input
+                className={passwordClassName}
+                type={passwordType}
+                name="password"
+                placeholder="********"
+                value={password}
+                onChange={this.handleChange}
+              />
+              <button
+                type="button"
+                className={styles.showButton}
+                onClick={() => {
+                  this.showPassword('password');
+                }}
+              >
+                <AiOutlineEye />
+              </button>
+            </div>
           </label>
           <label className={styles.label}>
             <span className={styles.inputName}>Password confirmation</span>
-            <input
-              className={passwordConfirmClassName}
-              type={passwordConfirmType}
-              name="passwordConfirm"
-              placeholder="********"
-              value={passwordConfirm}
-              onChange={this.handleChange}
-            />
-            <button
-              type="button"
-              className={styles.showButton}
-              onClick={() => {
-                this.showPassword('passwordConfirm');
-              }}
-            >
-              <AiOutlineEye />
-            </button>
+            <div className={styles.passwordSection}>
+              <input
+                className={passwordConfirmClassName}
+                type={passwordConfirmType}
+                name="passwordConfirm"
+                placeholder="********"
+                value={passwordConfirm}
+                onChange={this.handleChange}
+              />
+              <button
+                type="button"
+                className={styles.showButton}
+                onClick={() => {
+                  this.showPassword('passwordConfirm');
+                }}
+              >
+                <AiOutlineEye />
+              </button>
+            </div>
           </label>
-          <label className={styles.label}>
-            <span className={styles.inputName}>I agree with rools</span>
+          <label className={styles.checkboxLabel}>
             <input
               className={isRoolsAgreeClassName}
               type="checkbox"
@@ -215,8 +224,19 @@ class LoginForm extends Component {
               checked={isRoolsAgree}
               onChange={this.handleChange}
             />
+            <span className={styles.checkboxText}>
+              I Agree All Statements in Terms of Service
+            </span>
           </label>
-          <button type="submit">SignUp</button>
+          <button type="submit" className={styles.singUpButton}>
+            SignUp
+          </button>
+          <span className={styles.singIn}>
+            I`m already a member!
+            <a href="#" className={styles.singInLink}>
+              Sing In
+            </a>
+          </span>
         </form>
       </div>
     );
