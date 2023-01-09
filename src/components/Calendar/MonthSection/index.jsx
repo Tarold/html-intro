@@ -60,10 +60,10 @@ class MonthSection extends Component {
     const year = getYear(date);
 
     return (
-      <div>
-        <span className={styles.sectionName}>
+      <div className={styles.monthSection}>
+        <h2 className={styles.sectionName}>
           {MONTH[month]} {year}
-        </span>
+        </h2>
         <MonthTable
           whiteSpacesStart={whiteSpacesStart}
           whiteSpacesEnd={whiteSpacesEnd}

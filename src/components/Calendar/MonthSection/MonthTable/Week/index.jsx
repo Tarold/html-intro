@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import Day from './Day';
 
-function Week({ week, selected, clickDay }) {
+function Week({ week, selected, clickDay, className }) {
   return (
-    <tr>
+    <tr className={className}>
       {week.map((day, index) => (
         <Day
           key={'' + index + day}
@@ -28,6 +28,7 @@ Week.propTypes = {
   week: PropTypes.array,
   selected: PropTypes.number,
   clickDay: PropTypes.func,
+  className: PropTypes.string,
 };
 
 export default Week;

@@ -14,8 +14,8 @@ const WEEK_DAYS = [
 function SelectedSection({ selected }) {
   return (
     <div className={styles.selectedSection}>
-      {WEEK_DAYS[selected.getDay()]}
-      {selected.getDate()}
+      <h2 className={styles.sectionName}>{WEEK_DAYS[selected.getDay()]}</h2>
+      <span className={styles.selectedDate}>{selected.getDate()}</span>
     </div>
   );
 }

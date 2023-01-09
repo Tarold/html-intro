@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import THead from './THead';
 import Week from './Week';
 import styles from './style.module.sass';
 
@@ -17,18 +18,8 @@ function MounthTable({
 
   return (
     <table className={styles.mounthTable}>
-      <thead>
-        <tr>
-          <th>S</th>
-          <th>M</th>
-          <th>T</th>
-          <th>W</th>
-          <th>T</th>
-          <th>F</th>
-          <th>S</th>
-        </tr>
-      </thead>
-      <tbody>
+      <THead className={styles.tHead} />
+      <tbody className={styles.tBody}>
         {dateList.map((week, index) => (
           <Week
             key={'' + week + index}
@@ -36,6 +27,7 @@ function MounthTable({
             index={index}
             selected={selected}
             clickDay={clickDay}
+            className={styles.week}
           />
         ))}
       </tbody>
