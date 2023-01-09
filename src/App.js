@@ -1,7 +1,7 @@
-import FlexContainer from './components/FlexContainer';
+import Calendar from './components/Calendar';
 
 function App() {
-  return <FlexContainer />;
+  return <Calendar />;
 }
 
 export default App;
