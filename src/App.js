@@ -1,7 +1,7 @@
-import UsersLoader from './components/UsersLoader';
+import Calendar from './components/Calendar';
 
 function App() {
-  return <UsersLoader />;
+  return <Calendar />;
 }
 
 export default App;
