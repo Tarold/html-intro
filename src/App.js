@@ -1,9 +1,9 @@
-import UserList from './components/UserList';
+import UsersLoader from './components/UsersLoader';
 
 const App = (props) => {
   return (
     <>
-      <UserList />
+      <UsersLoader />
     </>
   );
 };
