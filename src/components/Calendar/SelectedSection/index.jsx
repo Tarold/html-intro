@@ -16,6 +16,7 @@ function SelectedSection({ selected }) {
   return (
     <div className={styles.selectedSection}>
       <TextTransition
+        delay={200}
         direction="down"
         springConfig={presets.gentle}
         className={styles.sectionName}
@@ -23,7 +24,6 @@ function SelectedSection({ selected }) {
         {WEEK_DAYS[selected.getDay()]}
       </TextTransition>
       <TextTransition
-        delay={250}
         direction="down"
         springConfig={presets.gentle}
         className={styles.selectedDate}
