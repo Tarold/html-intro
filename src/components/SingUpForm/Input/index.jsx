@@ -2,6 +2,7 @@ import styles from './style.module.sass';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ShowButton from './ShowButton';
+
 function Input({
   isValid,
   type,
@@ -25,13 +26,14 @@ function Input({
           [styles.checkboxInvalid]: !isValid,
         });
 
-  let inputType = type;
-  if (type === 'password') {
-    inputType = classNames({
-      text: showPass,
-      password: !showPass,
-    });
-  }
+  const inputType =
+    type !== 'password'
+      ? type
+      : classNames({
+          text: showPass,
+          password: !showPass,
+        });
+
   return (
     <label className={styles.label}>
       {type !== 'checkbox' && <span className={styles.inputName}>{label}</span>}
@@ -66,7 +68,11 @@ Input.propTypes = {
   name: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   placeholder: PropTypes.string,
-  text: PropTypes.string,
+  label: PropTypes.string,
+  onChange: PropTypes.func,
+  toggleShowPass: PropTypes.func,
+  showPass: PropTypes.bool,
+  checked: PropTypes.bool,
 };
 
 export default Input;

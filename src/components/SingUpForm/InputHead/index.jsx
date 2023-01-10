@@ -11,6 +11,11 @@ function InputHead({ img, title }) {
 }
 
 InputHead.propTypes = {
+  img: 'https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png',
+  title: 'Create your account',
+};
+
+InputHead.propTypes = {
   img: PropTypes.string,
   title: PropTypes.string,
 };
