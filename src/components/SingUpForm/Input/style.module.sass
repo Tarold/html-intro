@@ -1,0 +1,67 @@
+@import './../../../common/style/form'
+
+
+.label 
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  align-items: flex-start
+  gap: 10px
+
+.inputName 
+  color: $form-green-color
+  font-weight: 900
+  font-size: $form-small-font-size
+  text-transform: Uppercase
+
+.input 
+  box-sizing: border-box
+  width: 100%
+
+.inputSection 
+  width: 100%
+  display: flex
+  flex-wrap: nowrap
+  align-items: center
+
+.ckeckbox 
+  cursor: pointer
+  margin-right: 10px
+
+
+.checkboxText
+  font-size: $form-small-font-size
+
+.input,
+.showButton 
+  padding: 10px
+  outline: none
+
+.inputValid 
+  border: 2px solid $form-dark-green-color
+
+
+.inputInvalid 
+  border: 2px solid $form-warning-color
+
+.showButton 
+  height: 100%
+  border-radius: 0
+
+  appearance: none
+  background-color: inherit
+  border: 1px solid rgba(27, 31, 35, 0.15)
+  color: grey
+  cursor: pointer
+  display: inline-block
+
+.checkboxValid 
+  -webkit-box-shadow: 0px 0px 0px 1px $form-dark-green-color
+  -moz-box-shadow: 0px 0px 0px 1px $form-dark-green-color
+  box-shadow: 0px 0px 0px 1px $form-dark-green-color
+
+.checkboxInvalid 
+  -webkit-box-shadow: 0px 0px 0px 1px $form-warning-color
+  -moz-box-shadow: 0px 0px 0px 1px $form-warning-color
+  box-shadow: 0px 0px 0px 1px $form-warning-color
+

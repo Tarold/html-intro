@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import classNames from 'classnames';
-import styles from './SingUpForm.module.css';
-import { AiOutlineEye } from 'react-icons/ai';
+import InputHead from './InputHead';
+import Input from './Input';
+import InputFood from './InputFoot';
+import InputWarning from './InputWarning';
+import styles from './SingUpForm.module.sass';
 
 const INITIAL_VALUES = {
   input: {
@@ -17,6 +19,7 @@ const INITIAL_VALUES = {
     password: false,
     passwordConfirm: false,
   },
+  isSecond: false,
   showPassword: { password: false, passwordConfirm: false },
 };
 
@@ -34,6 +37,7 @@ class LoginForm extends Component {
       input: { ...INITIAL_VALUES.input },
       isValid: { ...INITIAL_VALUES.isValid },
       showPassword: { ...INITIAL_VALUES.showPassword },
+      isSecond: Boolean(INITIAL_VALUES.isSecond),
     };
   }
 
@@ -81,12 +85,12 @@ class LoginForm extends Component {
         input: { ...INITIAL_VALUES.input },
         isValid: { ...INITIAL_VALUES.isValid },
         showPassword: { ...INITIAL_VALUES.showPassword },
+        isSecond: Boolean(INITIAL_VALUES.isSecond),
       });
     } else {
-      alert('Not all inputs feel');
+      this.setState({ isSecond: true });
     }
   };
-
   showPassword = (i) => {
     const password = this.state.showPassword;
     password[i] = !password[i];
@@ -108,139 +112,89 @@ class LoginForm extends Component {
       showPassword: { password: showPass, passwordConfirm: showPassConf },
     } = this.state;
 
-    const nameClassName = classNames(styles.input, {
-      [styles.inputValid]: isNameValid,
-      [styles.inputInvalid]: !isNameValid,
-    });
-
-    const emailClassName = classNames(styles.input, {
-      [styles.inputValid]: isEmailValid,
-      [styles.inputInvalid]: !isEmailValid,
-    });
-
-    const passwordClassName = classNames(styles.input, {
-      [styles.inputValid]: isPasswordValid,
-      [styles.inputInvalid]: !isPasswordValid,
-    });
-    const passwordConfirmClassName = classNames(styles.input, {
-      [styles.inputValid]: isPasswordConfirmValid,
-      [styles.inputInvalid]: !isPasswordConfirmValid,
-    });
-    const isRoolsAgreeClassName = classNames(styles.ckeckbox, {
-      [styles.checkboxValid]: isRoolsAgree,
-      [styles.checkboxInvalid]: !isRoolsAgree,
-    });
-
-    const passwordType = classNames({
-      text: showPass,
-      password: !showPass,
-    });
-    const passwordConfirmType = classNames({
-      text: showPassConf,
-      password: !showPassConf,
-    });
-
     return (
       <div className={styles.formContainer}>
-        <h1 className={styles.siteHeader}>Sing Up #01</h1>
-        <img
-          className={styles.avatar}
-          src="https://st4.depositphotos.com/4329009/19956/v/600/depositphotos_199564354-stock-illustration-creative-vector-illustration-default-avatar.jpg"
-          alt="avatar"
+        <InputHead
+          img={
+            'https://st4.depositphotos.com/4329009/19956/v/600/depositphotos_199564354-stock-illustration-creative-vector-illustration-default-avatar.jpg'
+          }
+          title="Create your account"
         />
-        <h2 className={styles.formHeader}>Create your account</h2>
         <form className={styles.loginForm} onSubmit={this.handleSubmit}>
-          <label className={styles.label}>
-            <span className={styles.inputName}>Name</span>
-            <input
-              className={nameClassName}
-              type="text"
-              name="name"
-              placeholder="Name"
-              value={name}
-              onChange={this.handleChange}
-              autoFocus
+          <Input
+            isValid={isNameValid}
+            type="text"
+            name="name"
+            label="Name"
+            value={name}
+            placeholder="Name"
+            onChange={this.handleChange}
+          />
+          {this.state.isSecond && !this.state.isValid.name && (
+            <InputWarning text="Please enter a valid name" />
+          )}
+          <Input
+            isValid={isEmailValid}
+            type="email"
+            name="email"
+            label="Email"
+            value={email}
+            placeholder="your@email.com"
+            onChange={this.handleChange}
+          />
+          {this.state.isSecond && !this.state.isValid.email && (
+            <InputWarning text="Please enter a valid email" />
+          )}
+          <Input
+            isValid={isPasswordValid}
+            type="password"
+            name="password"
+            label="Password"
+            value={password}
+            showPass={showPass}
+            toggleShowPass={() => {
+              this.showPassword('password');
+            }}
+            placeholder="********"
+            onChange={this.handleChange}
+          />
+          {this.state.isSecond && !this.state.isValid.password && (
+            <InputWarning text="Please enter a valid password. Acceptable passwords are at least 8 characters long and contain at least one: capital letter, small letter, number, non-alphanumeric character." />
+          )}
+          <Input
+            isValid={isPasswordConfirmValid}
+            type="password"
+            name="passwordConfirm"
+            label="Password confirmation"
+            value={passwordConfirm}
+            showPass={showPassConf}
+            toggleShowPass={() => {
+              this.showPassword('passwordConfirm');
+            }}
+            placeholder="********"
+            onChange={this.handleChange}
+          />
+          {this.state.isSecond && !this.state.isValid.passwordConfirm && (
+            <InputWarning
+              text="Please enter a valid password confirm. 
+              Must be same as password"
             />
-          </label>
-          <label className={styles.label}>
-            <span className={styles.inputName}>Email</span>
-            <input
-              className={emailClassName}
-              type="email"
-              name="email"
-              placeholder="your@mail"
-              value={email}
-              onChange={this.handleChange}
-            />
-          </label>
-          <label className={styles.label}>
-            <span className={styles.inputName}>Password</span>
-            <div className={styles.passwordSection}>
-              <input
-                className={passwordClassName}
-                type={passwordType}
-                name="password"
-                placeholder="********"
-                value={password}
-                onChange={this.handleChange}
-              />
-              <button
-                type="button"
-                className={styles.showButton}
-                onClick={() => {
-                  this.showPassword('password');
-                }}
-              >
-                <AiOutlineEye />
-              </button>
-            </div>
-          </label>
-          <label className={styles.label}>
-            <span className={styles.inputName}>Password confirmation</span>
-            <div className={styles.passwordSection}>
-              <input
-                className={passwordConfirmClassName}
-                type={passwordConfirmType}
-                name="passwordConfirm"
-                placeholder="********"
-                value={passwordConfirm}
-                onChange={this.handleChange}
-              />
-              <button
-                type="button"
-                className={styles.showButton}
-                onClick={() => {
-                  this.showPassword('passwordConfirm');
-                }}
-              >
-                <AiOutlineEye />
-              </button>
-            </div>
-          </label>
-          <label className={styles.checkboxLabel}>
-            <input
-              className={isRoolsAgreeClassName}
-              type="checkbox"
-              name="isRoolsAgree"
-              checked={isRoolsAgree}
-              onChange={this.handleChange}
-            />
-            <span className={styles.checkboxText}>
-              I Agree All Statements in Terms of Service
-            </span>
-          </label>
+          )}
+          <Input
+            isValid={isRoolsAgree}
+            type="checkbox"
+            name="isRoolsAgree"
+            label="I Agree All Statements in Terms of Service"
+            checked={isRoolsAgree}
+            onChange={this.handleChange}
+          />
+          {this.state.isSecond && !this.state.input.isRoolsAgree && (
+            <InputWarning text="Please agree with All Statements in Terms of Service" />
+          )}
           <button type="submit" className={styles.singUpButton}>
             SignUp
           </button>
-          <span className={styles.singIn}>
-            I`m already a member!
-            <a
-              href="https://youtu.be/dQw4w9WgXcQ"
-              className={styles.singInLink}
-            >
-              Sing In
-            </a>
-          </span>
+          <InputFood />
         </form>
       </div>
     );
