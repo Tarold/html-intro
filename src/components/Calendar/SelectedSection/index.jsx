@@ -17,14 +17,15 @@ function SelectedSection({ selected }) {
     <div className={styles.selectedSection}>
       <TextTransition
         direction="down"
-        springConfig={presets.slow}
+        springConfig={presets.gentle}
         className={styles.sectionName}
       >
         {WEEK_DAYS[selected.getDay()]}
       </TextTransition>
       <TextTransition
+        delay={250}
         direction="down"
-        springConfig={presets.slow}
+        springConfig={presets.gentle}
         className={styles.selectedDate}
       >
         {selected.getDate()}
