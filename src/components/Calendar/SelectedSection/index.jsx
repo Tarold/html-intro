@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import styles from './style.module.sass';
+import TextTransition, { presets } from 'react-text-transition';
 
 const WEEK_DAYS = [
   'sunday',
@@ -14,8 +15,20 @@ const WEEK_DAYS = [
 function SelectedSection({ selected }) {
   return (
     <div className={styles.selectedSection}>
-      <h2 className={styles.sectionName}>{WEEK_DAYS[selected.getDay()]}</h2>
-      <span className={styles.selectedDate}>{selected.getDate()}</span>
+      <TextTransition
+        direction="down"
+        springConfig={presets.slow}
+        className={styles.sectionName}
+      >
+        {WEEK_DAYS[selected.getDay()]}
+      </TextTransition>
+      <TextTransition
+        direction="down"
+        springConfig={presets.slow}
+        className={styles.selectedDate}
+      >
+        {selected.getDate()}
+      </TextTransition>
     </div>
   );
 }

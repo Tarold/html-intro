@@ -3,17 +3,23 @@
 .day
   padding: 10px
   color: $calendar-grey-color
+  transition: color 0.2s 
+  position: relative
+  &:after 
+    content: ""
+    position: absolute
+    top: 0
+    left: 1px
+    height: 37px
+    width: 37px
+    border: 3px solid $calendar-bg-color
+    border-radius: 50%
+    transition: border-color 0.2s
+
+
   
 .selected
   color: $calendar-red-color
-  position: relative
   &:after 
-    top: 0
-    left: 1px
-    position: absolute
-    content: ""
-    height: 37px
-    width: 37px
-    border: 3px solid $calendar-red-color
-    border-radius: 50%
+    border-color: $calendar-red-color  
  
