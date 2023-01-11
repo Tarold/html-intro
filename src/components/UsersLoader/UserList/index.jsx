@@ -1,27 +1,17 @@
 import { Component } from 'react';
 import UserListItem from './UserListItem';
-import './style.css';
+
 class UserList extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      users: [],
+      users: [...props.users],
       selectedUsers: [],
     };
   }
 
-  getData = () => {
-    fetch(
-      `https://randomuser.me/api/?results=10&exc=dob,location,email,phone,login,cell,id,nat&seed=0458a254c596df4b&noinfo`
-    )
-      .then((response) => response.json())
-      .then((data) => this.setState({ users: data.results }))
-      .catch((err) => console.log(err));
-  };
-
-  componentDidMount() {
-    this.getData();
-  }
+  componentDidMount() {}
 
   selectUser = (u) => {
     let list = this.state.selectedUsers;
@@ -57,22 +47,15 @@ class UserList extends Component {
 
   mapUser = (u) => {
     const selected = this.state.selectedUsers.includes(u.name.first);
-    const inlineStyle = {
-      backgroundColor: selected
-        ? u.gender === 'male'
-          ? '#aebee485'
-          : '#ffd3e385'
-        : u.gender === 'male'
-        ? '#aebee435'
-        : '#ffd3e335',
-    };
+
     return (
       <UserListItem
         key={u.name.first}
         photo={u.picture.medium}
         name={u.name}
+        gender={u.gender}
         registered={u.registered}
-        inlineStyle={inlineStyle}
+        selected={selected}
         clickOnItem={this.selectUser}
         deleteItem={this.deleteItem}
       />
@@ -81,11 +64,7 @@ class UserList extends Component {
 
   render() {
     const { users } = this.state;
-    return (
-      <>
-        <div className="userList">{users.map(this.mapUser)} </div>
-      </>
-    );
+    return <>{users !== undefined && users.map(this.mapUser)}</>;
   }
 }
 

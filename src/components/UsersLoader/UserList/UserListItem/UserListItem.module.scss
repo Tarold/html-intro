@@ -1,3 +1,8 @@
+%shadow {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 8px;
+  border: 1px solid rgb(207, 207, 207);
+}
+
 .user {
   display: flex;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -6,17 +11,16 @@
   margin: 10px 0;
   cursor: pointer;
   align-items: center;
+  background-color: #fff;
+  transition: background-color 0.2s;
+  animation: appear 0.4s;
 }
 .userImg {
+  @extend %shadow;
   border-radius: 50%;
   width: 100px;
   height: 100px;
   margin-right: 5px;
-}
-.userImg,
-.deleteButton {
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 8px;
-  border: 1px solid rgb(207, 207, 207);
 }
 .userContent {
   display: flex;
@@ -35,6 +39,7 @@
 }
 
 .deleteButton {
+  @extend %shadow;
   margin: 0 25px 0 auto;
   width: 30px;
   height: 30px;
@@ -43,4 +48,25 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.selected {
+  background-color: rgba(128, 128, 128, 0.342);
+}
+
+.male {
+  border: 3px solid lightblue;
+}
+
+.female {
+  border: 3px solid pink;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

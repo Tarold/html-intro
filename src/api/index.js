@@ -1,17 +1,20 @@
 import queryString from 'query-string';
-import CONFIGS, { a } from '../configs';
+import CONFIGS from '../configs';
 
 function getUsers(options) {
   const defaultOptions = {
     page: 1,
     results: CONFIGS.RESULTS_COUNT,
     seed: CONFIGS.RESULTS_ORDER,
-    inc: CONFIGS.INCLUDUNG_RESULTS,
+    inc: CONFIGS.INCLUDING_RESULTS,
   };
+
+  const excOptions = options.exc > 0 ? { inc: [] } : {};
 
   const realOptions = {
     ...defaultOptions,
     ...options,
+    ...excOptions,
   };
 
   const queryStringifiedOptions = queryString.stringify(realOptions, {

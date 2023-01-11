@@ -1,17 +1,16 @@
-import styles from './style.module.css';
 import { BsFillTrashFill } from 'react-icons/bs';
+import classNames from 'classnames';
+import styles from './UserListItem.module.scss';
 
 const UserListItem = (props) => {
-  const { name, registered, photo, inlineStyle, clickOnItem, deleteItem } =
+  const { name, registered, photo, clickOnItem, deleteItem, selected, gender } =
     props;
+  const userImg = classNames(styles.userImg, [styles[gender]]);
+  const userCard = classNames(styles.user, { [styles.selected]: selected });
 
   return (
-    <li
-      className={styles.user}
-      style={inlineStyle}
-      onClick={() => clickOnItem(name.first)}
-    >
-      <img className={styles.userImg} src={photo} alt="AvatarUser" />
+    <li className={userCard} onClick={() => clickOnItem(name.first)}>
+      <img className={userImg} src={photo} alt="AvatarUser" />
       <div className={styles.userContent}>
         <p className={styles.userName}>
           {name.title} {name.first} {name.last}
