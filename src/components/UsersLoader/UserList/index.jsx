@@ -50,7 +50,7 @@ class UserList extends Component {
 
     return (
       <UserListItem
-        key={u.name.first}
+        key={u.name.first + u.name.last}
         photo={u.picture.medium}
         name={u.name}
         gender={u.gender}
