@@ -1,4 +1,4 @@
-import ThemeSwitcher from '../ThemeSwitcher/index';
+import ThemeSwitcher from './../ThemeSwithcer';
 
 function Header() {
   return (

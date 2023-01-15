@@ -7,7 +7,7 @@ const { LIGHT, DARK, PINK } = CONSTANTS.THEME;
 
 function Footer() {
   return (
-    <ThemeContext>
+    <ThemeContext.Consumer>
       {({ theme }) => {
         const footerClassName = classNames({
           [styles.lightTheme]: theme === LIGHT,
@@ -17,7 +17,7 @@ function Footer() {
 
         return <footer className={footerClassName}>Footer</footer>;
       }}
-    </ThemeContext>
+    </ThemeContext.Consumer>
   );
 }
 

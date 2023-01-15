@@ -8,7 +8,7 @@
 import React, { Component } from 'react';
 import CONSTANTS from './constants';
 import { ThemeContext } from './contexts';
-import UserPage from './components/ThemeSwithcer/index';
+import UserPage from './pages/UserPage/index';
 import styles from './App.module.sass';
 import classNames from 'classnames';
 
@@ -27,6 +27,21 @@ class App extends Component {
   setTheme = (newTheme) => {
     this.setState({ theme: newTheme });
   };
+  componentDidMount() {
+    const storageTheme = window.localStorage.getItem('theme');
+
+    if (storageTheme) {
+      this.setState({ theme: storageTheme });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { theme } = this.state;
+
+    if (theme !== prevState.theme) {
+      window.localStorage.setItem('theme', theme);
+    }
+  }
 
   render() {
     const { theme } = this.state;
