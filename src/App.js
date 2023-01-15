@@ -8,7 +8,7 @@
 import React, { Component } from 'react';
 import CONSTANTS from './constants';
 import { ThemeContext } from './contexts';
-import UserPage from './pages/UserPage/index';
+import UserPage from './components/ThemeSwithcer/index';
 import styles from './App.module.sass';
 import classNames from 'classnames';
 

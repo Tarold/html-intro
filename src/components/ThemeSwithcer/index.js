@@ -1,27 +1,5 @@
-import React from 'react';
-import { ThemeContext } from '../../contexts';
 import CONSTANTS from '../../constants';
-
-function UserPage() {
-  return (
-    <div>
-      <Header />
-      <main>Main Content</main>
-      <Footer />
-    </div>
-  );
-}
-
-export default UserPage;
-
-//TODO Move to components
-function Header() {
-  return (
-    <header>
-      <span>Header</span> <ThemeSwitcher />
-    </header>
-  );
-}
+import ThemeContext from '../../contexts/themeContext';
 
 const { LIGHT, DARK, PINK } = CONSTANTS.THEME;
 
@@ -47,6 +25,4 @@ function ThemeSwitcher() {
   );
 }
 
-function Footer() {
-  return <footer>Footer</footer>;
-}
+export default ThemeSwitcher;
