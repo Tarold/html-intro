@@ -1,8 +1,8 @@
 import React from 'react';
-import CounterH from './components/CounterH';
+import ClickerCounter from './components/ClickerCounter';
 
 function App() {
-  return <CounterH />;
+  return <ClickerCounter />;
 }
 
 export default App;
