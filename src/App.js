@@ -4,11 +4,22 @@ import StopWatch from './components/StopWatch/index';
 import {
   BrowserRouter as Router,
   Link,
+  NavLink,
   Route,
   Switch,
   useHistory,
   useRouteMatch,
 } from 'react-router-dom';
+
+// 1 Link змінює location
+// 2 BrowserRouter підписано на зміни location
+// 3 BrowserRouter в Routes шукає Route з path, як у location (тобто як у обраного Link) і
+// 4 виводить компонент із пропа children або component
+
+// Аналогічно можна обчислючати класи для активного пункту
+const defineNavLinkStyle = (isActive) => ({
+  color: isActive ? 'green' : 'blue',
+});
 
 function App() {
   return (
@@ -16,16 +27,24 @@ function App() {
       <nav>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <NavLink exact to="/" style={defineNavLinkStyle}>
+              Home
+            </NavLink>
           </li>
           <li>
-            <Link to="/components">Components</Link>
+            <NavLink to="/components" style={defineNavLinkStyle}>
+              Components
+            </NavLink>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <NavLink to="/about" style={defineNavLinkStyle}>
+              About
+            </NavLink>
           </li>
           <li>
-            <Link to="/contacts">Contacts</Link>
+            <NavLink to="/contacts" style={defineNavLinkStyle}>
+              Contacts
+            </NavLink>
           </li>
         </ul>
       </nav>
