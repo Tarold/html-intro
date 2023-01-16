@@ -1,6 +1,15 @@
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { useEffect } from 'react';
+import Counter from './components/Counter';
+import StopWatch from './components/StopWatch/index';
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Switch,
+  useHistory,
+  useRouteMatch,
+} from 'react-router-dom';
 
-//Додати Components, Contacts
 function App() {
   return (
     <Router>
@@ -21,7 +30,10 @@ function App() {
         </ul>
       </nav>
       <Switch>
-        <Route path="/Components">
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/components">
           <Components />
         </Route>
         <Route path="/about">
@@ -30,8 +42,8 @@ function App() {
         <Route path="/contacts">
           <Contacts />
         </Route>
-        <Route path="/">
-          <Home />
+        <Route path="*">
+          <NotFound />
         </Route>
       </Switch>
     </Router>
@@ -44,8 +56,34 @@ function Home() {
   return <div>Home</div>;
 }
 
+// /components/counter
+// /components/stopwatsh
 function Components() {
-  return <div>Components</div>;
+  const { path, url } = useRouteMatch();
+
+  return (
+    <div>
+      <ol>
+        <li>
+          <Link to={`${url}/counter`}>Counter</Link>
+        </li>
+        <li>
+          <Link to={`${url}/stopwath`}>Stopwatch</Link>
+        </li>
+      </ol>
+      <Switch>
+        <Route path={`${path}/counter`}>
+          <Counter />
+        </Route>
+        <Route path={`${path}/stopwath`}>
+          <StopWatch />
+        </Route>
+        <Route path={`${path}/*`}>
+          <NotFound />
+        </Route>
+      </Switch>
+    </div>
+  );
 }
 
 function About() {
@@ -54,4 +92,14 @@ function About() {
 
 function Contacts() {
   return <div>Contacts</div>;
+}
+
+function NotFound() {
+  const history = useHistory();
+
+  useEffect(() => {
+    setTimeout(() => history.push('/'), 5000);
+  });
+
+  return <div>404 Not Found</div>;
 }
