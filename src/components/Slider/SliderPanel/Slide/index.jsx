@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import styles from './style.module.scss';
 
-export default function Slide() {
+export default function Slide({ slideStyle, slideData }) {
   return (
-    <img
-      src="https://raw.githubusercontent.com/pecourses/pe20211-react-app/ad23d3878e304b2867e308ab630d6ce4c0b26529/src/components/Carousel/Slide/question-mark.jpg"
-      alt="question-mark.jpg"
-      hidden
-    />
+    <div className={slideStyle}>
+      <img className={styles.img} src={slideData[0]} alt="photo" />
+      <span>{slideData[1]}</span>
+    </div>
   );
 }
