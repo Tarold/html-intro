@@ -3,13 +3,9 @@ import SliderPanel from './SliderPanel';
 import ControlPanel from './ControlPanel';
 
 //TODO Функционал:
-// - кнопка: nextSlide,
-// - кнопка: prevSlide,
-// - * play/pause,
-// - * input для задания задержки (by default 5s) для смены слайдов
 // - * fullscreen
 export default function Slider() {
-  const [delay, setDelay] = useState(5000);
+  const [delay, setDelay] = useState(5);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPlay, setIsPlay] = useState(true);
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -26,6 +22,16 @@ export default function Slider() {
     setIsPlay((isPLay) => !isPLay);
   };
 
+  useEffect(() => {
+    let id;
+    if (isPlay) {
+      id = setTimeout(nextSlide, delay * 1000);
+    }
+    return () => {
+      clearTimeout(id);
+    };
+  });
+
   const toggleFullScreen = () => {
     setIsFullScreen((isFullScreen) => !isFullScreen);
   };
@@ -35,7 +41,7 @@ export default function Slider() {
   };
   return (
     <>
-      <SliderPanel count={currentSlide} />
+      <SliderPanel count={currentSlide} isFullScreen={isFullScreen} />
       <ControlPanel
         nextSlide={nextSlide}
         prevSlide={prevSlide}

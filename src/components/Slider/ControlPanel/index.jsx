@@ -14,7 +14,12 @@ export default function index({
       <button onClick={() => nextSlide()}>nextSlide</button>
       <button onClick={() => togglePlay()}>togglePlay</button>
       <button onClick={() => toggleFullScreen()}>toggleFullScreen</button>
-      <input type="number" onChange={(e) => eventHandler(e)} value={delay} />
+      <input
+        type="number"
+        min="1"
+        onChange={(e) => eventHandler(e)}
+        value={delay}
+      />
     </div>
   );
 }

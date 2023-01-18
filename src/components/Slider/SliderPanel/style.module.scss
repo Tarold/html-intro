@@ -1,31 +1,37 @@
+@import './../../../common/style/slider';
+
 .prevSlide,
 .nextSlide,
 .slide {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 1000px;
-  height: 800px;
-  transition: all 0.2s;
+  width: $slider-width;
+  height: $slider-height;
+  transition: all 0.5s;
 }
 .prevSlide {
-  right: 1000px;
+  right: $slider-width;
   z-index: 0;
 }
 .nextSlide {
-  right: -1000px;
+  right: -$slider-width;
   z-index: 0;
 }
 .slide {
   right: 0;
-  z-index: 1;
+  z-index: 2;
 }
 
 .sliderPanel {
   position: relative;
-
-  width: 1000px;
-  height: 800px;
+  width: $slider-width;
+  height: $slider-height;
   background-color: grey;
   overflow: hidden;
+  display: flex;
+}
+
+.fullscreen {
+  margin: auto;
 }

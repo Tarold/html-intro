@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Slider from './Slide';
+import classNames from 'classnames';
 import GetData from './../../../api';
 import styles from './style.module.scss';
 
-export default function SliderPanel({ count }) {
+export default function SliderPanel({ count, isFullScreen }) {
   const [countOld, setCountOld] = useState(0);
   const [slidesStyles, setSlidesStyles] = useState([
     styles.prevSlide,
@@ -13,24 +14,45 @@ export default function SliderPanel({ count }) {
   const [slidesData, setSlidesData] = useState([{}, {}, {}]);
 
   const moveSlides = (way) => {
-    //TODO двигать не стили. а двигать переменньіе для стилей
     if (way > 0) {
-      GetData().then((slideData) =>
-        setSlidesData((data) => [slideData, data[0], data[1]])
-      );
-      setSlidesStyles((slides) => [slides[2], slides[0], slides[1]]); //next slide
+      //next slide
+      setSlidesStyles((slidesStyles) => [
+        slidesStyles[2],
+        slidesStyles[0],
+        slidesStyles[1],
+      ]);
+      slidesStyles.forEach((value, index) => {
+        if (value.includes('prevSlide')) {
+          GetData().then((data) => {
+            const newData = [...slidesData];
+            newData[index] = data;
+            setSlidesData(newData);
+          });
+        }
+      });
     } else if (way < 0) {
-      GetData().then((slideData) =>
-        setSlidesData((data) => [slideData, data[1], data[2]])
-      );
-      setSlidesStyles((slides) => [slides[1], slides[2], slides[0]]); //prev slide
+      //prev slide
+      setSlidesStyles((slidesStyles) => [
+        slidesStyles[1],
+        slidesStyles[2],
+        slidesStyles[0],
+      ]);
+      slidesStyles.forEach((value, index) => {
+        if (value.includes('nextSlide')) {
+          GetData().then((data) => {
+            const newData = [...slidesData];
+            newData[index] = data;
+            setSlidesData(newData);
+          });
+        }
+      });
     }
   };
   useEffect(() => {
-    async function fetchData() {
+    const getAllData = async () => {
       setSlidesData([await GetData(), await GetData(), await GetData()]);
-    }
-    fetchData();
+    };
+    getAllData();
   }, []);
 
   useEffect(() => {
@@ -38,11 +60,20 @@ export default function SliderPanel({ count }) {
     setCountOld(count);
   }, [count]);
 
-  return (
-    <div className={styles.sliderPanel}>
-      <Slider slideStyle={slidesStyles[0]} slideData={slidesData[0]} />
-      <Slider slideStyle={slidesStyles[1]} slideData={slidesData[1]} />
-      <Slider slideStyle={slidesStyles[2]} slideData={slidesData[2]} />
-    </div>
-  );
+  const setSlide = (data, index) => {
+    return (
+      <Slider
+        slideStyle={data}
+        slideData={slidesData[index]}
+        key={'dog' + index}
+      />
+    );
+  };
+
+  const sliderClass = classNames([styles.sliderPanel], {
+    [styles.fullscreen]: isFullScreen,
+  }); //TODO нормально Fullscreen
+  //спитать а не чи потрібно його в set state
+
+  return <div className={sliderClass}>{slidesStyles.map(setSlide)}</div>;
 }
