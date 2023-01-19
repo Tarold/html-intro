@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import GetData from './../../../api';
 import styles from './style.module.scss';
 
-export default function SliderPanel({ count, isFullScreen }) {
+export default function SliderPanel({ count, isFullScreen, ...ControlPanel }) {
   const [countOld, setCountOld] = useState(0);
   const [slidesStyles, setSlidesStyles] = useState([
     styles.prevSlide,
@@ -61,19 +61,37 @@ export default function SliderPanel({ count, isFullScreen }) {
   }, [count]);
 
   const setSlide = (data, index) => {
+    const slideStyle = classNames(
+      {
+        [data + ' ' + styles.fullscreen]: isFullScreen,
+      },
+      {
+        [data]: !isFullScreen,
+      }
+    );
     return (
       <Slider
-        slideStyle={data}
+        slideStyle={slideStyle}
         slideData={slidesData[index]}
         key={'dog' + index}
+        isFullScreen={isFullScreen}
       />
     );
   };
 
-  const sliderClass = classNames([styles.sliderPanel], {
-    [styles.fullscreen]: isFullScreen,
-  }); //TODO нормально Fullscreen
-  //спитать а не чи потрібно його в set state
+  const sliderClass = classNames(
+    {
+      [styles.sliderPanel + ' ' + styles.fullscreen]: isFullScreen,
+    },
+    {
+      [styles.sliderPanel]: !isFullScreen,
+    }
+  );
 
-  return <div className={sliderClass}>{slidesStyles.map(setSlide)}</div>;
+  return (
+    <div className={sliderClass}>
+      {slidesStyles.map(setSlide)}
+      {ControlPanel.children}
+    </div>
+  );
 }

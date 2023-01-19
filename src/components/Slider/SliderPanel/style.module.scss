@@ -8,19 +8,34 @@
   bottom: 0;
   width: $slider-width;
   height: $slider-height;
-  transition: all 0.5s;
+
+  &.fullscreen {
+    width: $slider-full-width;
+    height: $slider-full-height;
+  }
 }
 .prevSlide {
   right: $slider-width;
   z-index: 0;
+  transition: right 0.5s, left 0.5s, z-index 0.5s cubic-bezier(0, -0.6, 1, -0.6);
+  &.fullscreen {
+    right: $slider-full-width;
+  }
 }
 .nextSlide {
   right: -$slider-width;
   z-index: 0;
+  transition: right 0.5s, left 0.5s, z-index 0.5s cubic-bezier(0, -0.6, 1, -0.6);
+  &.fullscreen {
+    right: -$slider-full-width;
+  }
 }
+
 .slide {
   right: 0;
   z-index: 2;
+  transition: right 0.5s, left 0.5s,
+    z-index 0.5s cubic-bezier(0, 1.115, 0.34, 1.65);
 }
 
 .sliderPanel {
@@ -30,8 +45,9 @@
   background-color: grey;
   overflow: hidden;
   display: flex;
-}
-
-.fullscreen {
-  margin: auto;
+  &.fullscreen {
+    margin: auto;
+    width: $slider-full-width;
+    height: $slider-full-height;
+  }
 }

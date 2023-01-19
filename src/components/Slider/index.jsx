@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import SliderPanel from './SliderPanel';
 import ControlPanel from './ControlPanel';
+import styles from './style.module.scss';
+import classNames from 'classnames';
 
-//TODO Функционал:
-// - * fullscreen
 export default function Slider() {
   const [delay, setDelay] = useState(5);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -39,17 +39,27 @@ export default function Slider() {
   const eventHandler = (e) => {
     setDelay(e.target.value);
   };
+
+  const sliderContainerClass = classNames(
+    {
+      [styles.sliderContainer + ' ' + styles.fullscreen]: isFullScreen,
+    },
+    {
+      [styles.sliderContainer]: !isFullScreen,
+    }
+  );
   return (
-    <>
-      <SliderPanel count={currentSlide} isFullScreen={isFullScreen} />
-      <ControlPanel
-        nextSlide={nextSlide}
-        prevSlide={prevSlide}
-        togglePlay={togglePlay}
-        toggleFullScreen={toggleFullScreen}
-        delay={delay}
-        eventHandler={eventHandler}
-      />
-    </>
+    <div className={sliderContainerClass}>
+      <SliderPanel count={currentSlide} isFullScreen={isFullScreen}>
+        <ControlPanel
+          nextSlide={nextSlide}
+          prevSlide={prevSlide}
+          togglePlay={togglePlay}
+          toggleFullScreen={toggleFullScreen}
+          delay={delay}
+          eventHandler={eventHandler}
+        />
+      </SliderPanel>
+    </div>
   );
 }

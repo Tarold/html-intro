@@ -1,0 +1,7 @@
+.sliderContainer {
+  position: relative;
+  height: 100vh;
+  &.fullscreen {
+    display: flex;
+  }
+}

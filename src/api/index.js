@@ -22,7 +22,7 @@ function getCaption(isFact) {
 
 function getDog() {
   const { BASE_URL } = CONFIGS.DOG;
-  //TODO Indicate whether to send a cookie in a cross-site request by specifying its SameSite attribute
+
   return fetch(`${BASE_URL}`)
     .then((response) => response.json())
     .then((data) => data.message)
