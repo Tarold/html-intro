@@ -48,6 +48,7 @@ export default function SliderPanel({ count, isFullScreen, ...ControlPanel }) {
         }
       });
     }
+    setCountOld(count);
   };
   useEffect(() => {
     const getAllData = async () => {
@@ -58,7 +59,6 @@ export default function SliderPanel({ count, isFullScreen, ...ControlPanel }) {
 
   useEffect(() => {
     moveSlides(count - countOld);
-    setCountOld(count);
   }, [count]);
 
   const setSlide = (data, index) => {

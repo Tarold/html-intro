@@ -7,7 +7,7 @@ export default function Slide({ slideStyle, slideData }) {
     <div className={slideStyle}>
       <div className={styles.slideContainer}>
         <span className={styles.caption}>{slideData[1]}</span>
-        <img className={styles.img} src={slideData[0]} alt="photo" />
+        <img alt="dogPhoto" className={styles.img} src={slideData[0]} />
       </div>
     </div>
   );
