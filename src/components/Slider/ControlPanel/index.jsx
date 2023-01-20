@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './style.module.scss';
 import ToggleButton from './ToggleButton';
+import Button from './Button';
+
 export default function index({
   nextSlide,
   prevSlide,
@@ -11,9 +13,11 @@ export default function index({
 }) {
   return (
     <div className={styles.controlPanel}>
-      <button className={styles.slidePrevButton} onClick={() => prevSlide()}>
-        prevSlide
-      </button>
+      <Button
+        className={styles.slidePrevButton}
+        icon="arrow-left"
+        onClick={() => prevSlide()}
+      />
       <div className={styles.controlPlay}>
         <ToggleButton
           onClick={() => togglePlay()}
@@ -23,13 +27,16 @@ export default function index({
         <input
           type="number"
           min="1"
+          max="60"
           onChange={(e) => eventHandler(e)}
           value={delay}
         />
       </div>
-      <button className={styles.slideNextButton} onClick={() => nextSlide()}>
-        nextSlide
-      </button>
+      <Button
+        className={styles.slideNextButton}
+        icon="arrow-right"
+        onClick={() => nextSlide()}
+      />
       <ToggleButton
         className={styles.fullscreenButton}
         onClick={() => toggleFullScreen()}

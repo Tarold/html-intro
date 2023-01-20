@@ -6,9 +6,11 @@ import {
   faPlay,
   faMaximize,
   faMinimize,
+  faArrowLeft,
+  faArrowRight,
 } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faPause, faPlay, faMaximize, faMinimize);
+library.add(faPause, faPlay, faMaximize, faMinimize, faArrowLeft, faArrowRight);
 
 export default function App() {
   return <Slider />;

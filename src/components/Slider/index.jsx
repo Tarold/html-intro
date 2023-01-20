@@ -4,6 +4,7 @@ import ControlPanel from './ControlPanel';
 import styles from './style.module.scss';
 import classNames from 'classnames';
 
+//TODO таймер на возможность следующего перелистьівания
 export default function Slider() {
   const [delay, setDelay] = useState(5);
   const [currentSlide, setCurrentSlide] = useState(0);

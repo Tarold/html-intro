@@ -17,7 +17,7 @@ function getCaption(isFact) {
         console.log(`error ${err}`);
       });
   }
-  return RandomSentence({ min: 10, max: 20 });
+  return RandomSentence({ words: 10 });
 }
 
 function getDog() {
