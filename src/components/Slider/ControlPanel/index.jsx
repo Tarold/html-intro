@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './style.module.scss';
-
+import ToggleButton from './ToggleButton';
 export default function index({
   nextSlide,
   prevSlide,
@@ -15,7 +15,11 @@ export default function index({
         prevSlide
       </button>
       <div className={styles.controlPlay}>
-        <button onClick={() => togglePlay()}>togglePlay</button>
+        <ToggleButton
+          onClick={() => togglePlay()}
+          firstIcon="play"
+          secondIcon="pause"
+        />
         <input
           type="number"
           min="1"
@@ -26,12 +30,12 @@ export default function index({
       <button className={styles.slideNextButton} onClick={() => nextSlide()}>
         nextSlide
       </button>
-      <button
+      <ToggleButton
         className={styles.fullscreenButton}
         onClick={() => toggleFullScreen()}
-      >
-        toggleFullScreen
-      </button>
+        firstIcon="minimize"
+        secondIcon="maximize"
+      />
     </div>
   );
 }
