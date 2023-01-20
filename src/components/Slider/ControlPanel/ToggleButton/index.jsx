@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function ToggleButton({
@@ -23,3 +24,10 @@ export default function ToggleButton({
     </>
   );
 }
+
+ToggleButton.propTypes = {
+  className: PropTypes.string,
+  onClick: PropTypes.func,
+  firstIcon: PropTypes.string,
+  secondIcon: PropTypes.string,
+};

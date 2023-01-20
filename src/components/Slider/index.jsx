@@ -4,21 +4,23 @@ import ControlPanel from './ControlPanel';
 import styles from './style.module.scss';
 import classNames from 'classnames';
 
-//TODO таймер на возможность следующего перелистьівания таймекр >=1
 //TODO сделать типо карточки
-//TODO старт слайдера покрасивше
 export default function Slider() {
   const [delay, setDelay] = useState(5);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPlay, setIsPlay] = useState(true);
+  const [isFlipThrough, setIsFlipThrough] = useState(false);
+
   const [isFullScreen, setIsFullScreen] = useState(false);
 
   const nextSlide = () => {
     setCurrentSlide((currentSlide) => currentSlide + 1);
+    setIsFlipThrough(true);
   };
 
   const prevSlide = () => {
     setCurrentSlide((currentSlide) => currentSlide - 1);
+    setIsFlipThrough(true);
   };
 
   const togglePlay = () => {
@@ -27,11 +29,18 @@ export default function Slider() {
 
   useEffect(() => {
     let id;
+    let idFlip;
     if (isPlay) {
       id = setTimeout(nextSlide, delay * 1000);
     }
+    if (isFlipThrough) {
+      idFlip = setTimeout(() => {
+        setIsFlipThrough(false);
+      }, 500);
+    }
     return () => {
       clearTimeout(id);
+      clearTimeout(idFlip);
     };
   });
 
@@ -40,7 +49,8 @@ export default function Slider() {
   };
 
   const eventHandler = (e) => {
-    setDelay(e.target.value);
+    const value = e.target.value >= 1 ? e.target.value : 1;
+    setDelay(value);
   };
 
   const sliderContainerClass = classNames(
@@ -52,17 +62,22 @@ export default function Slider() {
     }
   );
   return (
-    <div className={sliderContainerClass}>
-      <SliderPanel count={currentSlide} isFullScreen={isFullScreen}>
-        <ControlPanel
-          nextSlide={nextSlide}
-          prevSlide={prevSlide}
-          togglePlay={togglePlay}
-          toggleFullScreen={toggleFullScreen}
-          delay={delay}
-          eventHandler={eventHandler}
-        />
-      </SliderPanel>
+    <div className={styles.siteSection}>
+      <h1>Cool Slider</h1>
+      <p>with cool dogs</p>
+      <div className={sliderContainerClass}>
+        <SliderPanel count={currentSlide} isFullScreen={isFullScreen}>
+          <ControlPanel
+            nextSlide={nextSlide}
+            prevSlide={prevSlide}
+            togglePlay={togglePlay}
+            toggleFullScreen={toggleFullScreen}
+            isFlipThrough={isFlipThrough}
+            delay={delay}
+            eventHandler={eventHandler}
+          />
+        </SliderPanel>
+      </div>
     </div>
   );
 }

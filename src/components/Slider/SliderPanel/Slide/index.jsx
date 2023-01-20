@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import styles from './style.module.scss';
-//TODO PropTypes
+
 export default function Slide({ slideStyle, slideData }) {
   return (
     <div className={slideStyle}>
@@ -13,3 +12,8 @@ export default function Slide({ slideStyle, slideData }) {
     </div>
   );
 }
+
+Slide.propTypes = {
+  slideStyle: PropTypes.string,
+  slideData: PropTypes.arrayOf(PropTypes.string),
+};

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Slider from './Slide';
 import classNames from 'classnames';
 import GetData from './../../../api';
+import PropTypes from 'prop-types';
 import styles from './style.module.scss';
 
 export default function SliderPanel({ count, isFullScreen, ...ControlPanel }) {
@@ -11,7 +12,7 @@ export default function SliderPanel({ count, isFullScreen, ...ControlPanel }) {
     styles.slide,
     styles.nextSlide,
   ]);
-  const [slidesData, setSlidesData] = useState([{}, {}, {}]);
+  const [slidesData, setSlidesData] = useState([[], [], []]);
 
   const moveSlides = (way) => {
     if (way > 0) {
@@ -95,3 +96,9 @@ export default function SliderPanel({ count, isFullScreen, ...ControlPanel }) {
     </div>
   );
 }
+
+SliderPanel.propTypes = {
+  count: PropTypes.number,
+  isFullScreen: PropTypes.bool,
+  ControlPanel: PropTypes.element,
+};
