@@ -4,7 +4,9 @@ import ControlPanel from './ControlPanel';
 import styles from './style.module.scss';
 import classNames from 'classnames';
 
-//TODO таймер на возможность следующего перелистьівания
+//TODO таймер на возможность следующего перелистьівания таймекр >=1
+//TODO сделать типо карточки
+//TODO старт слайдера покрасивше
 export default function Slider() {
   const [delay, setDelay] = useState(5);
   const [currentSlide, setCurrentSlide] = useState(0);
