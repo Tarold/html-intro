@@ -1,5 +1,5 @@
-import PhonesLoadedList from './components/PhonesLoadedList';
+import UserInfoForm from './components/UserInfoForm';
 
 export default function App() {
-  return <PhonesLoadedList url="/data/phones.json" />;
+  return <UserInfoForm />;
 }
