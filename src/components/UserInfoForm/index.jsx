@@ -1,10 +1,6 @@
-import { ErrorMessage, Formik } from 'formik';
-import * as yup from 'yup';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React from 'react';
-
-const USER_VALIDATION_SCHEME = yup.object({
-  firstName: yup.string().trim().min(2).max(64).required(),
-});
+import { USER_VALIDATION_SCHEME } from '../../utils/validate/validationSchemas';
 
 export default function UserInfoForm() {
   const userInitialValues = { firstName: '' };
@@ -20,25 +16,17 @@ export default function UserInfoForm() {
       validationSchema={USER_VALIDATION_SCHEME}
     >
       {(formikProps) => (
-        <form
-          onSubmit={formikProps.handleSubmit}
-          onReset={formikProps.handleReset}
-        >
-          <input
-            type="text"
-            name="firstName"
-            value={formikProps.values.firstName}
-            onChange={formikProps.handleChange}
-            placeholder="name"
-          />
-          {formikProps.errors.firstName && (
-            <div>{formikProps.errors.firstName}</div>
-          )}
+        <Form>
+          <label>
+            <span>Name:</span>
+            <Field type="text" name="firstName" placeholder="name" />
+            <ErrorMessage name="firstName" component="span" />
+          </label>
           <button type="submit">Save</button>
           <button type="reset" disabled={!formikProps.dirty}>
             Cancel
           </button>
-        </form>
+        </Form>
       )}
     </Formik>
   );
