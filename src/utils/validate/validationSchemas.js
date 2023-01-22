@@ -1,20 +1,12 @@
 import * as yup from 'yup';
 
-export const USER_VALIDATION_SCHEME = yup.object({
-  firstName: yup.string().trim().min(2).max(64).required(),
-});
-
-const USER_SCHEMA = yup.object({
-  carNumber: yup
+export const CONTACT_VALIDATION_SCHEMA = yup.object({
+  name: yup.string().trim().min(2).max(64).required(),
+  phone: yup
     .string()
-    .length(8)
-    .matches(/^[A-Z][A-Z]/)
-    .matches(/[0-9]{4}/)
-    .matches(/[A-Z][A-Z]$/),
+    .length(13)
+    .matches(/^\+\d{12}$/, 'Phone number must correspond pattern +111111111111')
+    .required(),
+  email: yup.string().email(),
+  birthday: yup.date().max(new Date()),
 });
-
-USER_SCHEMA.validate({
-  carNumber: 'AA0000AA',
-})
-  .then((data) => console.log(data))
-  .catch((e) => console.log('e :>> ', e));
