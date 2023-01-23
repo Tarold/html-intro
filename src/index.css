@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+#root {
+  min-height: 100vh;
+}
+
 * {
   box-sizing: border-box;
 }
