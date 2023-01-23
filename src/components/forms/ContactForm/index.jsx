@@ -4,7 +4,7 @@ import { CONTACT_VALIDATION_SCHEMA } from '../../../utils/validate/validationSch
 
 // Name, Tel, Email, Birthday
 
-function ContactForm() {
+function ContactForm () {
   const initialValues = { name: '', phone: '', email: '', birthday: '' };
 
   const handleSubmit = (values, formikBag) => {
@@ -19,7 +19,7 @@ function ContactForm() {
       onSubmit={handleSubmit}
       validationSchema={CONTACT_VALIDATION_SCHEMA}
     >
-      {(formikProps) => {
+      {formikProps => {
         return <Form></Form>;
       }}
     </Formik>
