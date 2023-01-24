@@ -1,14 +1,23 @@
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import { LOGIN_SCHEMA } from './../../utils/validate/validationSchemas.js';
 import styles from './LoginPage.module.scss';
+import { Link } from 'react-router-dom';
+import Input from './../../components/forms/Input';
 
-export default function index () {
+export default function LoginPage () {
   const userInitialValues = { email: '', password: '' };
 
   const handleSubmit = (values, formikBag) => {
     console.log('values :>> ', values);
     formikBag.resetForm();
+  };
+
+  const classes = {
+    error: styles.error,
+    input: styles.input,
+    valid: styles.valid,
+    invalid: styles.invalid,
   };
   return (
     <Formik
@@ -16,18 +25,44 @@ export default function index () {
       validationSchema={LOGIN_SCHEMA}
       onSubmit={handleSubmit}
     >
-      {({ isSubmitting }) => (
-        <Form className={styles.Form}>
-          <h2>LOGIN TO YOUR ACCOUNT</h2>
-          <Field type='email' name='email' placeholder='Email address' />
-          <ErrorMessage name='email' component='div' />
-          <Field type='password' name='password' placeholder='Password' />
-          <ErrorMessage name='password' component='div' />
-          <button type='submit' disabled={isSubmitting}>
-            LOGIN
-          </button>
-        </Form>
-      )}
+      {({ isSubmitting }) => {
+        return (
+          <Form className={styles.form}>
+            <h2 className={styles.formTitle}>LOGIN TO YOUR ACCOUNT</h2>
+            <Input
+              label=''
+              type='email'
+              name='email'
+              placeholder='Email address'
+              autoFocus
+              classes={classes}
+            />
+            <Input
+              label=''
+              type='password'
+              name='password'
+              placeholder='Password'
+              classes={classes}
+            />
+            <div className={styles.oneLineDiv}>
+              <label className={styles.checkbox}>
+                <Field type='checkbox' name='rememberMe' />
+                Remember Me
+              </label>
+              <Link to='/forgot-password' className={styles.forgotPassword}>
+                Forgot Password
+              </Link>
+            </div>
+            <button
+              type='submit'
+              disabled={isSubmitting}
+              className={styles.button}
+            >
+              LOGIN
+            </button>
+          </Form>
+        );
+      }}
     </Formik>
   );
 }
