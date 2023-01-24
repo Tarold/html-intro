@@ -19,6 +19,9 @@ function App () {
           <Route path='/forgot_password'>
             <h1>Reset Password</h1>
           </Route>
+          <Route path='/Terms&Conditions'>
+            <h1>/Terms&Conditions</h1>
+          </Route>
           <Route path='*'>
             <h1>Error 404</h1>
           </Route>

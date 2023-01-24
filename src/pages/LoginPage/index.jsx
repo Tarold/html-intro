@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Input from './../../components/forms/Input';
 
 export default function LoginPage () {
-  const userInitialValues = { email: '', password: '' };
+  const userInitialValues = { email: '', password: '', rememberMe: false };
 
   const handleSubmit = (values, formikBag) => {
     console.log('values :>> ', values);
@@ -46,10 +46,13 @@ export default function LoginPage () {
               classes={classes}
             />
             <div className={styles.oneLineDiv}>
-              <label className={styles.checkbox}>
-                <Field type='checkbox' name='rememberMe' />
-                Remember Me
-              </label>
+              <Input
+                label='Remember Me'
+                type='checkbox'
+                name='rememberMe'
+                classes={classes}
+                className={styles.checkbox}
+              />
               <Link to='/forgot-password' className={styles.forgotPassword}>
                 Forgot Password
               </Link>

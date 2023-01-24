@@ -1,0 +1,22 @@
+@import './../../common/style/input-stylesheet.scss';
+
+.inputSection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.form > .checkbox {
+  margin: 0 auto 10px auto;
+}
+.temps {
+  font-size: 22px;
+  margin: 10px auto;
+  display: flex;
+  gap: 10px;
+}
+
+.temps > a {
+  color: inherit;
+  text-underline-offset: 4px;
+}

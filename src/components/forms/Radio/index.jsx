@@ -1,9 +1,10 @@
 import classNames from 'classnames';
 import { Field } from 'formik';
 import React from 'react';
+import styles from './Radio.module.scss';
 
 export default function Input (props) {
-  const { name, label, classes, className, ...restProps } = props;
+  const { name, label, classes, caption, ...restProps } = props;
 
   return (
     <Field name={name}>
@@ -13,9 +14,12 @@ export default function Input (props) {
           [classes.invalid]: meta.error && meta.touched,
         });
         return (
-          <label className={!!className ? className : ''}>
+          <label className={styles.radio}>
             <input className={inputClassNames} {...restProps} {...field} />
-            <span>{label} </span>
+            <div className={styles.radioText}>
+              <span className={styles.radioLabel}>{label} </span>
+              <span className={styles.radioCaption}>{caption}</span>
+            </div>
 
             {meta.error && meta.touched && (
               <span className={classes.error}>{meta.error}</span>
