@@ -42,6 +42,7 @@ export default function LoginPage () {
               type='password'
               name='password'
               placeholder='Password'
+              autoComplete='on'
               classes={classes}
             />
             <div className={styles.oneLineDiv}>

@@ -1,3 +1,5 @@
+$light-green: #28d2d0;
+
 .form {
   display: flex;
   flex-direction: column;
@@ -48,7 +50,7 @@
   font-size: 22px;
 }
 .valid {
-  background-color: aquamarine;
+  border: 3px solid $light-green;
 }
 .invalid {
   border: 3px solid red;
@@ -81,7 +83,7 @@
 }
 
 .button {
-  background-color: #28d2d0;
+  background-color: $light-green;
   -moz-transition: all 0.05s ease-in;
   -o-transition: all 0.05s ease-in;
   -webkit-transition: all 0.05s ease-in;
