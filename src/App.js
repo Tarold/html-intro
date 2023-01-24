@@ -16,7 +16,7 @@ function App () {
           </Route>
           <Route path='/login' component={LoginPage} />
           <Route path='/singup' component={SingupPage} />
-          <Route path='/forgot_password'>
+          <Route path='/forgot-password'>
             <h1>Reset Password</h1>
           </Route>
           <Route path='/Terms&Conditions'>

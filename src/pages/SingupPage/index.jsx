@@ -15,6 +15,7 @@ export default function LoginPage () {
     password: '',
     passwordConfirm: '',
     joinAs: '',
+    allowSquadhelp: false,
   };
 
   const handleSubmit = (values, formikBag) => {
@@ -84,6 +85,7 @@ export default function LoginPage () {
             </div>
             <Radio
               type='radio'
+              id='radio1'
               name='joinAs'
               value='AsBuyer'
               label='Join As a Buyer'
@@ -92,16 +94,18 @@ export default function LoginPage () {
             />
             <Radio
               type='radio'
+              id='radio2'
               name='joinAs'
               value='AsSeller'
               label='Join As a Creative or Marketplace Seller'
               caption='I plan to submit name ideas, Logo designs or sell names in Domain Marketplace.'
+              warning={false}
               classes={classes}
             />
             <Input
               label='Allow Squadhelp to send marketing/promotional offers from time to time'
               type='checkbox'
-              name='rememberMe'
+              name='allowSquadhelp'
               className={styles.checkbox}
               classes={classes}
             />

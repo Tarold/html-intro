@@ -12,6 +12,7 @@ export const SINGUP_SCHEMA = yup.object({
     .string()
     .oneOf([yup.ref('password'), null], 'Passwords must match')
     .required(),
+  joinAs: yup.string().required('A radio option is required'),
 });
 
 export const LOGIN_SCHEMA = yup.object({

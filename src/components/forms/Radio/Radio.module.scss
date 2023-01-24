@@ -1,12 +1,24 @@
 .radio {
-  border: 1px solid white;
-  padding: 10px;
+  position: relative;
+  padding: 10px 0;
   margin-top: 10px;
   display: flex;
   gap: 10px;
+  &:before {
+    content: ' ';
+    position: absolute;
+    top: 5px;
+    left: 0;
+    right: 0;
+    bottom: 5px;
+    border: 1px solid white;
+    border-radius: 4px;
+  }
 }
+
 .radio ~ .radio {
   margin-top: 0;
+  margin-bottom: 35px;
 }
 .radioText {
   display: flex;

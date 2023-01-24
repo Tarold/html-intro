@@ -14,7 +14,12 @@ export default function Input (props) {
         });
         return (
           <label className={!!className ? className : ''}>
-            <input className={inputClassNames} {...restProps} {...field} />
+            <input
+              className={inputClassNames}
+              checked={field.value}
+              {...restProps}
+              {...field}
+            />
             <span>{label} </span>
 
             {meta.error && meta.touched && (
