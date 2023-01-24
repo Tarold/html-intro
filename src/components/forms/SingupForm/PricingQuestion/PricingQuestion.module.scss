@@ -1,0 +1,45 @@
+%textFormat {
+  margin-top: 10px;
+  margin-bottom: 0;
+  line-height: 30px;
+  padding: 0;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.container {
+  display: flex;
+  max-width: 1300px;
+  padding: 20px 0 50px;
+  position: relative;
+  margin: 0 auto;
+}
+.column,
+.pricingQuestion {
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+  font-size: 20px;
+  flex: 1 0 50%;
+  min-width: 350px;
+  padding: 0 48px;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+  flex: 1 0 50%;
+  min-width: 350px;
+  padding: 0 48px;
+  box-sizing: border-box;
+
+  & > h4 {
+    @extend %textFormat;
+  }
+  & > p {
+    @extend %textFormat;
+    color: #9ca8b7;
+    & > a {
+      color: inherit;
+    }
+  }
+}

@@ -12,7 +12,6 @@ export default function Input (props) {
           [classes.valid]: !meta.error && meta.touched,
           [classes.invalid]: meta.error && meta.touched,
         });
-        console.log(field, meta, restProps);
         return (
           <label className={styles.radio}>
             <input
