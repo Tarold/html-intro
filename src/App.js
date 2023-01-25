@@ -1,8 +1,7 @@
-import React from 'react';
-import ContactPage from './pages/ContactPage';
+import Counter from './components/Counter';
 
 function App () {
-  return <ContactPage />;
+  return <Counter />;
 }
 
 export default App;
