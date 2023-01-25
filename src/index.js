@@ -3,8 +3,24 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, createSlice } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
+
+const counterSlice = createSlice({
+  name: 'counter',
+  initialState: { count: 0 },
+  reducers: {
+    decrement: state => {
+      state.count = state.count - 1;
+    },
+    increment: state => {
+      state.count = state.count + 1;
+    },
+  },
+});
+
+const { reducer, actions } = counterSlice;
+export const { decrement, increment } = actions;
 
 const store = configureStore({ reducer });
 
