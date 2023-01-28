@@ -3,27 +3,11 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { configureStore, createSlice } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
+import store from './store';
 
-const counterSlice = createSlice({
-  name: 'counter',
-  initialState: { count: 0 },
-  reducers: {
-    decrement: state => {
-      state.count = state.count - 1;
-    },
-    increment: state => {
-      state.count = state.count + 1;
-    },
-  },
-});
-
-const { reducer, actions } = counterSlice;
-export const { decrement, increment } = actions;
-
-const store = configureStore({ reducer });
-
+//* Компонент Provider з обов'язковим пропом store
+//* прокидує вниз по дереву компонентів можливість для доступу до стану
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
