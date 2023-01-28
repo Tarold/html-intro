@@ -24,7 +24,7 @@ function Counter (props) {
 }
 
 function mapStateToProps (state) {
-  return state;
+  return state.counter;
 }
 
 function mapDispatchToProps (dispatch) {
