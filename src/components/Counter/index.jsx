@@ -4,7 +4,7 @@ import {
   decrement,
   increment,
   setStep,
-} from './../../store/slices/counterSlice';
+} from './../../store/slices/contactsSlice';
 
 function Counter (props) {
   const { count, step, decrementCount, incrementCount, setNewStep } = props;
