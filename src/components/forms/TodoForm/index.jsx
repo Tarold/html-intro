@@ -5,6 +5,7 @@ import Input from '../Input';
 import { createTodo } from '../../../store/slices/todoSlice';
 import { TODO_VALIDATION_SCHEMA } from '../../../utils/validate/validationSchemas';
 import styles from './../../../common/style/formStylesheet.module.scss';
+import formStyles from './TodoForm.module.scss';
 
 function TodoForm ({ createNewTodo }) {
   const initialValues = { task: '' };
@@ -33,8 +34,11 @@ function TodoForm ({ createNewTodo }) {
           placeholder='Enter todo here'
           autoFocus
           classes={classes}
+          className={formStyles.inputTodo}
         />
-        <button type='submit'>Submit</button>
+        <button className={formStyles.submitTodo} type='submit'>
+          Submit
+        </button>
       </Form>
     </Formik>
   );

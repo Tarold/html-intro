@@ -6,7 +6,7 @@ import { editTodo } from '../../../store/slices/todoSlice';
 import { TODO_VALIDATION_SCHEMA } from '../../../utils/validate/validationSchemas';
 import styles from './../../../common/style/formStylesheet.module.scss';
 
-function TodoForm ({ editTodo, task, index, closeEdit }) {
+function TodoForm ({ editTodo, task, index, closeEdit, buttonStyle }) {
   const initialValues = { task: task };
 
   const handleSubmit = (values, formikBag) => {
@@ -35,7 +35,9 @@ function TodoForm ({ editTodo, task, index, closeEdit }) {
           autoFocus
           classes={classes}
         />
-        <button type='submit'>Submit</button>
+        <button type='submit' className={buttonStyle}>
+          Submit
+        </button>
       </Form>
     </Formik>
   );

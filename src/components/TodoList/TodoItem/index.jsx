@@ -14,15 +14,23 @@ export const TodoItem = ({ toggleCompleted, removeTodo, ...props }) => {
   return (
     <li className={styles.todo}>
       <input
+        className={styles.checkbox}
         type='checkbox'
         checked={item.completed}
         onChange={() => toggleCompleted(index)}
       />
       {!isEdit && (
         <>
-          <span>{item.task}</span>
-          <button onClick={toogleSetIsEdit}>Edit</button>
-          <button onClick={() => removeTodo(index)}>Remove</button>
+          <span className={styles.todoTask}>{item.task}</span>
+          <button className={styles.greenButton} onClick={toogleSetIsEdit}>
+            Edit
+          </button>
+          <button
+            className={styles.redButton}
+            onClick={() => removeTodo(index)}
+          >
+            Remove
+          </button>
         </>
       )}
       {isEdit && (
@@ -32,8 +40,11 @@ export const TodoItem = ({ toggleCompleted, removeTodo, ...props }) => {
             task={item.task}
             index={index}
             closeEdit={toogleSetIsEdit}
+            buttonStyle={styles.greenButton}
           />
-          <button onClick={toogleSetIsEdit}>Cancel</button>
+          <button onClick={toogleSetIsEdit} className={styles.redButton}>
+            Cancel
+          </button>
         </>
       )}
     </li>

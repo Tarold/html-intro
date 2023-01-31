@@ -1,13 +1,16 @@
 import React from 'react';
 import TodoForm from '../../components/forms/TodoForm';
 import TodoList from '../../components/TodoList';
+import styles from './TodoPage.module.scss';
 
 function ContactPage () {
   return (
-    <section>
-      <h2>Todos</h2>
-      <TodoForm />
-      <TodoList />
+    <section className={styles.Todos}>
+      <h2 className={styles.titleTodos}>Todos</h2>
+      <div className={styles.sectionBody}>
+        <TodoForm />
+        <TodoList />
+      </div>
     </section>
   );
 }

@@ -1,9 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import TodoItem from './TodoItem';
+import styles from './TodoList.module.scss';
 
 export const TodoList = ({ tasks }) => {
-  return <ul>{tasks.map((item, index) => mapList(item, index))}</ul>;
+  return (
+    <ul className={styles.todoList}>
+      {tasks.map((item, index) => mapList(item, index))}
+    </ul>
+  );
 };
 
 const mapList = (item, index) => (
