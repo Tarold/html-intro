@@ -4,7 +4,7 @@ import { Formik, Form } from 'formik';
 import Input from '../Input';
 import { createTodo } from '../../../store/slices/todoSlice';
 import { TODO_VALIDATION_SCHEMA } from '../../../utils/validate/validationSchemas';
-import styles from './TodoForm.module.scss';
+import styles from './../../../common/style/formStylesheet.module.scss';
 
 function TodoForm ({ createNewTodo }) {
   const initialValues = { task: '' };

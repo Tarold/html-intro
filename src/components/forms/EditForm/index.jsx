@@ -4,10 +4,11 @@ import { Formik, Form } from 'formik';
 import Input from '../Input';
 import { editTodo } from '../../../store/slices/todoSlice';
 import { TODO_VALIDATION_SCHEMA } from '../../../utils/validate/validationSchemas';
+import styles from './../../../common/style/formStylesheet.module.scss';
 
-function TodoForm ({ editTodo, styles, task, index, closeEdit }) {
+function TodoForm ({ editTodo, task, index, closeEdit }) {
   const initialValues = { task: task };
-  debugger;
+
   const handleSubmit = (values, formikBag) => {
     editTodo({ index: index, todo: values });
     formikBag.resetForm();
