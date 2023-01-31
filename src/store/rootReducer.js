@@ -1,19 +1,8 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import themeReducer from './slices/themeSlice';
-import counterReducer from './slices/counterSlice';
+import todoSlice from './slices/todoSlice';
 
 const rootReducer = combineReducers({
-  theme: themeReducer,
-  counter: counterReducer,
+  todo: todoSlice,
 });
 
 export default rootReducer;
-
-// {
-//    theme:{
-//    isLight: true;
-//   },
-//   counter:{
-//     count: 0, step: 1
-//   }
-// }

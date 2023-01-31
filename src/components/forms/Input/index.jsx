@@ -1,9 +1,8 @@
-import classNames from 'classnames';
 import { Field } from 'formik';
 import React from 'react';
 
 function Input (props) {
-  const { name, label, classes, ...restProps } = props;
+  const { name, classes, ...restProps } = props;
   return (
     <Field name={name}>
       {({
@@ -11,17 +10,14 @@ function Input (props) {
         form: { errors, touched },
         meta,
       }) => {
-        const inputClassNames = classNames(classes.input, {
-          [classes.valid]: !meta.error && meta.touched,
-          [classes.invalid]: meta.error && meta.touched,
-        });
-
         return (
           <label>
-            <span>{label} </span>
-            <input className={inputClassNames} {...restProps} {...field} />
+            <input className={classes.input} {...restProps} {...field} />
+
             {meta.error && meta.touched && (
-              <span className={classes.error}>{meta.error}</span>
+              <span className={classes.error} data-hover={meta.error}>
+                warning
+              </span>
             )}
           </label>
         );

@@ -1,7 +1,7 @@
-import ContactPage from './pages/ContactPage/index';
+import Todo from './pages/TodoPage';
 
 function App () {
-  return <ContactPage />;
+  return <Todo />;
 }
 
 export default App;
