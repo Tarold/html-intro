@@ -3,6 +3,7 @@ import { toggleCompleted, removeTodo } from './../../../store/slices/todoSlice';
 import { connect } from 'react-redux';
 import EditForm from '../../forms/EditForm';
 import styles from './TodoItem.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const TodoItem = ({ toggleCompleted, removeTodo, ...props }) => {
   const { item, index } = props;
@@ -23,13 +24,13 @@ export const TodoItem = ({ toggleCompleted, removeTodo, ...props }) => {
         <>
           <span className={styles.todoTask}>{item.task}</span>
           <button className={styles.greenButton} onClick={toogleSetIsEdit}>
-            Edit
+            <FontAwesomeIcon icon='pencil' size='2x' />
           </button>
           <button
             className={styles.redButton}
             onClick={() => removeTodo(index)}
           >
-            Remove
+            <FontAwesomeIcon icon='trash' size='2x' />
           </button>
         </>
       )}
@@ -43,7 +44,7 @@ export const TodoItem = ({ toggleCompleted, removeTodo, ...props }) => {
             buttonStyle={styles.greenButton}
           />
           <button onClick={toogleSetIsEdit} className={styles.redButton}>
-            Cancel
+            <FontAwesomeIcon icon='xmark' size='2x' />
           </button>
         </>
       )}

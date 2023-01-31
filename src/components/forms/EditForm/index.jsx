@@ -5,6 +5,7 @@ import Input from '../Input';
 import { editTodo } from '../../../store/slices/todoSlice';
 import { TODO_VALIDATION_SCHEMA } from '../../../utils/validate/validationSchemas';
 import styles from './../../../common/style/formStylesheet.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function TodoForm ({ editTodo, task, index, closeEdit, buttonStyle }) {
   const initialValues = { task: task };
@@ -36,7 +37,7 @@ function TodoForm ({ editTodo, task, index, closeEdit, buttonStyle }) {
           classes={classes}
         />
         <button type='submit' className={buttonStyle}>
-          Submit
+          <FontAwesomeIcon icon='check' size='2x' />
         </button>
       </Form>
     </Formik>
