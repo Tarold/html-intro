@@ -14,7 +14,6 @@ function Input (props) {
           [classes.valid]: !meta.error && meta.touched,
           [classes.invalid]: meta.error && meta.touched,
         });
-        restProps['data-hover'] = meta.error;
         return (
           <label>
             <input className={inputClassNames} {...restProps} {...field} />

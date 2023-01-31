@@ -25,28 +25,12 @@
   height: 100%;
   width: 100%;
   transition: background-color 0.2s;
-  position: relative;
-  &:before {
-    content: attr(data-hover);
-    width: 140px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 5px;
-    padding: 5px 0;
-    transition: opacity 1s ease-in-out;
-  }
-
-  &:hover:before {
-    opacity: 1;
-    visibility: visible;
-  }
 }
 
 .invalid {
-  background-color: rgb(249, 141, 108);
+  background-color: rgb(255, 222, 212);
 }
 
 .valid {
-  background-color: aqua;
+  background-color: #b6ffff;
 }
