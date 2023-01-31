@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { toggleCompleted, removeTodo } from './../../store/slices/todoSlice';
 import { connect } from 'react-redux';
+import EditForm from '../forms/EditForm';
+import styles from './TodoList.module.scss';
 
 export const TodoList = ({ tasks, toggleCompleted, removeTodo }) => {
   const [isEdit, setIsEdit] = useState(false);
@@ -11,15 +13,9 @@ export const TodoList = ({ tasks, toggleCompleted, removeTodo }) => {
   const toogleSetIsEdit = () => {
     setIsEdit(isEdit => !isEdit);
   };
-  const editDone = () => {
-    toogleSetIsEdit();
-  };
-  const editCancel = () => {
-    toogleSetIsEdit();
-  };
   const mapList = (item, index) => {
     return (
-      <div key={item.key}>
+      <li key={item.key} className={styles.todo}>
         <input
           type='checkbox'
           checked={item.completed}
@@ -27,22 +23,26 @@ export const TodoList = ({ tasks, toggleCompleted, removeTodo }) => {
         />
         {!isEdit && (
           <>
-            <span>{item.text}</span>
+            <span>{item.task}</span>
             <button onClick={toogleSetIsEdit}>Edit</button>
             <button onClick={() => removeTodo(index)}>Remove</button>
           </>
         )}
         {isEdit && (
           <>
-            <input type='text' value={item.text} />
-            <button onClick={editDone}>Done</button>
-            <button onClick={editCancel}>Cancel</button>
+            <EditForm
+              styles={styles}
+              task={item.task}
+              index={index}
+              closeEdit={toogleSetIsEdit}
+            />
+            <button onClick={toogleSetIsEdit}>Cancel</button>
           </>
         )}
-      </div>
+      </li>
     );
   };
-  return <div>{tasks.map(mapList)}</div>;
+  return <ul>{tasks.map(mapList)}</ul>;
 };
 
 const mapStateToProps = state => state.todo;

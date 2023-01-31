@@ -1,6 +1,5 @@
 .form {
   display: flex;
-  flex-direction: column;
   max-width: 800px;
   width: 100%;
   margin: 0 auto;
@@ -11,7 +10,7 @@
     justify-content: space-between;
     align-items: baseline;
     padding: 10px;
-    margin-bottom: 30px;
+    width: 100%;
     position: relative;
     span {
       width: 30%;
@@ -19,42 +18,33 @@
   }
 }
 
-.error {
-  position: absolute;
-  vertical-align: text-top;
-  top: 30%;
-  bottom: 0;
-  right: 0;
-  color: red;
-  text-align: center;
-  display: inline-block;
-  vertical-align: middle;
-  line-height: normal;
-}
-
-.error:before {
-  content: attr(data-hover);
-  visibility: hidden;
-  opacity: 0;
-  width: 140px;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  border-radius: 5px;
-  padding: 5px 0;
-  transition: opacity 1s ease-in-out;
-
-  position: absolute;
-  z-index: 1;
-  left: 0;
-  top: 110%;
-}
-
-.error:hover:before {
-  opacity: 1;
-  visibility: visible;
-}
 .input {
   padding: 10px;
   width: 100%;
+  transition: background-color 0.2s;
+  position: relative;
+
+  &:before {
+    content: attr(data-hover);
+    width: 140px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 0;
+    transition: opacity 1s ease-in-out;
+  }
+
+  &:hover:before {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.invalid {
+  background-color: rgb(249, 141, 108);
+}
+
+.valid {
+  background-color: aqua;
 }
