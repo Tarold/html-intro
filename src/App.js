@@ -1,19 +1,18 @@
-import './App.css'
-import PurchaseForm from './components/forms/PurchaseForm/index'
-import PurchasesList from './components/PurchasesList/index'
+import Todo from './pages/TodoPage';
+
+import { library } from '@fortawesome/fontawesome-svg-core';
+
+import {
+  faCheck,
+  faXmark,
+  faPencil,
+  faTrash,
+} from '@fortawesome/free-solid-svg-icons';
+
+library.add(faCheck, faXmark, faPencil, faTrash);
 
 function App () {
-  return (
-    <>
-      <header>
-        <h1>Purchases List</h1>
-      </header>
-      <main>
-        <PurchaseForm />
-        <PurchasesList />
-      </main>
-    </>
-  )
+  return <Todo />;
 }
 
-export default App
+export default App;
