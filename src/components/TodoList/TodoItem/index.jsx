@@ -3,10 +3,7 @@ import { connect } from 'react-redux';
 import EditForm from '../../forms/EditForm';
 import styles from './TodoItem.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  deletePurchase,
-  updatePurchase,
-} from '../../../store/slices/purchasesSlice';
+import { deleteTodos, updateTodos } from '../../../store/slices/todosesSlice';
 
 export const TodoItem = ({ updateTodo, removeTodo, item }) => {
   const [isEdit, setIsEdit] = useState(false);
@@ -55,8 +52,8 @@ export const TodoItem = ({ updateTodo, removeTodo, item }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  updateTodo: (id, values) => dispatch(updatePurchase({ id, values })),
-  removeTodo: id => dispatch(deletePurchase(id)),
+  updateTodo: (id, values) => dispatch(updateTodos({ id, values })),
+  removeTodo: id => dispatch(deleteTodos(id)),
 });
 
 export default connect(null, mapDispatchToProps)(TodoItem);

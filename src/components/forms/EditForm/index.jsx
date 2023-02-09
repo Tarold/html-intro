@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Formik, Form } from 'formik';
 import Input from '../Input';
-import { updatePurchase } from '../../../store/slices/purchasesSlice';
+import { updateTodos } from '../../../store/slices/todosesSlice';
 import { TODO_VALIDATION_SCHEMA } from '../../../utils/validate/validationSchemas';
 import styles from './../../../common/style/formStylesheet.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -45,7 +45,7 @@ function TodoForm ({ updateTodo, value, id, closeEdit, buttonStyle }) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  updateTodo: (id, values) => dispatch(updatePurchase({ id, values })),
+  updateTodo: (id, values) => dispatch(updateTodos({ id, values })),
 });
 
 export default connect(null, mapDispatchToProps)(TodoForm);

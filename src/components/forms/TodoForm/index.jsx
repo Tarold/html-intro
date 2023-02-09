@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Formik, Form } from 'formik';
 import Input from '../Input';
-import { createPurchase } from '../../../store/slices/purchasesSlice';
+import { createTodose } from '../../../store/slices/todosesSlice';
 import { TODO_VALIDATION_SCHEMA } from '../../../utils/validate/validationSchemas';
 import styles from './../../../common/style/formStylesheet.module.scss';
 import formStyles from './TodoForm.module.scss';
@@ -45,7 +45,7 @@ function TodoForm ({ createNewTodo }) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  createNewTodo: values => dispatch(createPurchase(values)),
+  createNewTodo: values => dispatch(createTodose(values)),
 });
 
 export default connect(null, mapDispatchToProps)(TodoForm);

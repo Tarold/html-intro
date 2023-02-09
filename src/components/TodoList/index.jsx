@@ -1,29 +1,38 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getPurchases } from '../../store/slices/purchasesSlice';
+import { getTodoses } from '../../store/slices/todosesSlice';
 import TodoItem from './TodoItem';
 import styles from './TodoList.module.scss';
 
-export const TodoList = ({ purchases: tasks, get, isFetching, error }) => {
+export const TodoList = ({ todoses, get, isFetching, error }) => {
   useEffect(() => {
     get();
+    // eslint-disable-next-line
   }, []);
 
   return (
     <ul className={styles.todoList}>
-      {!error && tasks.map((item, index) => mapList(item, index))}
-      {isFetching && <div>Loading...</div>}
-      {error && <div>!!!!ERROR!!!!</div>}
+      {!error && todoses.map((item, index) => mapList(item, index))}
+      {isFetching && (
+        <li className={styles.info}>
+          <span>Loading...</span>
+        </li>
+      )}
+      {error && (
+        <li className={styles.info}>
+          <span>!!!!ERROR!!!!</span>
+        </li>
+      )}
     </ul>
   );
 };
 
 const mapList = item => <TodoItem item={item} key={item.id} />;
 
-const mapStateToProps = ({ purchasesData }) => purchasesData;
+const mapStateToProps = ({ todosesData }) => todosesData;
 
 const mapDispatchToProps = dispatch => ({
-  get: () => dispatch(getPurchases()),
+  get: () => dispatch(getTodoses()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

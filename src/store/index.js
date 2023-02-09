@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import purchasesReduces from './slices/purchasesSlice';
+import todosesReduces from './slices/todosesSlice';
 
 const store = configureStore({
   reducer: {
-    purchasesData: purchasesReduces,
+    todosesData: todosesReduces,
   },
 });
 
