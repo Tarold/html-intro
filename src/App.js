@@ -1,21 +1,18 @@
+import './App.css'
+import PurchaseForm from './components/forms/PurchaseForm/index'
+
 function App () {
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Learn React
-        </a>
+    <>
+      <header>
+        <h1>Purchases List</h1>
       </header>
-    </div>
-  );
+      <main>
+        <PurchaseForm />
+        {/* <PurchasesList /> */}
+      </main>
+    </>
+  )
 }
 
-export default App;
+export default App
