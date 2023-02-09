@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { toggleCompleted, removeTodo } from './../../../store/slices/todoSlice';
 import { connect } from 'react-redux';
 import EditForm from '../../forms/EditForm';
 import styles from './TodoItem.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  deletePurchase,
+  updatePurchase,
+} from '../../../store/slices/purchasesSlice';
 
-export const TodoItem = ({ toggleCompleted, removeTodo, ...props }) => {
-  const { item, index } = props;
+export const TodoItem = ({ updateTodo, removeTodo, item }) => {
   const [isEdit, setIsEdit] = useState(false);
 
   const toogleSetIsEdit = () => {
@@ -17,18 +19,18 @@ export const TodoItem = ({ toggleCompleted, removeTodo, ...props }) => {
       <input
         className={styles.checkbox}
         type='checkbox'
-        checked={item.completed}
-        onChange={() => toggleCompleted(index)}
+        checked={item.isDone}
+        onChange={() => updateTodo(item.id, { isDone: !item.isDone })}
       />
       {!isEdit && (
         <>
-          <span className={styles.todoTask}>{item.task}</span>
+          <span className={styles.todoTask}>{item.value}</span>
           <button className={styles.greenButton} onClick={toogleSetIsEdit}>
             <FontAwesomeIcon icon='pencil' size='2x' />
           </button>
           <button
             className={styles.redButton}
-            onClick={() => removeTodo(index)}
+            onClick={() => removeTodo(item.id)}
           >
             <FontAwesomeIcon icon='trash' size='2x' />
           </button>
@@ -38,8 +40,8 @@ export const TodoItem = ({ toggleCompleted, removeTodo, ...props }) => {
         <>
           <EditForm
             styles={styles}
-            task={item.task}
-            index={index}
+            value={item.value}
+            id={item.id}
             closeEdit={toogleSetIsEdit}
             buttonStyle={styles.greenButton}
           />
@@ -53,8 +55,8 @@ export const TodoItem = ({ toggleCompleted, removeTodo, ...props }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  toggleCompleted: index => dispatch(toggleCompleted(index)),
-  removeTodo: index => dispatch(removeTodo(index)),
+  updateTodo: (id, values) => dispatch(updatePurchase({ id, values })),
+  removeTodo: id => dispatch(deletePurchase(id)),
 });
 
 export default connect(null, mapDispatchToProps)(TodoItem);

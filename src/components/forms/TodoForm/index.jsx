@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Formik, Form } from 'formik';
 import Input from '../Input';
-import { createTodo } from '../../../store/slices/todoSlice';
+import { createPurchase } from '../../../store/slices/purchasesSlice';
 import { TODO_VALIDATION_SCHEMA } from '../../../utils/validate/validationSchemas';
 import styles from './../../../common/style/formStylesheet.module.scss';
 import formStyles from './TodoForm.module.scss';
 
 function TodoForm ({ createNewTodo }) {
-  const initialValues = { task: '' };
+  const initialValues = { value: '' };
 
   const handleSubmit = (values, formikBag) => {
     createNewTodo(values);
@@ -30,7 +30,7 @@ function TodoForm ({ createNewTodo }) {
       <Form className={styles.form}>
         <Input
           type='text'
-          name='task'
+          name='value'
           placeholder='Enter todo here'
           autoFocus
           classes={classes}
@@ -45,7 +45,7 @@ function TodoForm ({ createNewTodo }) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  createNewTodo: v => dispatch(createTodo(v)), // => {payload: v}
+  createNewTodo: values => dispatch(createPurchase(values)),
 });
 
 export default connect(null, mapDispatchToProps)(TodoForm);

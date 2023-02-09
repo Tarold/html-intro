@@ -2,16 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Formik, Form } from 'formik';
 import Input from '../Input';
-import { editTodo } from '../../../store/slices/todoSlice';
+import { updatePurchase } from '../../../store/slices/purchasesSlice';
 import { TODO_VALIDATION_SCHEMA } from '../../../utils/validate/validationSchemas';
 import styles from './../../../common/style/formStylesheet.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function TodoForm ({ editTodo, task, index, closeEdit, buttonStyle }) {
-  const initialValues = { task: task };
+function TodoForm ({ updateTodo, value, id, closeEdit, buttonStyle }) {
+  const initialValues = { value: value };
 
   const handleSubmit = (values, formikBag) => {
-    editTodo({ index: index, todo: values });
+    updateTodo(id, { ...values });
     formikBag.resetForm();
     closeEdit();
   };
@@ -31,7 +31,7 @@ function TodoForm ({ editTodo, task, index, closeEdit, buttonStyle }) {
       <Form className={styles.form}>
         <Input
           type='text'
-          name='task'
+          name='value'
           placeholder='Enter todo here'
           autoFocus
           classes={classes}
@@ -45,7 +45,7 @@ function TodoForm ({ editTodo, task, index, closeEdit, buttonStyle }) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  editTodo: v => dispatch(editTodo(v)),
+  updateTodo: (id, values) => dispatch(updatePurchase({ id, values })),
 });
 
 export default connect(null, mapDispatchToProps)(TodoForm);
