@@ -7,10 +7,12 @@ const DB = new TasksDB(defaultValues);
 app
   .use(express.json())
   .get('/tasks', (req, res) => {
-    res.send(DB.getTasks());
+    const contacts = DB.getTasks();
+    res.status(200).send(contacts);
   })
   .post('/createTask', (req, res) => {
-    res.send(DB.createTask(req.body));
+    const createdTask = DB.createTask(req.body);
+    res.status(201).send(createdTask);
   });
 
 module.exports = app;
