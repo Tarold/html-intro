@@ -1,8 +1,9 @@
 const { TasksDB } = require('./../models');
+const createError = require('http-errors');
 
 module.exports.getTasks = (req, res) => {
-  const contacts = TasksDB.getTasks();
-  res.status(200).send(contacts);
+  const tasks = TasksDB.getTasks();
+  res.status(200).send(tasks);
 };
 
 module.exports.createTask = (req, res) => {
@@ -10,21 +11,29 @@ module.exports.createTask = (req, res) => {
   res.status(201).send(createdTask);
 };
 
-module.exports.getTask = (req, res) => {
+module.exports.getTask = (req, res, next) => {
   const { id } = req.params;
 
-  const contacts = TasksDB.getTaskById(id);
-  res.status(200).send(contacts);
+  const tasks = TasksDB.getTaskById(id);
+
+  if (tasks) {
+    return res.status(200).send(tasks);
+  }
+  next(createError(404, 'Task Not Found'));
+  res.status(200).send(tasks);
 };
 
-module.exports.updateTask = (req, res) => {
+module.exports.updateTask = (req, res, next) => {
   const {
     params: { id },
     body,
   } = req;
-  console.log('body :>> ', body);
-  const contacts = TasksDB.updateTask(id, body);
-  res.status(200).send(contacts);
+  const tasks = TasksDB.updateTask(id, body);
+
+  if (tasks) {
+    return res.status(200).send(tasks);
+  }
+  next(createError(404, 'Task Not Found'));
 };
 
 module.exports.removeTask = (req, res) => {
@@ -33,5 +42,9 @@ module.exports.removeTask = (req, res) => {
   } = req;
 
   const removedTask = TasksDB.deleteTask(id);
-  res.status(204).send(removedTask);
+
+  if (removedTask) {
+    return res.status(204).send();
+  }
+  next(createError(404, 'Task Not Found'));
 };

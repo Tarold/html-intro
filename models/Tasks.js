@@ -5,14 +5,14 @@ const defaultValues = [
     id: '0',
     title: 'Test1',
     body: 'Test1',
-    createdAt: '2000-12-01',
+    createdAt: '1678189302537',
     isDone: false,
   },
   {
     id: '1',
     title: 'Test2',
     body: 'Test2',
-    createdAt: '2000-12-01',
+    createdAt: '1678189304537',
     isDone: false,
   },
 ];
