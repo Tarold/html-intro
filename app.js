@@ -1,46 +1,18 @@
 const express = require('express');
-
-const { validate } = require('./middleware');
-const { contactsController } = require('./controllers');
-
 const app = express();
 
-app.use(express.json());
+const { TasksDB, defaultValues } = require('./db');
+const DB = new TasksDB(defaultValues);
 
-app.get(
-  '/',
-  (req, res, next) => {
-    console.log('handler 1 :>> ');
-    next();
-  },
-  (req, res) => {
-    console.log('handler 2 :>> ');
-    res.send('app )))');
-  }
-);
-
-// GET /constacts
-app.get('/contacts/', contactsController.getContacts);
-
-// POST /contacts (body)
-app.post(
-  '/contacts',
-  validate.validateContactOnCreate,
-  contactsController.createContact
-);
-
-// GET /contacts/5
-app.get('/contacts/:id', contactsController.getContactById);
-
-// PATCH /contacts/5 (body)
-app.patch(
-  '/contacts/:id',
-  validate.validateContactOnUpdate,
-  contactsController.updateContactById
-);
-
-// реалізувати endpoint для видалення конкретного контакту
-// DELETE /contacts/5
-app.delete('/contacts/:id', contactsController.deleteContactById);
+app
+  .use(express.json())
+  .get('/tasks', (req, res) => {
+    const contacts = DB.getTasks();
+    res.status(200).send(contacts);
+  })
+  .post('/createTask', (req, res) => {
+    const createdTask = DB.createTask(req.body);
+    res.status(201).send(createdTask);
+  });
 
 module.exports = app;
