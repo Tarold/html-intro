@@ -1,18 +1,16 @@
 const express = require('express');
-const app = express();
 
-const { TasksDB, defaultValues } = require('./db');
-const DB = new TasksDB(defaultValues);
+// const { validate, errorHandlers } = require('./middleware');
+const { tasksController } = require('./controllers');
+
+const app = express();
 
 app
   .use(express.json())
-  .get('/tasks', (req, res) => {
-    const contacts = DB.getTasks();
-    res.status(200).send(contacts);
-  })
-  .post('/createTask', (req, res) => {
-    const createdTask = DB.createTask(req.body);
-    res.status(201).send(createdTask);
-  });
+  .get('/tasks', tasksController.getTasks)
+  .post('/createTask', tasksController.createTask)
+  .get('/task/:id', tasksController.getTask)
+  .patch('/task/:id', tasksController.updateTask)
+  .delete('/task/:id', tasksController.removeTask);
 
 module.exports = app;
