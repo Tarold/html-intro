@@ -1,36 +1,10 @@
-const { Pool } = require('pg');
+const http = require('http');
+const app = require('./app');
 
-const connectionConfig = {
-  host: 'localhost',
-  port: '5432',
-  database: 'test',
-  user: 'postgres',
-  password: '121212',
-};
+const PORT = process.env.PORT || 5000;
 
-const pool = new Pool(connectionConfig);
+const httpServer = http.createServer(app);
 
-pool.connect(err => {
-  if (!err) {
-    console.log('DB connection success');
-  }
+httpServer.listen(PORT, () => {
+  console.log('Yeah, at port: ', PORT);
 });
-
-pool.on('beforExit', () => pool.end());
-
-pool.query('SELECT * FROM users;', (err, data) => {
-  if (!err) {
-    console.log('data :>> ', data.rows);
-  }
-});
-
-const id = 1;
-
-(async () => {
-  try {
-    const data = await pool.query('SELECT * FROM students WHERE id=$1', [id]);
-    console.log('object :>> ', data.rows);
-  } catch (err) {
-    console.log('err :>> ', err);
-  }
-})();
