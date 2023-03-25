@@ -1,10 +1,11 @@
 const { Router } = require('express');
+const { usersController } = require('../controllers/');
 
 const usersRouter = Router();
 
 usersRouter
   .route('/')
-  .post(() => {})
+  .post(usersController.createUsers)
   .delete(() => {})
   .get((req, res) => {
     res.status(200).send('OK');
