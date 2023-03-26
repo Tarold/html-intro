@@ -1,13 +1,8 @@
 const { Router } = require('express');
 
+// /api/phones
 const phonesRouter = Router();
 
-phonesRouter
-  .route('/')
-  .post(() => {})
-  .delete(() => {})
-  .get((req, res) => {
-    res.status(200).send('OK');
-  });
+phonesRouter.get('/', (req, res) => res.send('OK'));
 
 module.exports = phonesRouter;

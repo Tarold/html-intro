@@ -1,22 +1,18 @@
 const { Router } = require('express');
-const { usersController } = require('../controllers/');
+const { usersController } = require('../controllers');
 
+// /api/users
 const usersRouter = Router();
 
 usersRouter
   .route('/')
-  .post(usersController.createUsers)
-  .delete(() => {})
-  .get((req, res) => {
-    res.status(200).send('OK');
-  });
+  .post(usersController.createUser)
+  .get((req, res) => res.send('ok'));
 
 usersRouter
   .route('/:id')
   .post(() => {})
-  .delete(() => {})
-  .get((req, res) => {
-    res.status(200).send('OK');
-  });
+  .get((req, res) => res.send('ok1'))
+  .delete(() => {});
 
 module.exports = usersRouter;

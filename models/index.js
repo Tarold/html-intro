@@ -5,20 +5,20 @@ const Phone = require('./phone');
 const connectionConfig = {
   host: 'localhost',
   port: '5432',
-  database: 'test',
+  database: 'phones_sales',
   user: 'postgres',
-  password: '121212',
+  password: 'admin',
 };
 
 const pool = new Pool(connectionConfig);
 
 pool.connect(err => {
   if (!err) {
-    console.log('DB connection success');
+    console.log('DB coonnection success!');
   }
 });
 
-pool.on('beforExit', () => pool.end());
+process.on('beforeExit', () => pool.end());
 
 User.pool = pool;
 

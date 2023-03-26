@@ -1,1 +1,1 @@
-module.exports.errorHandlers = require('./errorHandler');
+module.exports.errorHandlers = require('./errorHandlers');

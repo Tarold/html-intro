@@ -1,26 +1,20 @@
 {
-  "name": "pe2022-1",
+  "name": "pg-server-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "start": "node .",
     "start-dev": "nodemon ."
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Tarold/pe2022-1.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Tarold/pe2022-1/issues"
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   },
-  "homepage": "https://github.com/Tarold/pe2022-1#readme",
   "dependencies": {
     "express": "^4.18.2",
-    "nodemon": "^2.0.22",
     "pg": "^8.10.0"
   }
 }

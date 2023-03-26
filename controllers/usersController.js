@@ -1,13 +1,14 @@
 const { User } = require('../models');
 
-module.exports.createUsers = async (req, res, next) => {
+module.exports.createUser = async (req, res, next) => {
   const { body } = req;
 
   try {
-    const createdUsers = await User.create(body);
-    res.status(201).send(createdUsers);
+    const createdUser = await User.create(body);
+    res.status(201).send(createdUser);
   } catch (err) {
     next(err);
   }
 };
+
 module.exports.deleteUser = async () => {};

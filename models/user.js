@@ -4,17 +4,17 @@ class User {
 
     const insertQuery = `
       INSERT INTO users (first_name, last_name, email, tel)
-      VALUES (${firstName}, ${lastName}, ${email}, ${tel})
+      VALUES ('${firstName}', '${lastName}', '${email}', '${tel}')
       RETURNING *;
     `;
     try {
       // виконати запит
       const createdUser = await User.pool.query(insertQuery);
-      console.log('createdUser :>> ', createdUser.rows[0]);
+
       return createdUser.rows[0];
     } catch (err) {
       // повернути результат або помилку
-      console.log('err :>> ', err);
+      throw new Error(err.detail);
     }
   }
   static getAll () {}
