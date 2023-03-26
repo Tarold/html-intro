@@ -17,10 +17,38 @@ class User {
       throw new Error(err.detail);
     }
   }
-  static getAll () {}
+  static async getAll ({ limit, offset }) {
+    const selectQuery = `
+    SELECT * 
+    FROM users
+    ORDER BY id
+    LIMIT ${limit} OFFSET ${offset};
+  `;
+    try {
+      // виконати запит
+      const createdUser = await User.pool.query(selectQuery);
+
+      return createdUser.rows;
+    } catch (err) {
+      // повернути результат або помилку
+      throw new Error(err.detail);
+    }
+  }
   static getById () {}
   static updateById () {}
-  static deleteById () {}
+  static async deleteById ({ userId }) {
+    const deleteQuery = `
+    DELETE FROM users 
+    WHERE id = ${userId}
+    RETURNING id;
+  `;
+    try {
+      const createdUser = await User.pool.query(deleteQuery);
+      return createdUser.rows[0];
+    } catch (err) {
+      throw new Error(err.detail);
+    }
+  }
 }
 
 module.exports = User;

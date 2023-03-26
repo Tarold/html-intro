@@ -5,9 +5,9 @@ const Phone = require('./phone');
 const connectionConfig = {
   host: 'localhost',
   port: '5432',
-  database: 'phones_sales',
+  database: 'test',
   user: 'postgres',
-  password: 'admin',
+  password: '121212',
 };
 
 const pool = new Pool(connectionConfig);
