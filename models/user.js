@@ -19,32 +19,31 @@ class User {
   }
   static async getAll ({ limit, offset }) {
     const selectQuery = `
-    SELECT * 
-    FROM users
-    ORDER BY id
-    LIMIT ${limit} OFFSET ${offset};
-  `;
+     SELECT *
+     FROM users
+     ORDER BY id
+     LIMIT ${limit} OFFSET ${offset};
+   `;
     try {
-      // виконати запит
-      const createdUser = await User.pool.query(selectQuery);
-
-      return createdUser.rows;
+      const foundUsers = await User.pool.query(selectQuery);
+      return foundUsers.rows;
     } catch (err) {
-      // повернути результат або помилку
       throw new Error(err.detail);
     }
   }
   static getById () {}
   static updateById () {}
-  static async deleteById ({ userId }) {
+  static async deleteById (id) {
     const deleteQuery = `
-    DELETE FROM users 
-    WHERE id = ${userId}
-    RETURNING id;
-  `;
+      DELETE FROM users
+      WHERE id = ${id}
+      RETURNING id;
+    `;
+
     try {
-      const createdUser = await User.pool.query(deleteQuery);
-      return createdUser.rows[0];
+      const deletedUser = await User.pool.query(deleteQuery);
+
+      return deletedUser.rows[0];
     } catch (err) {
       throw new Error(err.detail);
     }

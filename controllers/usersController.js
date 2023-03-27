@@ -13,19 +13,21 @@ module.exports.createUser = async (req, res, next) => {
 
 module.exports.getUsers = async (req, res, next) => {
   const { pagination } = req;
+
   try {
-    const allUsers = await User.getAll(pagination);
-    res.status(200).send(allUsers);
+    const foundUsers = await User.getAll(pagination);
+    res.status(200).send(foundUsers);
   } catch (err) {
     next(err);
   }
 };
 
 module.exports.deleteUser = async (req, res, next) => {
-  const { params } = req;
+  const { userId } = req.params;
 
   try {
-    const deletedUser = await User.deleteById(params);
+    const deletedUser = await User.deleteById(userId);
+
     if (deletedUser) {
       return res.status(204).send();
     }
