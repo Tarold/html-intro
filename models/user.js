@@ -94,6 +94,28 @@ class User {
       throw new Error(err.detail);
     }
   }
+  static async getPhonesById (id, model, first_date, second_date) {
+    const selectQuery = `
+    SELECT phones.model, phones.color, phones.cost
+    FROM phones
+    JOIN shopping ON phones.id=shopping.phone_id
+    JOIN users ON users.id=shopping.user_id
+    WHERE users.id=${id} 
+        ${model ? `AND phones.model='${model}'` : ''}
+        ${
+          first_date !== undefined && second_date !== undefined
+            ? `AND shopping.date BETWEEN '${first_date}'AND'${second_date}'`
+            : ''
+        };
+    `;
+    try {
+      const userPhones = await User.pool.query(selectQuery);
+
+      return userPhones.rows;
+    } catch (err) {
+      throw new Error(err.detail);
+    }
+  }
 }
 
 module.exports = User;

@@ -43,3 +43,15 @@ INSERT INTO shopping (user_id, phone_id, date) VALUES
 (2, 3, '2021-09-03'),
 (3, 1, '2021-09-04'),
 (3, 2, '2021-09-05');
+
+SELECT phones.model, phones.color, phones.cost
+FROM phones
+JOIN shopping ON phones.id=shopping.phone_id
+JOIN users ON users.id=shopping.user_id
+WHERE users.id=3;
+
+SELECT phones.model, phones.color, phones.cost, shopping.date
+FROM phones
+JOIN shopping ON phones.id=shopping.phone_id
+JOIN users ON users.id=shopping.user_id
+WHERE users.id=1 AND phones.model='iPhone 12' AND shopping.date BETWEEN '2021-09-02' AND '2021-09-02';

@@ -41,6 +41,25 @@ module.exports.deleteUser = async (req, res, next) => {
   }
 };
 
+module.exports.getUserPhone = async (req, res, next) => {
+  const { userId } = req.params;
+  const { model, first_date, second_date } = req.query;
+  try {
+    const userPhones = await User.getPhonesById(
+      userId,
+      model,
+      first_date,
+      second_date
+    );
+    if (userPhones[0]) {
+      return res.status(200).send(userPhones);
+    }
+    res.status(404).send('User Not Found || User dont have phones');
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports.getUsers = async (req, res, next) => {
   const { pagination } = req;
 

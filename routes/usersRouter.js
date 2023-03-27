@@ -14,9 +14,11 @@ usersRouter
 usersRouter
   .route('/:userId')
   .patch(validate.validateUserOnUpdate, usersController.updateUser)
-  .get((req, res) => res.send('ok1'))
   .delete(usersController.deleteUser);
 
+usersRouter
+  .route('/:userId/phones')
+  .get(validate.validateUserPhoneDate, usersController.getUserPhone);
 module.exports = usersRouter;
 
 //-------------------------------------------
