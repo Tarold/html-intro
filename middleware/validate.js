@@ -1,5 +1,6 @@
 const {
   USER_CREATION_VALIDATION_SCHEMA,
+  USER_UPDATE_VALIDATION_SCHEMA,
 } = require('../utils/validationSchemas');
 
 module.exports.validateUserOnCreate = async (req, res, next) => {
@@ -7,6 +8,21 @@ module.exports.validateUserOnCreate = async (req, res, next) => {
 
   try {
     req.body = await USER_CREATION_VALIDATION_SCHEMA.validate(body);
+
+    next();
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports.validateUserOnUpdate = async (req, res, next) => {
+  const { body } = req;
+
+  try {
+    if (Object.keys(body).length === 0) {
+      throw new Error('Update body is empty');
+    }
+    req.body = await USER_UPDATE_VALIDATION_SCHEMA.validate(body);
 
     next();
   } catch (err) {

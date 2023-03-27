@@ -1,4 +1,4 @@
-module.exports.paginateUser = (req, res, next) => {
+const paginate = function (req, res, next) {
   // отримати page, results
   const { page = 1, results = 5 } = req.query;
 
@@ -11,3 +11,6 @@ module.exports.paginateUser = (req, res, next) => {
 
   next();
 };
+
+module.exports.paginateUser = paginate;
+module.exports.paginatePhones = paginate;

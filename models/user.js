@@ -32,7 +32,53 @@ class User {
     }
   }
   static getById () {}
-  static updateById () {}
+  static async updateById (body, userId) {
+    let set = '';
+    let returning = '';
+    for (const [key, value] of Object.entries(body)) {
+      if (set !== '') {
+        set += ', ';
+      }
+      if (returning !== '') {
+        returning += ', ';
+      }
+      switch (key) {
+        case 'firstName':
+          set += `first_name = '${value}'`;
+          returning += `first_name`;
+          break;
+        case 'lastName':
+          set += `last_name = '${value}'`;
+          returning += `last_name`;
+          break;
+        case 'email':
+          set += `email = '${value}'`;
+          returning += `email`;
+          break;
+        case 'tel':
+          set += `tel = '${value}'`;
+          returning += `tel`;
+          break;
+
+        default:
+          break;
+      }
+    }
+
+    const updateQuery = `
+     UPDATE users
+     SET ${set} 
+     WHERE id=${userId}
+     RETURNING ${returning};
+   `;
+
+    try {
+      const updateUsers = await User.pool.query(updateQuery);
+      return updateUsers.rows[0];
+    } catch (err) {
+      throw new Error(err.detail);
+    }
+  }
   static async deleteById (id) {
     const deleteQuery = `
       DELETE FROM users

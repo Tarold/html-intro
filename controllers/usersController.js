@@ -11,12 +11,15 @@ module.exports.createUser = async (req, res, next) => {
   }
 };
 
-module.exports.getUsers = async (req, res, next) => {
-  const { pagination } = req;
-
+module.exports.updateUser = async (req, res, next) => {
+  const { body } = req;
+  const { userId } = req.params;
   try {
-    const foundUsers = await User.getAll(pagination);
-    res.status(200).send(foundUsers);
+    const updatedUser = await User.updateById(body, userId);
+    if (updatedUser) {
+      return res.status(200).send(updatedUser);
+    }
+    res.status(404).send('User Not Found');
   } catch (err) {
     next(err);
   }
@@ -33,6 +36,17 @@ module.exports.deleteUser = async (req, res, next) => {
     }
 
     res.status(404).send('User Not Found');
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports.getUsers = async (req, res, next) => {
+  const { pagination } = req;
+
+  try {
+    const foundUsers = await User.getAll(pagination);
+    res.status(200).send(foundUsers);
   } catch (err) {
     next(err);
   }
