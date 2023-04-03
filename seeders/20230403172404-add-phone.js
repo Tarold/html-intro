@@ -9,13 +9,13 @@ module.exports = {
         {
           model: '13 Pro',
           brand: 'Xiaomi',
-          year: 2026,
+          year: 2022,
           ram: '4 Gb',
           processor: 'MiliTech',
           screen_size: '1920x1080',
-          nfc: false,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          is_nfc: false,
+          created_at: new Date(),
+          updated_at: new Date(),
         },
       ],
       {}

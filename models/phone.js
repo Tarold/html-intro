@@ -31,11 +31,12 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: { is: /^\d+x\d+$/ },
       },
-      nfc: { type: DataTypes.BOOLEAN, defaultValue: false },
+      isNfc: { type: DataTypes.BOOLEAN, defaultValue: false },
     },
     {
       sequelize,
       modelName: 'phone',
+      underscored: true,
     }
   );
   return Phone;

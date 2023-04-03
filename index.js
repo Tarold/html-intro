@@ -1,30 +1,11 @@
 const {
-  sequelize,
-  phone,
+  phone: Phone,
   Sequelize: { Op },
 } = require('./models');
 
-// CREATE TABLE IF NOT EXISTS "Students" (
-//   "id"   SERIAL ,
-//   "firstName" VARCHAR(64) NOT NULL,
-//   "lastName" VARCHAR(64),
-//   "email" VARCHAR(128) NOT NULL UNIQUE,
-//   "birthday" DATE,
-//   "isMale" BOOLEAN,
-//   "activitiesCount" INTEGER DEFAULT 0,
-//   "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL,
-//   "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL,
-//   PRIMARY KEY ("id")
-// );
-
-// sequelize
-//   .sync({ force: true })
-//   .then(() => console.log('Sync OK)'))
-//   .catch(e => console.log('e :>> ', e));
-
-// CRUD - create, findAll(findByPk), update / upsert, destroy;
-
 (async () => {
+  //додавання нового телефону
+
   const onePhone = {
     model: '13 Pro',
     brand: 'Xiaomi',
@@ -32,189 +13,54 @@ const {
     ram: '4 Gb',
     processor: 'MiliTech',
     screenSize: '1920x1080',
-    nfc: false,
+    isNfc: false,
   };
 
-  const createdPhone = await phone.create(onePhone);
+  const createdPhone = await Phone.create(onePhone);
   console.log('createdStudent :>> ', createdPhone.get());
 
-  // C - INSERT - create
+  //отримання списку телефонів (* 3-я сторінка при перегляді по 4 телефони на сторінці, упорядкованих за роком виробництва),
 
-  // INSERT INTO "Students" ("id","firstName","lastName","email","birthday","isMale","activitiesCount","createdAt","updatedAt")
-  // VALUES (DEFAULT,$1,$2,$3,$4,$5,$6,$7,$8)
-  // RETURNING "id","firstName","lastName","email","birthday","isMale","activitiesCount","createdAt","updatedAt";
+  // const foundPhones = await Phone.findAll({ offset: 12, limit: 4, raw: true, order: ['year'] });
+  // console.log('foundPhones :>> ', foundPhones);
 
-  // const createdStudent = await Student.create(student);
-  // console.log('createdStudent :>> ', createdStudent.get());
+  //*отримання списку телефонів певного року видання,
 
-  // R - SELECT - findAll ------------------------------------------------------------------
+  // const yearOfPhoneCreate = 2023;
 
-  // SELECT "id", "firstName", "lastName", "email", "birthday", "isMale", "activitiesCount", "createdAt", "updatedAt"
-  // FROM "Students" AS "Student";
-
-  // const foundStudents = await Student.findAll({ raw: true });
-  // console.log('foundStudents :>> ', foundStudents);
-
-  // Пагінація + сортування
-
-  // SELECT "id", "firstName", "lastName", "email", "birthday", "isMale", "activitiesCount", "createdAt", "updatedAt"
-  // FROM "Students" AS "Student"
-  // ORDER BY "Student"."id" ASC, "Student"."birthday" DESC
-  // LIMIT 2 OFFSET 0;
-
-  // const foundStudents = await Student.findAll({
+  // const foundPhones = await Phone.findAll({
   //   raw: true,
-  //   limit: 2,
-  //   offset: 0,
-  //   order: [
-  //     ['id', 'ASC'],
-  //     ['birthday', 'DESC'],
-  //   ],
+  //   where: { year: yearOfPhoneCreate },
   // });
 
-  // console.log('foundStudents :>> ', foundStudents);
+  // console.log('foundPhones :>> ', foundPhones);
 
-  // Task: Додати дані в таблицю і отримати другу сторінку при перегляді по 3 рядки,
-  //       впорядкувавши за іменем
+  //*отримання списку телефонів старше 2020 року випуску,
 
-  // const foundStudents = await Student.findAll({
+  // const foundPhones = await Phone.findAll({
   //   raw: true,
-  //   limit: 3,
-  //   offset: 3,
-  //   order: ['firstName'],
+  //   where: { year: { [Op.gt]: 2020 } },
   // });
 
-  // console.log('foundStudents :>> ', foundStudents);
+  // console.log('foundPhones :>> ', foundPhones);
 
-  // Фільтрація
+  //оновлення: додати нфс всім телефонам 2021 року випуску,
 
-  // const foundStudents = await Student.findAll({
+  // const body = { isNfc: true };
+
+  // const result = await Phone.update(body, {
   //   raw: true,
-  //   where: { id: 3 },
-  // });
-
-  // console.log('foundStudents :>> ', foundStudents);
-
-  // AND
-
-  // const foundStudents = await Student.findAll({
-  //   raw: true,
-  //   where: { firstName: 'John', activitiesCount: 2 },
-  // });
-
-  // console.log('foundStudents :>> ', foundStudents);
-
-  // OR
-  // const foundStudents = await Student.findAll({
-  //   raw: true,
-  //   where: { firstName: { [Op.or]: ['John', 'Ann'] } },
-  // });
-
-  // console.log('foundStudents :>> ', foundStudents);
-
-  // Вивести чоловіків або у кого кількість активностей = 4
-  // const foundStudents = await Student.findAll({
-  //   raw: true,
-  //   where: { [Op.or]: [{ isMale: false }, { activitiesCount: 4 }] },
-  // });
-  // console.log('foundStudents :>> ', foundStudents);
-
-  // Проекція
-  // const foundStudents = await Student.findAll({
-  //   raw: true,
-  //   attributes: ['email', 'id'],
-  // });
-
-  // console.log('foundStudents :>> ', foundStudents);
-
-  // Виключення з результату
-  // const foundStudents = await Student.findAll({
-  //   raw: true,
-  //   attributes: { exclude: ['createdAt', 'updatedAt'] },
-  // });
-
-  // console.log('foundStudents :>> ', foundStudents);
-
-  // Додавання до результату
-  // const foundStudents = await Student.findAll({
-  //   raw: true,
-  //   attributes: {
-  //     include: [[sequelize.fn('age', sequelize.col('birthday')), 'stud_age']],
-  //   },
-  // });
-
-  // console.log('foundStudents :>> ', foundStudents);
-
-  // const foundStudents = await Student.findAll({
-  //   raw: true,
-  //   attributes: {
-  //     include: [
-  //       [sequelize.literal('EXTRACT (YEAR FROM age(birthday))'), 'stud_age'],
-  //     ],
-  //   },
-  // });
-
-  // console.log('foundStudents :>> ', foundStudents);
-
-  // Group
-
-  // const foundStudents = await Student.findAll({
-  //   raw: true,
-  //   attributes: [
-  //     'isMale',
-  //     [sequelize.fn('count', sequelize.col('id')), 'stud_count'],
-  //   ],
-  //   group: 'isMale',
-  // });
-
-  // console.log('foundStudents :>> ', foundStudents);
-
-  // Порахувати суму активностей студентів ж та ч статі
-  // const foundStudents = await Student.findAll({
-  //   raw: true,
-  //   attributes: [
-  //     'isMale',
-  //     [
-  //       sequelize.fn('sum', sequelize.col('activitiesCount')),
-  //       'stud_activitiesCount',
-  //     ],
-  //   ],
-  //   group: 'isMale',
-  // });
-
-  // console.log('foundStudets :>> ', foundStudents);
-
-  // Having
-  // const foundStudents = await Student.findAll({
-  //   raw: true,
-  //   attributes: [
-  //     'isMale',
-  //     [
-  //       sequelize.fn('sum', sequelize.col('activitiesCount')),
-  //       'stud_activitiesCount',
-  //     ],
-  //   ],
-  //   group: 'isMale',
-  //   having: sequelize.literal('sum("activitiesCount") > 7'),
-  // });
-
-  // console.log('foundStudets :>> ', foundStudents);
-
-  // U - UPDATE - update
-
-  // const body = { email: 'newTest@gmail.com' };
-  // [updatedStudentsCount, updatedStudentsArray]
-  // [updatedStudentsCount, [updatedStudent]]
-  // const result = await Student.update(body, {
-  //   raw: true,
-  //   where: { id: 2 },
+  //   where: { year: { [Op.eq]: 2021 } },
   //   returning: true,
   // });
 
   // console.log('result :>> ', result);
 
-  // D - DELETE - destroy
-  // const deletedStudentCount = await Student.destroy({ where: { id: 3 } });
+  //видалення телефонів 2010 року випуску.
 
-  // console.log('deletedStudentCount :>> ', deletedStudentCount);
+  // const deletedPhonesCount = await Phone.destroy({
+  //   where: { year: { [Op.eq]: 2010 } },
+  // });
+
+  // console.log('deletedPhonesCount :>> ', deletedPhonesCount);
 })();

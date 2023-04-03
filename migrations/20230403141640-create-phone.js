@@ -33,14 +33,14 @@ module.exports = {
         type: Sequelize.STRING(32),
         allowNull: false,
       },
-      nfc: {
+      is_nfc: {
         type: Sequelize.BOOLEAN,
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
       },
