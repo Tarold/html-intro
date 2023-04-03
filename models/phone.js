@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       year: {
         type: DataTypes.SMALLINT,
         allowNull: false,
-        validate: { is: /^\d{4}$/, max: Number(new Date.getFullYear()) },
+        validate: { is: /^\d{4}$/, max: Number(new Date().getFullYear()) },
       },
       ram: {
         type: DataTypes.STRING(32),
