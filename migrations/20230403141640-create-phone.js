@@ -29,7 +29,7 @@ module.exports = {
         type: Sequelize.STRING(64),
         allowNull: false,
       },
-      screenSize: {
+      screen_size: {
         type: Sequelize.STRING(32),
         allowNull: false,
       },
