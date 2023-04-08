@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const createError = require('http-errors');
 const { User } = require('./../models');
 
 module.exports.createUser = async (req, res, next) => {
@@ -13,7 +14,7 @@ module.exports.createUser = async (req, res, next) => {
       'createdAt',
       'updatedAt',
     ]);
-    res.status(201).send(preparedUser);
+    res.status(201).send({ data: preparedUser });
   } catch (e) {
     // не ок - відправити 4** або 5** + помилку
     next(e);
@@ -31,7 +32,7 @@ module.exports.getUsers = async (req, res, next) => {
       offset,
       order: ['id'],
     });
-    res.status(200).send(foundUsers);
+    res.status(200).send({ data: foundUsers });
   } catch (e) {
     next(e);
   }
@@ -47,9 +48,9 @@ module.exports.getUserById = async (req, res, next) => {
       // where: { id: userId },
     });
     if (!foundUser) {
-      return res.status(404).send('User Not Found');
+      return next(createError(404, 'User Not Found'));
     }
-    res.status(200).send(foundUser);
+    res.status(200).send({ data: foundUser });
   } catch (e) {
     next(e);
   }
@@ -69,7 +70,7 @@ module.exports.updateUserById = async (req, res, next) => {
     });
 
     if (!updatedUser) {
-      return res.status(404).send('User Not Found');
+      return next(createError(404, 'User Not Found'));
     }
 
     const preparedUser = _.omit(updatedUser, [
@@ -78,7 +79,7 @@ module.exports.updateUserById = async (req, res, next) => {
       'updatedAt',
     ]);
 
-    res.status(200).send(preparedUser);
+    res.status(200).send({ data: preparedUser });
   } catch (e) {
     next(e);
   }
@@ -108,7 +109,7 @@ module.exports.updateOrCreateUserById = async (req, res, next) => {
       'updatedAt',
     ]);
 
-    res.status(200).send(preparedUser);
+    res.status(200).send({ data: preparedUser });
   } catch (e) {
     next(e);
   }
@@ -121,7 +122,7 @@ module.exports.deleteUserById = async (req, res, next) => {
     const deletedUsersCount = await User.destroy({ where: { id: userId } });
 
     if (!deletedUsersCount) {
-      return res.status(404).send('User Not Found');
+      return next(createError(404, 'User Not Found'));
     }
 
     res.status(204).end();
