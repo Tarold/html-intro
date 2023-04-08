@@ -1,15 +1,16 @@
 const { Router } = require('express');
-
 const usersRouter = Router();
+const { usersController } = require('./../controllers');
+// POST /api/users body
 
 usersRouter
   .route('/')
-  .get(() => {})
-  .post(() => {});
-
+  .post(usersController.createUser)
+  .get(() => {});
 usersRouter
   .route('/userId')
   .get(() => {})
-  .post(() => {});
+  .patch(() => {})
+  .delete(() => {});
 
 module.exports = usersRouter;

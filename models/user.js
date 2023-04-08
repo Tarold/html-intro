@@ -61,4 +61,5 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
     }
   );
-  return
+  return User;
+};
