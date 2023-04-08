@@ -1,16 +1,22 @@
 const { Router } = require('express');
 const usersRouter = Router();
 const { usersController } = require('./../controllers');
-// POST /api/users body
 
+// POST /api/users body
+// GET /api/users?limit=10&offset=0 (query)
+
+// GET /api/users/1 (params)
+//  /api/users/:userId
+
+// DELETE /api/users/1 (params)
 usersRouter
   .route('/')
   .post(usersController.createUser)
-  .get(() => {});
+  .get(usersController.getUsers);
 usersRouter
-  .route('/userId')
-  .get(() => {})
-  .patch(() => {})
-  .delete(() => {});
+  .route('/:userId')
+  .get(usersController.getUserById)
+  .patch(usersController.updateUserById)
+  .delete(usersController.deleteUserById);
 
 module.exports = usersRouter;

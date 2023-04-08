@@ -20,10 +20,55 @@ module.exports.createUser = async (req, res, next) => {
   }
 };
 
-module.exports.getUsers = async (req, res, next) => {};
+module.exports.getUsers = async (req, res, next) => {
+  const { limit = 10, offset = 0 } = req.query;
 
-module.exports.getUserById = async (req, res, next) => {};
+  try {
+    const foundUsers = await User.findAll({
+      raw: true,
+      attributes: { exclude: ['passwordHash', 'createdAt', 'updatedAt'] },
+      limit,
+      offset,
+      order: ['id'],
+    });
+    res.status(200).send(foundUsers);
+  } catch (e) {
+    next(e);
+  }
+};
+
+module.exports.getUserById = async (req, res, next) => {
+  const { userId } = req.params;
+
+  try {
+    const foundUser = await User.findByPk(userId, {
+      raw: true,
+      attributes: { exclude: ['passwordHash', 'createdAt', 'updatedAt'] },
+      // where: { id: userId },
+    });
+    if (!foundUser) {
+      return res.status(404).send('User Not Found');
+    }
+    res.status(200).send(foundUser);
+  } catch (e) {
+    next(e);
+  }
+};
 
 module.exports.updateUserById = async (req, res, next) => {};
 
-module.exports.deleteUserById = async (req, res, next) => {};
+module.exports.deleteUserById = async (req, res, next) => {
+  const { userId } = req.params;
+
+  try {
+    const deletedUsersCount = await User.destroy({ where: { id: userId } });
+
+    if (!deletedUsersCount) {
+      return res.status(404).send('User Not Found');
+    }
+
+    res.status(204).end();
+  } catch (e) {
+    next(e);
+  }
+};
