@@ -1,6 +1,6 @@
 const { Router } = require('express');
-const usersRouter = Router();
-const { usersController } = require('../controllers');
+const phonesRouter = Router();
+const { phonesController } = require('../controllers');
 
 // POST /api/users body
 // GET /api/users?limit=10&offset=0 (query)
@@ -10,15 +10,15 @@ const { usersController } = require('../controllers');
 // PATCH /api/users/1 body (params)
 // PUT /api/users/1 body (params)
 // DELETE /api/users/1 (params)
-usersRouter
+phonesRouter
   .route('/')
-  .post(usersController.createUser)
-  .get(usersController.getUsers);
-usersRouter
+  .get(phonesController.getPhones)
+  .post(phonesController.createPhone);
+phonesRouter
   .route('/:userId')
-  .get(usersController.getUserById)
-  .patch(usersController.updateUserById)
-  .put(usersController.updateOrCreateUserById, usersController.createUser)
-  .delete(usersController.deleteUserById);
+  .get(phonesController.getPhoneById)
+  .patch(phonesController.updatePhoneById)
+  .delete(phonesController.deletePhoneById)
+  .put(phonesController.updateOrCreatePhoneById, phonesController.createPhone);
 
-module.exports = usersRouter;
+module.exports = phonesRouter;
