@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   class Phone extends Model {
     static associate (models) {
       Phone.hasOne(models.Processor, {
-        foreignKey: { name: 'processorId', allowNull: false },
+        foreignKey: { name: 'processorsId', allowNull: false },
         onDelete: 'RESTRICT',
         onUpdate: 'CASCADE',
       });

@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   class Processor extends Model {
     static associate (models) {
       Processor.belongsTo(models.phone, {
-        foreignKey: 'processorId',
+        foreignKey: 'processorsId',
       });
     }
   }
