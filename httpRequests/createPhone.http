@@ -1,0 +1,27 @@
+# check valid phone - 200
+POST http://localhost:5000/api/phones
+Content-Type: application/json
+
+{
+  "model":"Test",
+  "brand":"Test",
+  "year":"2022",
+  "ram":"12 gb",
+  "processor":"12",
+  "screenSize":"1920x1080",
+  "isNfc":"false"
+}
+
+# check invalid phone - 500
+POST http://localhost:5000/api/phones
+Content-Type: application/json
+
+{
+  "model":"Test",
+  "brand":"Test",
+  "year":"2025",
+  "ram":"12 gb",
+  "processor":"12",
+  "screenSize":"1920x1080",
+  "isNfc":"true"
+}

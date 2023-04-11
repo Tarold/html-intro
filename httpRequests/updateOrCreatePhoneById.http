@@ -1,0 +1,27 @@
+#check update existing phone - 200
+PUT http://localhost:5000/api/phones/2 HTTP/1.1
+Content-Type: application/json
+
+{
+  "model":"Test",
+  "brand":"Test",
+  "year":"2022",
+  "ram":"12 gb",
+  "processor":"12",
+  "screenSize":"1920x1080",
+  "isNfc":"false"
+}
+
+#check create phone - 201
+PUT http://localhost:5000/api/phones/1002 HTTP/1.1
+Content-Type: application/json
+
+{
+  "model":"Test",
+  "brand":"Test",
+  "year":"2022",
+  "ram":"12 gb",
+  "processor":"12",
+  "screenSize":"1920x1080",
+  "isNfc":"false"
+}

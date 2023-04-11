@@ -1,131 +1,119 @@
 const _ = require('lodash');
 const createError = require('http-errors');
-const { User } = require('../models');
+const { phone: Phone } = require('../models');
 
-module.exports.createUser = async (req, res, next) => {
-  // дістати дані з body
-  const { body } = req;
-  try {
-    // спробувати створити нового користувача в БД
-    const createdUser = await User.create(body);
-    // ок - відправити 200 + створеного користувача
-    const preparedUser = _.omit(createdUser.get(), [
-      'passwordHash',
-      'createdAt',
-      'updatedAt',
-    ]);
-    res.status(201).send({ data: preparedUser });
-  } catch (e) {
-    // не ок - відправити 4** або 5** + помилку
-    next(e);
-  }
-};
-
-module.exports.getUsers = async (req, res, next) => {
+module.exports.getPhones = async (req, res, next) => {
   const { limit = 10, offset = 0 } = req.query;
 
   try {
-    const foundUsers = await User.findAll({
+    const foundPhones = await Phone.findAll({
       raw: true,
-      attributes: { exclude: ['passwordHash', 'createdAt', 'updatedAt'] },
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
       limit,
       offset,
       order: ['id'],
     });
-    res.status(200).send({ data: foundUsers });
+    res.status(200).send({ data: foundPhones });
   } catch (e) {
     next(e);
   }
 };
 
-module.exports.getUserById = async (req, res, next) => {
-  const { userId } = req.params;
+module.exports.getPhoneById = async (req, res, next) => {
+  const { phoneId } = req.params;
 
   try {
-    const foundUser = await User.findByPk(userId, {
+    const foundPhone = await Phone.findByPk(phoneId, {
       raw: true,
-      attributes: { exclude: ['passwordHash', 'createdAt', 'updatedAt'] },
-      // where: { id: userId },
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      // where: { id: phoneId },
     });
-    if (!foundUser) {
-      return next(createError(404, 'User Not Found'));
+    if (!foundPhone) {
+      return next(createError(404, 'Phone Not Found'));
     }
-    res.status(200).send({ data: foundUser });
+    res.status(200).send({ data: foundPhone });
   } catch (e) {
     next(e);
   }
 };
 
-module.exports.updateUserById = async (req, res, next) => {
-  const {
-    body,
-    params: { userId },
-  } = req;
-
+module.exports.createPhone = async (req, res, next) => {
+  const { body } = req;
+  console.log(body);
   try {
-    const [, [updatedUser]] = await User.update(body, {
-      raw: true,
-      where: { id: userId },
-      returning: true,
-    });
-
-    if (!updatedUser) {
-      return next(createError(404, 'User Not Found'));
-    }
-
-    const preparedUser = _.omit(updatedUser, [
-      'passwordHash',
+    const createdPhone = await Phone.create(body);
+    const preparedPhone = _.omit(createdPhone.get(), [
       'createdAt',
       'updatedAt',
     ]);
-
-    res.status(200).send({ data: preparedUser });
+    res.status(201).send({ data: preparedPhone });
   } catch (e) {
     next(e);
   }
 };
 
-module.exports.updateOrCreateUserById = async (req, res, next) => {
+module.exports.updatePhoneById = async (req, res, next) => {
   const {
     body,
-    params: { userId },
+    params: { phoneId },
   } = req;
 
   try {
-    const [, [updatedUser]] = await User.update(body, {
+    const [, [updatedPhone]] = await Phone.update(body, {
       raw: true,
-      where: { id: userId },
+      where: { id: phoneId },
       returning: true,
     });
 
-    if (!updatedUser) {
-      body.id = userId;
-      return next();
+    if (!updatedPhone) {
+      return next(createError(404, 'Phone Not Found'));
     }
 
-    const preparedUser = _.omit(updatedUser, [
-      'passwordHash',
-      'createdAt',
-      'updatedAt',
-    ]);
+    const preparedPhone = _.omit(updatedPhone, ['createdAt', 'updatedAt']);
 
-    res.status(200).send({ data: preparedUser });
+    res.status(200).send({ data: preparedPhone });
   } catch (e) {
     next(e);
   }
 };
 
-module.exports.deleteUserById = async (req, res, next) => {
-  const { userId } = req.params;
+module.exports.deletePhoneById = async (req, res, next) => {
+  const { phoneId } = req.params;
 
   try {
-    const deletedUsersCount = await User.destroy({ where: { id: userId } });
+    const deletedPhonesCount = await Phone.destroy({ where: { id: phoneId } });
 
-    if (!deletedUsersCount) {
-      return next(createError(404, 'User Not Found'));
+    if (!deletedPhonesCount) {
+      return next(createError(404, 'Phone Not Found'));
     }
 
     res.status(204).end();
+  } catch (e) {
+    next(e);
+  }
+};
+
+module.exports.updateOrCreatePhoneById = async (req, res, next) => {
+  const {
+    body,
+    params: { phoneId },
+  } = req;
+
+  try {
+    const [, [updatedPhone]] = await Phone.update(body, {
+      raw: true,
+      where: { id: phoneId },
+      returning: true,
+    });
+
+    if (!updatedPhone) {
+      body.id = phoneId;
+      return next();
+    }
+
+    const preparedPhone = _.omit(updatedPhone, ['createdAt', 'updatedAt']);
+
+    res.status(200).send({ data: preparedPhone });
   } catch (e) {
     next(e);
   }

@@ -25,8 +25,8 @@ app.use((err, req, res, next) => {
 
 module.exports = app;
 
-// GET /api/users
-// POST /api/users
-// GET /api/users/1
-// PATCH /api/users/1
-// DELETE /api/users/1
+// GET /api/phones
+// POST /api/phones
+// GET /api/phones/1
+// PATCH /api/phones/1
+// DELETE /api/phones/1
