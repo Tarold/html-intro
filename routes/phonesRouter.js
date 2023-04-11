@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const usersRouter = Router();
-const { usersController } = require('./../controllers');
+const { usersController } = require('../controllers');
 
 // POST /api/users body
 // GET /api/users?limit=10&offset=0 (query)

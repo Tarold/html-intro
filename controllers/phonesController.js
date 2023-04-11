@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const createError = require('http-errors');
-const { User } = require('./../models');
+const { User } = require('../models');
 
 module.exports.createUser = async (req, res, next) => {
   // дістати дані з body
