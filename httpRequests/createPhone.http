@@ -7,7 +7,7 @@ Content-Type: application/json
   "brand":"Test",
   "year":"2022",
   "ram":"12 gb",
-  "processor":"12",
+  "processorId":"1",
   "screenSize":"1920x1080",
   "isNfc":"false"
 }
@@ -21,7 +21,7 @@ Content-Type: application/json
   "brand":"Test",
   "year":"2025",
   "ram":"12 gb",
-  "processor":"12",
+  "processorId":"1",
   "screenSize":"1920x1080",
   "isNfc":"true"
 }
