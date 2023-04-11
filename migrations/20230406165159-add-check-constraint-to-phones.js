@@ -6,7 +6,9 @@ module.exports = {
       where: {
         year: {
           [Sequelize.Op.and]: [
-            { [Sequelize.Op.lte]: Number(new Date().getFullYear()) },
+            {
+              [Sequelize.Op.lte]: Sequelize.literal(`DATE_PART('Year', NOW())`),
+            },
             Sequelize.where(Sequelize.cast(Sequelize.col('year'), 'TEXT'), {
               [Sequelize.Op.regexp]: '^\\d{4}$',
             }),
