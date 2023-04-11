@@ -18,7 +18,7 @@ module.exports = {
         allowNull: false,
       },
       year: {
-        type: Sequelize.SMALLINT,
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       ram: {

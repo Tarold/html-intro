@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       model: { type: DataTypes.STRING(64), allowNull: false },
       brand: { type: DataTypes.STRING(64), allowNull: false },
       year: {
-        type: DataTypes.SMALLINT,
+        type: DataTypes.INTEGER,
         allowNull: false,
         validate: { is: /^\d{4}$/, max: Number(new Date().getFullYear()) },
       },
