@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const createError = require('http-errors');
-const { phone: Phone } = require('../models');
+const { phone: Phone, Processor } = require('../models');
 
 module.exports.getPhones = async (req, res, next) => {
   const { limit = 10, offset = 0 } = req.query;
@@ -112,6 +112,50 @@ module.exports.updateOrCreatePhoneById = async (req, res, next) => {
     }
 
     const preparedPhone = _.omit(updatedPhone, ['createdAt', 'updatedAt']);
+
+    res.status(200).send({ data: preparedPhone });
+  } catch (e) {
+    next(e);
+  }
+};
+
+module.exports.getPhonesByProcessor = async (req, res, next) => {
+  const {
+    params: { processorId },
+  } = req;
+
+  try {
+    const foundPhones = await Phone.findAll({
+      raw: true,
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+      where: { id: processorId },
+      returning: true,
+    });
+
+    res.status(200).send({ data: foundPhones });
+  } catch (e) {
+    next(e);
+  }
+};
+module.exports.createPhoneByProcessor = async (req, res, next) => {
+  const {
+    body,
+    params: { processorId },
+  } = req;
+
+  try {
+    const foundProcessor = await Processor.findByPk(processorId);
+
+    if (!foundProcessor) {
+      return next(createError(404, 'Processor Not Found'));
+    }
+
+    const createdPhone = await foundProcessor.createPhone(body);
+
+    const preparedPhone = _.omit(createdPhone.get(), [
+      'createdAt',
+      'updatedAt',
+    ]);
 
     res.status(200).send({ data: preparedPhone });
   } catch (e) {
