@@ -3,8 +3,10 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Processor extends Model {
     static associate (models) {
-      Processor.belongsTo(models.phone, {
-        foreignKey: 'processorsId',
+      Processor.hasMany(models.phone, {
+        foreignKey: { name: 'processorsId' },
+        onDelete: 'RESTRICT',
+        onUpdate: 'CASCADE',
       });
     }
   }
