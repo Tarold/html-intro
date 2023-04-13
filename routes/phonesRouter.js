@@ -23,6 +23,6 @@ phonesRouter
 
 phonesRouter
   .route('/byProcessor/:processorId')
-  .get(phonesController.getPhonesByProcessor);
-//.post(phonesController.createPhoneByProcessor);
+  .get(phonesController.getPhonesByProcessor)
+  .post(phonesController.createPhoneByProcessor);
 module.exports = phonesRouter;

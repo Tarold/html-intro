@@ -138,31 +138,30 @@ module.exports.getPhonesByProcessor = async (req, res, next) => {
   }
 };
 
-// module.exports.createPhoneByProcessor = async (req, res, next) => {
-//   const {
-//     body,
-//     params: { processorId },
-//   } = req;
+module.exports.createPhoneByProcessor = async (req, res, next) => {
+  const {
+    body,
+    params: { processorId },
+  } = req;
 
-//   try {
-//     const foundProcessor = await Processor.findByPk(processorId);
+  try {
+    console.log('body :>> ', body);
+    const foundProcessor = await Processor.findByPk(processorId);
 
-//     if (!foundProcessor) {
-//       return next(createError(404, 'Processor Not Found'));
-//     }
+    if (!foundProcessor) {
+      return next(createError(404, 'Processor Not Found'));
+    }
+    const createdPhone = await Phone.create(body);
 
-//     const createdPhone = await Phone.create({
-//       ...body,
-//       processorId: processorId,
-//     });
+    const usedProcessor = await foundProcessor.addPhone(createdPhone);
 
-//     const preparedPhone = _.omit(createdPhone.get(), [
-//       'createdAt',
-//       'updatedAt',
-//     ]);
-
-//     res.status(200).send({ data: preparedPhone });
-//   } catch (e) {
-//     next(e);
-//   }
-// };
+    createdPhone.processorsId = foundProcessor.id;
+    const preparedPhone = _.omit(createdPhone.get(), [
+      'createdAt',
+      'updatedAt',
+    ]);
+    res.status(200).send({ data: preparedPhone });
+  } catch (e) {
+    next(e);
+  }
+};
