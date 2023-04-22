@@ -1,10 +1,4 @@
-.*
-
 node_modules/
-
-!.prettierrc.json
-
-!.gitignore
 
 .vscode/
 
