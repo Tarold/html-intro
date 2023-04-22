@@ -1,6 +1,8 @@
 const { Router } = require('express');
 const usersRouter = Router();
 const { usersController } = require('./../controllers');
+const multer = require('multer');
+const { STATIC_PATH } = require('../constants');
 
 // POST /api/users body
 // GET /api/users?limit=10&offset=0 (query)
@@ -23,5 +25,9 @@ usersRouter
   .delete(usersController.deleteUserById);
 
 usersRouter.get('/:userId/tasks', usersController.getUserTasks);
+
+const upload = multer({ dest: STATIC_PATH });
+
+usersRouter.patch('/:userId/images', upload.single('userPhoto'));
 
 module.exports = usersRouter;
