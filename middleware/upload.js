@@ -7,13 +7,13 @@ const storage = multer.diskStorage({
     cb(null, path.join(STATIC_PATH, 'images'));
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldName + '-' + Date.now());
+    cb(null, file.fieldname + '-' + Date.now());
   },
 });
 
 function fileFilter (req, file, cb) {
-  const MINETYPE_REGEXP = /^image\/(gif|jpeg|)$/;
-  cb(null, MINETYPE_REGEXP.test(file.minetype));
+  const MIMETYPE_REGEXP = /^image\/(gif|jpeg|png)$/;
+  cb(null, MIMETYPE_REGEXP.test(file.mimetype));
 }
 
 const upload = multer({ storage, fileFilter });

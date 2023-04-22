@@ -3,17 +3,9 @@ const usersRouter = Router();
 const { usersController } = require('./../controllers');
 const { upload } = require('../middleware');
 
-// POST /api/users body
-// GET /api/users?limit=10&offset=0 (query)
-
-// GET /api/users/1 (params)
-//  /api/users/:userId
-// PATCH /api/users/1 body (params)
-// PUT /api/users/1 body (params)
-// DELETE /api/users/1 (params)
 usersRouter
   .route('/')
-  .post(usersController.createUser)
+  .post(upload.uploadUserPhoto, usersController.createUser)
   .get(usersController.getUsers);
 
 usersRouter
@@ -25,10 +17,15 @@ usersRouter
 
 usersRouter.get('/:userId/tasks', usersController.getUserTasks);
 
+// PATCH /api/users/1/images
+
 usersRouter.patch(
   '/:userId/images',
   upload.uploadUserPhoto,
   usersController.changeUserImage
 );
+// 1 збереже файл в статичній папці
+//   згенерує ім'я файла і прокине далі
+// 2 збереже ім'я файла в БД для користувача userId
 
 module.exports = usersRouter;
