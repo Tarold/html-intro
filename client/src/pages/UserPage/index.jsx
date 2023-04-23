@@ -7,6 +7,7 @@ function UserPage () {
     <section>
       <h2>User Form</h2>
       <UserForm />
+
       <UsersList />
     </section>
   );
