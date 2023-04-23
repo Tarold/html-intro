@@ -3,6 +3,8 @@ const usersRouter = Router();
 const { usersController } = require('./../controllers');
 const { upload } = require('../middleware');
 
+// TODO yup validation middleware
+
 usersRouter
   .route('/')
   .post(upload.uploadUserPhoto, usersController.createUser)

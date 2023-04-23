@@ -41,6 +41,7 @@ module.exports = (sequelize, DataTypes) => {
       // ->
       // INSERT INTO users(password_hash)
       // VALUES ('dfg45fdg45454g5dg54s5df4gs54f5154vojeifdif')
+      // TODO password regexp
       passwordHash: {
         allowNull: false,
         type: DataTypes.STRING,
