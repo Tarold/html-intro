@@ -22,3 +22,7 @@ export const USER_VALIDATION_SCHEMA = yup.object({
   gender: yup.string().oneOf(GENDERS),
   userPhoto: yup.mixed(),
 });
+
+export const TODO_VALIDATION_SCHEMA = yup.object({
+  value: yup.string().trim().min(1).max(64).required('Todo cannot be empty'),
+});
