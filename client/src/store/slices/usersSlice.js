@@ -15,12 +15,24 @@ export const getUsersThunk = createAsyncThunk(
   }
 );
 
-export const createUsersThunk = createAsyncThunk(
+export const createUserThunk = createAsyncThunk(
   `${USERS_SLICE_NAME}/create`,
   async (payload, thunkAPI) => {
     try {
       const response = await API.createUser(payload);
       return response.data.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue({ message: err.message });
+    }
+  }
+);
+
+export const deleteUserThunk = createAsyncThunk(
+  `${USERS_SLICE_NAME}/delete`,
+  async (payload, thunkAPI) => {
+    try {
+      await API.deleteUser(payload);
+      return payload;
     } catch (err) {
       return thunkAPI.rejectWithValue({ message: err.message });
     }
@@ -37,8 +49,8 @@ const usersSlice = createSlice({
   name: USERS_SLICE_NAME,
   initialState,
   extraReducers: builder => {
-    //GET
-    builder.addCase(getUsersThunk.pending, (state, action) => {
+    // GET
+    builder.addCase(getUsersThunk.pending, state => {
       state.isFetching = true;
       state.error = null;
     });
@@ -50,16 +62,32 @@ const usersSlice = createSlice({
       state.isFetching = false;
       state.error = action.payload;
     });
-    //CREATE
-    builder.addCase(createUsersThunk.pending, (state, action) => {
+    // CREATE
+    builder.addCase(createUserThunk.pending, state => {
       state.isFetching = true;
       state.error = null;
     });
-    builder.addCase(createUsersThunk.fulfilled, (state, action) => {
+    builder.addCase(createUserThunk.fulfilled, (state, action) => {
       state.isFetching = false;
       state.users.push(action.payload);
     });
-    builder.addCase(createUsersThunk.rejected, (state, action) => {
+    builder.addCase(createUserThunk.rejected, (state, action) => {
+      state.isFetching = false;
+      state.error = action.payload;
+    });
+    // DELETE
+    builder.addCase(deleteUserThunk.pending, state => {
+      state.isFetching = true;
+      state.error = null;
+    });
+    builder.addCase(deleteUserThunk.fulfilled, (state, action) => {
+      state.isFetching = false;
+      const deletedUserIndex = state.users.findIndex(
+        u => u.id === action.payload
+      );
+      state.users.splice(deletedUserIndex, 1);
+    });
+    builder.addCase(deleteUserThunk.rejected, (state, action) => {
       state.isFetching = false;
       state.error = action.payload;
     });
