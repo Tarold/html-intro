@@ -19,7 +19,7 @@ function App () {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<UserPage />} />
-        <Route path='/:userId' element={<Task />} />
+        <Route path='/user/:userId' element={<Task />} />
       </Routes>
     </BrowserRouter>
   );
