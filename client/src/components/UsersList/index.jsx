@@ -30,6 +30,7 @@ export const UsersList = ({ users, isFetching, error, get, remove }) => {
               alt={`${u.firstName} ${u.lastName}`}
             />
             {JSON.stringify(u)}
+            <a href={'/user/' + u.id}>Show Tasks</a>
           </li>
         ))}
       </ul>
