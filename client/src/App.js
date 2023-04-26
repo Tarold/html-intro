@@ -1,6 +1,6 @@
 import './App.css';
 //import UserPage from './pages/UserPage';
-import Todo from './pages/TodoPage';
+import Task from './pages/TaskPage';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 
@@ -14,7 +14,7 @@ import {
 library.add(faCheck, faXmark, faPencil, faTrash);
 
 function App () {
-  return <Todo />;
+  return <Task />;
 }
 
 export default App;

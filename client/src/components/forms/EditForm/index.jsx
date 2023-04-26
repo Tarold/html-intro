@@ -2,16 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Formik, Form } from 'formik';
 import Input from '../Input';
-import { updateTodos } from '../../../store/slices/todosesSlice';
-import { TODO_VALIDATION_SCHEMA } from '../../../utils/validate/validationSchemas';
+import { updateTask } from '../../../store/slices/tasksSlice';
+import { TASK_VALIDATION_SCHEMA } from '../../../utils/validate/validationSchemas';
 import styles from './../../../common/style/formStylesheet.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import DatePickerField from '../DatePicker';
 
-function TodoForm ({ updateTodo, value, id, closeEdit, buttonStyle }) {
-  const initialValues = { value: value };
-
+function TaskForm ({ updateTask, value, id, closeEdit, buttonStyle }) {
+  const initialValues = value;
+  console.log('initialValues :>> ', initialValues);
   const handleSubmit = (values, formikBag) => {
-    updateTodo(id, { ...values });
+    updateTask(id, { ...values });
     formikBag.resetForm();
     closeEdit();
   };
@@ -26,16 +27,17 @@ function TodoForm ({ updateTodo, value, id, closeEdit, buttonStyle }) {
     <Formik
       initialValues={initialValues}
       onSubmit={handleSubmit}
-      validationSchema={TODO_VALIDATION_SCHEMA}
+      validationSchema={TASK_VALIDATION_SCHEMA}
     >
       <Form className={styles.form}>
         <Input
           type='text'
-          name='value'
-          placeholder='Enter todo here'
+          name='body'
+          placeholder='Enter task here'
           autoFocus
           classes={classes}
         />
+        <DatePickerField name='deadline' />
         <button type='submit' className={buttonStyle}>
           <FontAwesomeIcon icon='check' size='2x' />
         </button>
@@ -45,7 +47,7 @@ function TodoForm ({ updateTodo, value, id, closeEdit, buttonStyle }) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  updateTodo: (id, values) => dispatch(updateTodos({ id, values })),
+  updateTask: (id, values) => dispatch(updateTask({ id, values })),
 });
 
-export default connect(null, mapDispatchToProps)(TodoForm);
+export default connect(null, mapDispatchToProps)(TaskForm);

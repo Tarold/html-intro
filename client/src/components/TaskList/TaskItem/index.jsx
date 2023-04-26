@@ -1,33 +1,35 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import EditForm from '../../forms/EditForm';
-import styles from './TodoItem.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { deleteTodos, updateTodos } from '../../../store/slices/todosesSlice';
 
-export const TodoItem = ({ updateTodo, removeTodo, item }) => {
+import styles from './TaskItem.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { deleteTask, updateTask } from '../../../store/slices/tasksSlice';
+
+export const TaskItem = ({ updateTask, removeTask, item }) => {
   const [isEdit, setIsEdit] = useState(false);
 
   const toogleSetIsEdit = () => {
     setIsEdit(isEdit => !isEdit);
   };
   return (
-    <li className={styles.todo}>
+    <li className={styles.task}>
       <input
         className={styles.checkbox}
         type='checkbox'
         checked={item.isDone}
-        onChange={() => updateTodo(item.id, { isDone: !item.isDone })}
+        onChange={() => updateTask(item.id, { isDone: !item.isDone })}
       />
       {!isEdit && (
         <>
-          <span className={styles.todoTask}>{item.value}</span>
+          <span className={styles.taskTask}>{item.body}</span>
+          <span className={styles.taskTask}>{item.deadline}</span>
           <button className={styles.greenButton} onClick={toogleSetIsEdit}>
             <FontAwesomeIcon icon='pencil' size='2x' />
           </button>
           <button
             className={styles.redButton}
-            onClick={() => removeTodo(item.id)}
+            onClick={() => removeTask(item.id)}
           >
             <FontAwesomeIcon icon='trash' size='2x' />
           </button>
@@ -37,7 +39,7 @@ export const TodoItem = ({ updateTodo, removeTodo, item }) => {
         <>
           <EditForm
             styles={styles}
-            value={item.value}
+            value={{ body: item.body, deadline: item.deadline }}
             id={item.id}
             closeEdit={toogleSetIsEdit}
             buttonStyle={styles.greenButton}
@@ -52,8 +54,8 @@ export const TodoItem = ({ updateTodo, removeTodo, item }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  updateTodo: (id, values) => dispatch(updateTodos({ id, values })),
-  removeTodo: id => dispatch(deleteTodos(id)),
+  updateTask: (id, values) => dispatch(updateTask({ id, values })),
+  removeTask: id => dispatch(deleteTask(id)),
 });
 
-export default connect(null, mapDispatchToProps)(TodoItem);
+export default connect(null, mapDispatchToProps)(TaskItem);

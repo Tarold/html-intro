@@ -3,7 +3,7 @@ const usersRouter = Router();
 const { usersController } = require('./../controllers');
 const { upload } = require('../middleware');
 
-// TODO yup validation middleware
+// TASK yup validation middleware
 
 usersRouter
   .route('/')

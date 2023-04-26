@@ -3,7 +3,7 @@ import CONSTANTS from '../../constants';
 
 const { GENDERS } = CONSTANTS;
 
-// TODO password regexp
+// TASK password regexp
 
 const NAME_VALIDATION_SCHEMA = yup
   .string()
@@ -23,6 +23,6 @@ export const USER_VALIDATION_SCHEMA = yup.object({
   userPhoto: yup.mixed(),
 });
 
-export const TODO_VALIDATION_SCHEMA = yup.object({
-  value: yup.string().trim().min(1).max(64).required('Todo cannot be empty'),
+export const TASK_VALIDATION_SCHEMA = yup.object({
+  body: yup.string().trim().min(1).max(64).required('Task cannot be empty'),
 });

@@ -3,7 +3,7 @@ import { useField, useFormikContext } from 'formik';
 import DatePicker from 'react-datepicker';
 import './datepicker.scss';
 
-export const DatePickerField = ({ ...props }) => {
+export default function DatePickerField ({ ...props }) {
   const { setFieldValue } = useFormikContext();
   const [field] = useField(props);
   return (
@@ -16,4 +16,4 @@ export const DatePickerField = ({ ...props }) => {
       }}
     />
   );
-};
+}

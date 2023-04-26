@@ -8,7 +8,7 @@ tasksRouter
   .get(tasksController.getTasks)
   .post(tasksController.createTask);
 
-//TODO модернізувати основний сайт
+//TASK модернізувати основний сайт
 //або завдання окремою сторінкою, або як вспливаючий елмент
 tasksRouter
   .route('/:taskId')

@@ -2,17 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Formik, Form } from 'formik';
 import Input from '../Input';
-import { createTodose } from '../../../store/slices/todosesSlice';
-import { TODO_VALIDATION_SCHEMA } from '../../../utils/validate/validationSchemas';
+import { createTask } from '../../../store/slices/tasksSlice';
+import { TASK_VALIDATION_SCHEMA } from '../../../utils/validate/validationSchemas';
 import styles from './../../../common/style/formStylesheet.module.scss';
-import formStyles from './TodoForm.module.scss';
-import { DatePickerField } from '../DatePicker';
+import formStyles from './TaskForm.module.scss';
+import DatePickerField from '../DatePicker';
 
-function TodoForm ({ createNewTodo }) {
+function TaskForm ({ createNewTask }) {
   const initialValues = { value: '' };
 
   const handleSubmit = (values, formikBag) => {
-    createNewTodo(values);
+    createNewTask(values);
     formikBag.resetForm();
   };
 
@@ -26,19 +26,19 @@ function TodoForm ({ createNewTodo }) {
     <Formik
       initialValues={initialValues}
       onSubmit={handleSubmit}
-      validationSchema={TODO_VALIDATION_SCHEMA}
+      validationSchema={TASK_VALIDATION_SCHEMA}
     >
       <Form className={styles.form}>
         <Input
           type='text'
           name='value'
-          placeholder='Enter todo here'
+          placeholder='Enter task here'
           autoFocus
           classes={classes}
-          className={formStyles.inputTodo}
+          className={formStyles.inputTask}
         />
         <DatePickerField name='deadline' />
-        <button className={formStyles.submitTodo} type='submit'>
+        <button className={formStyles.submitTask} type='submit'>
           Submit
         </button>
       </Form>
@@ -47,7 +47,7 @@ function TodoForm ({ createNewTodo }) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  createNewTodo: values => dispatch(createTodose(values)),
+  createNewTask: values => dispatch(createTask(values)),
 });
 
-export default connect(null, mapDispatchToProps)(TodoForm);
+export default connect(null, mapDispatchToProps)(TaskForm);
