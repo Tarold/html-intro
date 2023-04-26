@@ -13,16 +13,11 @@ export const createUser = data => httpClient.post('/api/users', data);
 
 export const deleteUser = userId => httpClient.delete(`/api/users/${userId}`);
 
-const httpClient1 = axios.create({
-  baseURL: 'https://ullhgy.sse.codesandbox.io/',
-});
+export const getTasks = userId => httpClient.get(`/api/users/${userId}/tasks`);
 
-export const getTodoses = userId =>
-  httpClient.get(`/api/users/${userId}/tasks`);
+export const createNewTask = values => httpClient.post('/api/tasks', values);
 
-export const createNewTodos = values => httpClient1.post('/contacts', values);
+export const updateTask = (id, values) =>
+  httpClient.patch(`/api/tasks/${id}`, values);
 
-export const updateTodos = (id, values) =>
-  httpClient1.patch(`/contacts/${id}`, values);
-
-export const deleteTodos = id => httpClient1.delete(`/contacts/${id}`);
+export const deleteTask = id => httpClient.delete(`/api/tasks/${id}`);
