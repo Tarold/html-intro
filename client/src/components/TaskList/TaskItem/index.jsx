@@ -22,8 +22,8 @@ export const TaskItem = ({ updateTask, removeTask, item }) => {
       />
       {!isEdit && (
         <>
-          <span className={styles.taskTask}>{item.body}</span>
-          <span className={styles.taskTask}>{item.deadline}</span>
+          <span className={styles.taskBody}>{item.body}</span>
+          <span className={styles.taskDeadline}>{item.deadline}</span>
           <button className={styles.greenButton} onClick={toogleSetIsEdit}>
             <FontAwesomeIcon icon='pencil' size='2x' />
           </button>
