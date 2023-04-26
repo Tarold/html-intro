@@ -6,6 +6,7 @@ import { createTodose } from '../../../store/slices/todosesSlice';
 import { TODO_VALIDATION_SCHEMA } from '../../../utils/validate/validationSchemas';
 import styles from './../../../common/style/formStylesheet.module.scss';
 import formStyles from './TodoForm.module.scss';
+import { DatePickerField } from '../DatePicker';
 
 function TodoForm ({ createNewTodo }) {
   const initialValues = { value: '' };
@@ -36,6 +37,7 @@ function TodoForm ({ createNewTodo }) {
           classes={classes}
           className={formStyles.inputTodo}
         />
+        <DatePickerField name='deadline' />
         <button className={formStyles.submitTodo} type='submit'>
           Submit
         </button>

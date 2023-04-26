@@ -17,7 +17,8 @@ const httpClient1 = axios.create({
   baseURL: 'https://ullhgy.sse.codesandbox.io/',
 });
 
-export const getTodoses = () => httpClient1.get('/contacts');
+export const getTodoses = userId =>
+  httpClient.get(`/api/users/${userId}/tasks`);
 
 export const createNewTodos = values => httpClient1.post('/contacts', values);
 
