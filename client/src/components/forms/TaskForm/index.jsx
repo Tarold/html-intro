@@ -8,10 +8,11 @@ import styles from './../../../common/style/formStylesheet.module.scss';
 import formStyles from './TaskForm.module.scss';
 import DatePickerField from '../DatePicker';
 
-function TaskForm ({ createNewTask }) {
-  const initialValues = { value: '' };
+function TaskForm ({ createNewTask, userId }) {
+  const initialValues = { body: '', deadline: Date.now() };
 
   const handleSubmit = (values, formikBag) => {
+    values.userId = userId;
     createNewTask(values);
     formikBag.resetForm();
   };
@@ -31,7 +32,7 @@ function TaskForm ({ createNewTask }) {
       <Form className={styles.form}>
         <Input
           type='text'
-          name='value'
+          name='body'
           placeholder='Enter task here'
           autoFocus
           classes={classes}

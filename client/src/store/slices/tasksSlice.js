@@ -69,7 +69,7 @@ const tasksSlice = createSlice({
       state.error = null;
     });
     builder.addCase(createTask.fulfilled, (state, action) => {
-      state.tasks.push(action.payload);
+      state.tasks.push(action.payload.data);
       state.isFetching = false;
     });
     builder.addCase(createTask.rejected, (state, action) => {
@@ -108,8 +108,10 @@ const tasksSlice = createSlice({
       state.error = null;
     });
     builder.addCase(updateTask.fulfilled, (state, action) => {
-      const foundIndex = state.tasks.findIndex(p => p.id === action.payload.id);
-      state.tasks[foundIndex] = action.payload;
+      const foundIndex = state.tasks.findIndex(
+        p => p.id === action.payload.data.id
+      );
+      state.tasks[foundIndex] = action.payload.data;
       state.isFetching = false;
     });
     builder.addCase(updateTask.rejected, (state, action) => {
