@@ -4,9 +4,9 @@ import { getTasks } from '../../store/slices/tasksSlice';
 import TaskItem from './TaskItem';
 import styles from './TaskList.module.scss';
 
-export const TaskList = ({ tasks, get, isFetching, error }) => {
+export const TaskList = ({ tasks, get, userId, isFetching, error }) => {
   useEffect(() => {
-    get(1);
+    get(userId);
     // eslint-disable-next-line
   }, []);
 
