@@ -5,7 +5,6 @@
   display: inline-block;
   padding: 0;
   border: 0;
-  width: 100%;
 }
 
 .react-datepicker {
@@ -517,10 +516,18 @@
   position: relative;
   display: inline-block;
   width: 100%;
-
+  height: 100%;
   .react-datepicker__calendar-icon {
     position: absolute;
     padding: 0.5rem;
+  }
+  input {
+    font-size: 18px;
+    height: 100%;
+    width: 105px;
+    transition: background-color 0.2s;
+    border-color: rgb(211, 211, 211);
+    padding-left: 5px;
   }
 }
 
