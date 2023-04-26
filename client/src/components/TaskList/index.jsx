@@ -20,7 +20,7 @@ export const TaskList = ({ tasks, get, userId, isFetching, error }) => {
       )}
       {error && (
         <li className={styles.info}>
-          <span>!!!!ERROR!!!!</span>
+          <span>!!!!ERROR!!!!{JSON.stringify(error)}</span>
         </li>
       )}
     </ul>

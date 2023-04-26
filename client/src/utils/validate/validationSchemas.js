@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+import { startOfToday } from 'date-fns';
 import CONSTANTS from '../../constants';
 
 const { GENDERS } = CONSTANTS;
@@ -25,4 +26,8 @@ export const USER_VALIDATION_SCHEMA = yup.object({
 
 export const TASK_VALIDATION_SCHEMA = yup.object({
   body: yup.string().trim().min(1).max(64).required('Task cannot be empty'),
+  deadline: yup
+    .date()
+    .min(startOfToday(), 'Date must be today or later')
+    .required('Date cannot be empty'),
 });

@@ -11,6 +11,8 @@ export default function DatePickerField ({ ...props }) {
       {...field}
       {...props}
       dateFormat='yyyy-MM-dd'
+      minDate={new Date()}
+      placeholderText='Deadline'
       selected={(field.value && new Date(field.value)) || null}
       onChange={val => {
         setFieldValue(field.name, val);

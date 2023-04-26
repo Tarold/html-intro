@@ -9,7 +9,7 @@ import formStyles from './TaskForm.module.scss';
 import DatePickerField from '../DatePicker';
 
 function TaskForm ({ createNewTask, userId }) {
-  const initialValues = { body: '', deadline: Date.now() };
+  const initialValues = { body: '', deadline: '' };
 
   const handleSubmit = (values, formikBag) => {
     values.userId = userId;
