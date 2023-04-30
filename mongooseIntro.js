@@ -1,16 +1,23 @@
+// ODM Mongoose
 const mongoose = require('mongoose');
 
 (async () => {
   try {
+    // Установлення з'єднання
     await mongoose.connect('mongodb://localhost:27017/test');
-    console.log('Connection OK');
+    console.log('Connection OK ');
 
-    const taskSchema = new mongoose.Schema({ value: String });
+    // Створення моделі на базі схеми
+    const taskSchema = new mongoose.Schema({
+      value: String,
+    });
     const Task = mongoose.model('Task', taskSchema);
 
-    const testTask = { value: 'ToDo HW' };
-
+    const testTask = { value: 'ToDo HW 1' };
+    // Task.create
     // const createdTask = await Task.create(testTask);
+    // console.log('createdTask :>> ', createdTask);
+
     // Task.find
     const foundTasks = await Task.find();
     console.log('foundTasks :>> ', foundTasks);
