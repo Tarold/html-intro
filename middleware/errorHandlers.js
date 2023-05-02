@@ -1,3 +1,5 @@
+const _ = require('lodash');
+
 module.exports.errorHandler = (err, req, res, next) => {
   if (res.headersSent) {
     return;
@@ -7,17 +9,19 @@ module.exports.errorHandler = (err, req, res, next) => {
 
   let body = {};
 
-  if (err.name) {
-    body.name = err.name;
+  if (err.errors) {
+    body.errors = [];
+    Object.keys(err.errors).forEach(err_name => {
+      body.errors.push({
+        [err_name]: _.omit(err.errors[err_name], ['properties']),
+      });
+    });
+  } else {
+    body.type = err.name;
   }
-
   res.status(status).send({
-    errors: [
-      {
-        status,
-        ...body,
-        title: err,
-      },
-    ],
+    status,
+    ...body,
+    title: err.message,
   });
 };
