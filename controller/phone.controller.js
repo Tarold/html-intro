@@ -1,7 +1,5 @@
 const createHttpError = require('http-errors');
-const mongoose = require('mongoose');
-const _ = require('lodash');
-const { Phone, User } = require('../models');
+const { Phone } = require('../models');
 
 module.exports.createPhone = async (req, res, next) => {
   const { body } = req;

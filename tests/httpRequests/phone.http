@@ -6,8 +6,8 @@ Content-Type: application/json
   "brand": "Samsung",
   "price": 10000
 }
-//validation error
 
+//validation error
 POST http://localhost:5000/api/phones
 Content-Type: application/json
 
@@ -17,26 +17,48 @@ Content-Type: application/json
   "price": 10000
 }
 
-GET http://localhost:5000/api/phones?limit=undefined
-
-GET http://localhost:5000/api/phones/6450e0594c37dcb79d3f6950
-
-PATCH http://localhost:5000/api/phones/6450e0594c37dcb79d3f6950
-Content-Type: application/json
-
-{
-  "name": "t"
-}
-
-DELETE http://localhost:5000/api/phones/6450e0594c37dcb79d3f6950
-
-POST http://localhost:5000/api/phones/6450e0594c37dcb79d3f6950/posts
-Content-Type: application/json
-
-{
-  "body":"Some new post 1"
-}
-
-GET http://localhost:5000/api/localhost:5000/api/phones/byProcessor/1/644e73e35a33307f48a251b6/posts
-
 GET http://localhost:5000/api/phones
+
+GET http://localhost:5000/api/phones/6450e325200255d506643567
+
+PATCH http://localhost:5000/api/phones/6450e325200255d506643567
+Content-Type: application/json
+
+{
+  "name": "Pro 11"
+}
+
+//validation error
+PATCH http://localhost:5000/api/phones/6450e325200255d506643567
+Content-Type: application/json
+
+{
+  "name": "a",
+  "brand":"b"
+}
+
+DELETE http://localhost:5000/api/phones/6450e325200255d506643567
+
+POST http://localhost:5000/api/users/644e752688e5378fba6f27c0/phones
+Content-Type: application/json
+
+{
+  "name":"Pro",
+  "brand":"Samsung",
+  "price": 50000
+}
+
+//validation error
+POST http://localhost:5000/api/users/644e752688e5378fba6f27c0/phones
+Content-Type: application/json
+
+{
+  "name":"Pro",
+  "brand":"ChinChun",
+  "price": 50000
+}
+
+GET http://localhost:5000/api/users/644e752688e5378fba6f27c0/phones
+
+//invalid user
+GET http://localhost:5000/api/users/644e752688e5378fba6f27c1/phones
