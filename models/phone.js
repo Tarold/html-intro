@@ -31,7 +31,6 @@ const phoneSchema = new mongoose.Schema({
   user: {
     type: mongoose.ObjectId,
     ref: 'User',
-    required: true,
   },
 });
 
