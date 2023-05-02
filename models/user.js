@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-const yup = require('yup');
 
-const EMAIL_VALIDATION_SCHEMA = yup.string().email();
+const { EMAIL_VALIDATION_SCHEMA } = require('./../utils/validationSchemas');
 
 // required
 // Number, Date: min, max
