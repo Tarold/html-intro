@@ -1,0 +1,42 @@
+POST http://localhost:5000/api/phones
+Content-Type: application/json
+
+{
+  "name": "Pro 10",
+  "brand": "Samsung",
+  "price": 10000
+}
+//validation error
+
+POST http://localhost:5000/api/phones
+Content-Type: application/json
+
+{
+  "name": "Pro 10",
+  "brand": "Samsung1",
+  "price": 10000
+}
+
+GET http://localhost:5000/api/phones?limit=undefined
+
+GET http://localhost:5000/api/phones/6450e0594c37dcb79d3f6950
+
+PATCH http://localhost:5000/api/phones/6450e0594c37dcb79d3f6950
+Content-Type: application/json
+
+{
+  "name": "t"
+}
+
+DELETE http://localhost:5000/api/phones/6450e0594c37dcb79d3f6950
+
+POST http://localhost:5000/api/phones/6450e0594c37dcb79d3f6950/posts
+Content-Type: application/json
+
+{
+  "body":"Some new post 1"
+}
+
+GET http://localhost:5000/api/localhost:5000/api/phones/byProcessor/1/644e73e35a33307f48a251b6/posts
+
+GET http://localhost:5000/api/phones

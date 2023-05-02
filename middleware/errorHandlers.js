@@ -5,11 +5,18 @@ module.exports.errorHandler = (err, req, res, next) => {
 
   const status = err.status ?? 500;
 
+  let body = {};
+
+  if (err.name) {
+    body.name = err.name;
+  }
+
   res.status(status).send({
     errors: [
       {
         status,
-        title: err.message ?? 'Server Error',
+        ...body,
+        title: err,
       },
     ],
   });
