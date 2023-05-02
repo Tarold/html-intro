@@ -1,17 +1,17 @@
 const { Router } = require('express');
 const { phoneController } = require('../controller');
 
-const userRouter = Router();
+const phoneRouter = Router();
 
-userRouter
+phoneRouter
   .route('/')
   .get(phoneController.getPhones)
   .post(phoneController.createPhone);
 
-userRouter
+phoneRouter
   .route('/:phoneId')
   .get(phoneController.getPhoneById)
   .patch(phoneController.updatePhoneById)
   .delete(phoneController.deletePhoneById);
 
-module.exports = userRouter;
+module.exports = phoneRouter;
