@@ -28,7 +28,7 @@ const phoneSchema = new mongoose.Schema({
     required: true,
     min: 0,
   },
-  user: {
+  userId: {
     type: mongoose.ObjectId,
     ref: 'User',
   },
