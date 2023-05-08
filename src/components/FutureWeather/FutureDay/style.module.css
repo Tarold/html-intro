@@ -1,0 +1,46 @@
+.day {
+  box-shadow: rgba(50, 50, 93, 0.15) 0px 15px 30px -6px,
+    rgba(0, 0, 0, 0.15) 0px 8px 18px -9px;
+  border-radius: 7px;
+  margin: 5px 0 0 0;
+
+  transition: all 0.2s;
+}
+.day:hover {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  margin: 0 0 5px 0;
+}
+.dataNames {
+  margin: 5px 0 0 0;
+  list-style-type: none;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.dayTitle {
+  font-size: 18px;
+  padding-bottom: 4px;
+  padding: 5px 10px;
+  border-bottom: 1px solid grey;
+}
+.dataList {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
+.dataList > li {
+  margin: 15px;
+  display: flex;
+}
+.dataNames > .dataList > li {
+  margin-right: 0;
+  margin-left: 0;
+  margin-left: auto;
+  cursor: pointer;
+}
+.dataList > li > p {
+  margin-right: 5px;
+}
