@@ -18,6 +18,6 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3000
+EXPOSE 5000
 
 CMD sequelize db:migrate && sequelize db:seed:all && npm start
