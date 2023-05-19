@@ -43,7 +43,7 @@ module.exports.dataForContest = async (req, res, next) => {
 module.exports.getContestById = async (req, res, next) => {
   try {
     let contestInfo = await db.Contests.findOne({
-      where: { id: req.headers.contestid },
+      where: { id: req.params.contestId },
       order: [[db.Offers, 'id', 'asc']],
       include: [
         {
@@ -98,12 +98,13 @@ module.exports.downloadFile = async (req, res, next) => {
 };
 
 module.exports.updateContest = async (req, res, next) => {
+  const { contestId } = req.params;
+
   if (req.file) {
     req.body.fileName = req.file.filename;
     req.body.originalFileName = req.file.originalname;
   }
-  const contestId = req.body.contestId;
-  delete req.body.contestId;
+
   try {
     const updatedContest = await contestQueries.updateContest(req.body, {
       id: contestId,
@@ -253,9 +254,9 @@ module.exports.setOfferStatus = async (req, res, next) => {
 
 module.exports.getCustomersContests = (req, res, next) => {
   db.Contests.findAll({
-    where: { status: req.headers.status, userId: req.tokenData.userId },
-    limit: req.body.limit,
-    offset: req.body.offset ? req.body.offset : 0,
+    where: { status: req.query.contestStatus, userId: req.tokenData.userId },
+    limit: req.query.limit,
+    offset: req.query.offset ? req.query.offset : 0,
     order: [['id', 'DESC']],
     include: [
       {
@@ -273,28 +274,33 @@ module.exports.getCustomersContests = (req, res, next) => {
       if (contests.length === 0) {
         haveMore = false;
       }
+      console.log('getCustomersContests :>> ', { contests, haveMore });
       res.send({ contests, haveMore });
     })
     .catch(err => next(new ServerError(err)));
 };
 
 module.exports.getContests = (req, res, next) => {
+  const { limit = 10, offset = 0 } = req.query;
+  const { typeIndex, contestId, industry, awardSort, ownEntries } = req.body;
+  const { userId } = req.tokenData;
+
   const predicates = UtilFunctions.createWhereForAllContests(
-    req.body.typeIndex,
-    req.body.contestId,
-    req.body.industry,
-    req.body.awardSort
+    typeIndex,
+    contestId,
+    industry,
+    awardSort
   );
   db.Contests.findAll({
     where: predicates.where,
     order: predicates.order,
-    limit: req.body.limit,
-    offset: req.body.offset ? req.body.offset : 0,
+    limit,
+    offset,
     include: [
       {
         model: db.Offers,
-        required: req.body.ownEntries,
-        where: req.body.ownEntries ? { userId: req.tokenData.userId } : {},
+        required: ownEntries,
+        where: ownEntries ? { userId } : {},
         attributes: ['id'],
       },
     ],
@@ -312,4 +318,21 @@ module.exports.getContests = (req, res, next) => {
     .catch(err => {
       next(new ServerError());
     });
+};
+
+module.exports.getAllOffers = async (req, res, next) => {
+  const {
+    query: { limit = 10, offset = 0 },
+  } = req;
+
+  try {
+    const foundOffers = await db.Offers.findAll(
+      { limit, offset },
+      { raw: true }
+    );
+
+    res.status(200).send(foundOffers);
+  } catch (err) {
+    next(new ServerError());
+  }
 };

@@ -1,14 +1,14 @@
+import queryString from 'query-string';
 import http from '../interceptor';
 
 export const registerRequest = data => http.post('registration', data);
 export const loginRequest = data => http.post('login', data);
 export const getUser = () => http.post('getUser');
-export const updateContest = data => http.post('updateContest', data);
 export const setNewOffer = data => http.post('setNewOffer', data);
 export const setOfferStatus = data => http.post('setOfferStatus', data);
 export const downloadContestFile = data =>
   http.get(`downloadFile/${data.fileName}`);
-export const payMent = data => http.post('pay', data.formData);
+export const payMent = data => http.post('contests', data.formData);
 export const changeMark = data => http.post('changeMark', data);
 export const getPreviewChat = () => http.post('getPreview');
 export const getDialog = data => http.post('getChat', data);
@@ -25,16 +25,11 @@ export const deleteCatalog = data => http.post('deleteCatalog', data);
 export const removeChatFromCatalog = data =>
   http.post('removeChatFromCatalog', data);
 export const changeCatalogName = data => http.post('updateNameCatalog', data);
-export const getCustomersContests = data =>
-  http.post(
-    'getCustomersContests',
-    { limit: data.limit, offset: data.offset },
-    {
-      headers: {
-        status: data.contestStatus,
-      },
-    }
-  );
+
+// GET //contests/byCustomer?limit=...&offset=...&status=...
+export const getCustomersContests = data => {
+  http.get(`contests/byCustomer?${queryString.stringify(data)}`);
+};
 
 export const getActiveContests = ({
   offset,
@@ -45,7 +40,7 @@ export const getActiveContests = ({
   awardSort,
   ownEntries,
 }) =>
-  http.post('getAllContests', {
+  http.get('contests/', {
     offset,
     limit,
     typeIndex,
@@ -55,9 +50,8 @@ export const getActiveContests = ({
     ownEntries,
   });
 
-export const getContestById = data =>
-  http.get('getContestById', {
-    headers: {
-      contestId: data.contestId,
-    },
-  });
+export const updateContest = (contestId, data) =>
+  http.patch(`contests/${contestId}`, data);
+
+export const getContestById = ({ contestId }) =>
+  http.get(`contests/${contestId}`);
