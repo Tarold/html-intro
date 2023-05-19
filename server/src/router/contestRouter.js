@@ -49,6 +49,12 @@ contestsRouter
     //getAllContests
     checkToken.checkToken,
     basicMiddlewares.onlyForCreative,
+    queryParser({
+      parseNull: true,
+      parseUndefined: true,
+      parseBoolean: true,
+      parseNumber: true,
+    }),
     contestController.getContests
   );
 
