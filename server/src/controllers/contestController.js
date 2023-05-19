@@ -290,7 +290,15 @@ module.exports.getContests = (req, res, next) => {
     ownEntries,
   } = req.query;
   const { userId } = req.tokenData;
-
+  console.log('object :>> ', {
+    limit,
+    offset,
+    typeIndex,
+    contestId,
+    industry,
+    awardSort,
+    ownEntries,
+  });
   const predicates = UtilFunctions.createWhereForAllContests(
     typeIndex,
     contestId,
