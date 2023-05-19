@@ -274,7 +274,6 @@ module.exports.getCustomersContests = (req, res, next) => {
       if (contests.length === 0) {
         haveMore = false;
       }
-      console.log('getCustomersContests :>> ', { contests, haveMore });
       res.send({ contests, haveMore });
     })
     .catch(err => next(new ServerError(err)));

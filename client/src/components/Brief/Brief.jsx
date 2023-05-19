@@ -20,7 +20,7 @@ const Brief = props => {
     if (values.file instanceof File) {
       data.append('file', values.file);
     }
-    props.update({ contestId: props.contestData.id, data });
+    props.update(props.contestData.id, data);
   };
 
   const getContestObjInfo = () => {
