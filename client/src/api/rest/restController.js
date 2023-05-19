@@ -27,10 +27,8 @@ export const removeChatFromCatalog = data =>
 export const changeCatalogName = data => http.post('updateNameCatalog', data);
 
 // GET //contests/byCustomer?limit=...&offset=...&status=...
-export const getCustomersContests = data => {
+export const getCustomersContests = data =>
   http.get(`contests/byCustomer?${queryString.stringify(data)}`);
-};
-
 export const getActiveContests = ({
   offset,
   limit,
@@ -50,8 +48,9 @@ export const getActiveContests = ({
     ownEntries,
   });
 
-export const updateContest = (contestId, data) =>
-  http.patch(`contests/${contestId}`, data);
+export const updateContest = ({ contestId, data }) => {
+  return http.patch(`contests/${contestId}`, data);
+};
 
 export const getContestById = ({ contestId }) =>
   http.get(`contests/${contestId}`);
