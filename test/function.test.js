@@ -1,5 +1,5 @@
 const assert = require('assert')
-const { sum } = require('./../utils/math')
+const { sum } = require('../utils/math')
 const { expect } = require('chai')
 
 describe('Testing math.sum', function () {
