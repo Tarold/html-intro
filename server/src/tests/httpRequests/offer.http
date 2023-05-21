@@ -1,1 +1,0 @@
-GET http://localhost:5000/offers?limit=10&offset=0
